@@ -1473,7 +1473,7 @@ footer {
           <button type="button" class="calc-toggle" data-addon="hst">
             <div class="calc-toggle-info">
               <div class="calc-toggle-name">HST / GST filing</div>
-              <div class="calc-toggle-meta">+ $50 / month</div>
+              <div class="calc-toggle-meta">+ $100 / month</div>
             </div>
             <div class="calc-toggle-switch"></div>
           </button>
@@ -1481,7 +1481,7 @@ footer {
           <button type="button" class="calc-toggle" data-addon="payroll">
             <div class="calc-toggle-info">
               <div class="calc-toggle-name">Payroll</div>
-              <div class="calc-toggle-meta">+ $75 base · $15 / employee</div>
+              <div class="calc-toggle-meta">+ $150 base · $30 / employee</div>
             </div>
             <div class="calc-toggle-switch"></div>
           </button>
@@ -1496,7 +1496,7 @@ footer {
           <button type="button" class="calc-toggle" data-addon="ar">
             <div class="calc-toggle-info">
               <div class="calc-toggle-name">Accounts Receivable management</div>
-              <div class="calc-toggle-meta">+ $150 / month · invoicing &amp; collections</div>
+              <div class="calc-toggle-meta">+ $300 / month · invoicing &amp; collections</div>
             </div>
             <div class="calc-toggle-switch"></div>
           </button>
@@ -1504,7 +1504,7 @@ footer {
           <button type="button" class="calc-toggle" data-addon="ap">
             <div class="calc-toggle-info">
               <div class="calc-toggle-name">Accounts Payable management</div>
-              <div class="calc-toggle-meta">+ $150 / month · bill pay &amp; scheduling</div>
+              <div class="calc-toggle-meta">+ $300 / month · bill pay &amp; scheduling</div>
             </div>
             <div class="calc-toggle-switch"></div>
           </button>
@@ -1549,13 +1549,6 @@ footer {
             <input type="range" id="monthsSlider" class="calc-slider" min="1" max="24" step="1" value="3">
           </div>
 
-          <button type="button" class="calc-toggle" data-addon="setup">
-            <div class="calc-toggle-info">
-              <div class="calc-toggle-name">System setup &amp; onboarding</div>
-              <div class="calc-toggle-meta">$350 · QBO/Xero, chart of accounts, integrations</div>
-            </div>
-            <div class="calc-toggle-switch"></div>
-          </button>
         </div>
       </div>
 
@@ -1700,16 +1693,15 @@ const TIERS = {
   }
 };
 const ADDONS_MONTHLY = {
-  hst:     { label: "HST / GST filing",      amount: 50 },
+  hst:     { label: "HST / GST filing",      amount: 100 },
   t2:      { label: "Corporate tax (T2)",    amount: 150 },        // $1,800 / 12
   t1:      { label: "Personal tax (T1)",     amount: 41.67 },      // $500 / 12
-  payroll: { label: "Payroll",               amount: 75, perEmployee: 15 },
-  ar:      { label: "AR management",         amount: 150 },
-  ap:      { label: "AP management",         amount: 150 }
+  payroll: { label: "Payroll",               amount: 150, perEmployee: 30 },
+  ar:      { label: "AR management",         amount: 300 },
+  ap:      { label: "AP management",         amount: 300 }
 };
 const ONETIME = {
-  catchup: { label: "Catch-up / clean-up",        perMonthBehind: 250 },
-  setup:   { label: "System setup & onboarding",  amount: 350 }
+  catchup: { label: "Catch-up / clean-up",        perMonthBehind: 250 }
 };
 
 /* === STATE === */
@@ -1720,8 +1712,7 @@ const state = {
   addons: { hst: false, t2: false, t1: false, payroll: false, ar: false, ap: false },
   employees: 1,
   catchupOn: false,
-  monthsBehind: 3,
-  setupOn: false
+  monthsBehind: 3
 };
 
 function recommendedTier(txns) {
@@ -1799,7 +1790,6 @@ function calculate() {
 
   let oneTime = 0;
   if (state.catchupOn) oneTime += state.monthsBehind * ONETIME.catchup.perMonthBehind;
-  if (state.setupOn)   oneTime += ONETIME.setup.amount;
 
   return { tierKey, tier, monthly, lines, oneTime, annual: monthly * 12 };
 }
@@ -1870,9 +1860,6 @@ $$(".calc-toggle[data-addon]").forEach(t => {
       state.catchupOn = !state.catchupOn;
       t.classList.toggle("active", state.catchupOn);
       catchupSub.classList.toggle("show", state.catchupOn);
-    } else if (key === "setup") {
-      state.setupOn = !state.setupOn;
-      t.classList.toggle("active", state.setupOn);
     } else if (key === "payroll") {
       state.addons.payroll = !state.addons.payroll;
       t.classList.toggle("active", state.addons.payroll);
