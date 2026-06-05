@@ -1084,6 +1084,124 @@ footer {
   .line-art-bg path { transition: none; stroke-dashoffset: 0; }
 }
 
+/* ========== BOOKING MODAL ========== */
+.booking-modal {
+  position: fixed; inset: 0;
+  display: none;
+  z-index: 200;
+  align-items: center; justify-content: center;
+  padding: 32px;
+}
+.booking-modal.open { display: flex; }
+.booking-modal-backdrop {
+  position: absolute; inset: 0;
+  background: rgba(15, 15, 13, 0.62);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  cursor: pointer;
+  animation: modal-fade 0.3s var(--ease);
+}
+.booking-modal-card {
+  position: relative;
+  width: 100%; max-width: 940px;
+  height: min(760px, 92vh);
+  background: var(--cream);
+  border: 1px solid var(--rule);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  animation: modal-in 0.4s var(--ease);
+}
+@keyframes modal-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes modal-in {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.booking-modal-head {
+  padding: 22px 26px 18px;
+  border-bottom: 1px solid var(--rule);
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 16px;
+  flex-shrink: 0;
+}
+.booking-modal-eyebrow {
+  font-family: var(--mono); font-size: 0.62rem;
+  text-transform: uppercase; letter-spacing: 0.18em;
+  color: var(--accent); font-weight: 500;
+  margin-bottom: 8px;
+}
+.booking-modal-title {
+  font-family: var(--serif); font-size: 1.7rem;
+  letter-spacing: -0.02em; line-height: 1.05;
+  font-weight: 400;
+  margin: 0;
+}
+.booking-modal-title em { color: var(--accent); }
+.booking-modal-sub {
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+  margin-top: 6px;
+}
+.booking-modal-sub a {
+  color: var(--ink);
+  border-bottom: 1px solid var(--rule);
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s;
+}
+.booking-modal-sub a:hover { color: var(--accent); border-color: var(--accent); }
+.booking-modal-close {
+  width: 38px; height: 38px;
+  background: transparent;
+  border: 1px solid var(--rule);
+  font-size: 1.4rem; line-height: 1;
+  color: var(--ink-muted);
+  display: inline-flex; align-items: center; justify-content: center;
+  cursor: pointer; padding: 0;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+  flex-shrink: 0;
+}
+.booking-modal-close:hover {
+  color: var(--ink);
+  border-color: var(--ink);
+  background: var(--cream-soft);
+}
+.booking-modal-body {
+  flex: 1;
+  min-height: 0;
+  background: var(--cream-soft);
+  position: relative;
+}
+.booking-modal-body iframe {
+  width: 100%; height: 100%;
+  border: 0;
+  display: block;
+  background: var(--cream-soft);
+}
+.booking-modal-loading {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: 0.72rem;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-muted);
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.booking-modal-body.loaded .booking-modal-loading { opacity: 0; }
+
+@media (max-width: 720px) {
+  .booking-modal { padding: 0; }
+  .booking-modal-card {
+    height: 100vh; max-height: 100vh;
+    width: 100vw;
+    border: none;
+  }
+  .booking-modal-head { padding: 18px 20px 14px; }
+  .booking-modal-title { font-size: 1.4rem; }
+}
+
 /* ========== REVEAL ========== */
 .sr {
   opacity: 0; transform: translateY(28px);
@@ -1525,6 +1643,25 @@ footer {
   </div>
 </footer>
 
+<!-- ============ BOOKING MODAL ============ -->
+<div class="booking-modal" id="bookingModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+  <div class="booking-modal-backdrop" data-modal-close></div>
+  <div class="booking-modal-card">
+    <header class="booking-modal-head">
+      <div>
+        <div class="booking-modal-eyebrow">Let's talk</div>
+        <h3 id="bookingModalTitle" class="booking-modal-title">Book <em>30 minutes</em> with Shay.</h3>
+        <p class="booking-modal-sub">No deck, no script. <a href="https://calendar.notion.so/meet/shayfrankly/ye47g3ulh" target="_blank" rel="noopener">Open in a new tab</a></p>
+      </div>
+      <button type="button" class="booking-modal-close" data-modal-close aria-label="Close booking">&times;</button>
+    </header>
+    <div class="booking-modal-body" id="bookingModalBody">
+      <div class="booking-modal-loading">Loading calendar…</div>
+      <iframe id="bookingFrame" src="about:blank" title="Schedule a call with Shay"></iframe>
+    </div>
+  </div>
+</div>
+
 <script>
 /* ============================================================
    FRANKLY — interactive pricing calculator
@@ -1755,19 +1892,38 @@ monthsSlider.addEventListener("input", () => {
   render();
 });
 
-/* === BOOK-A-CALL CTAs === */
-function openCalendar(e) {
-  if (CALENDAR_URL && !CALENDAR_URL.includes("REPLACE-WITH-REAL")) {
-    if (e) e.preventDefault();
-    window.open(CALENDAR_URL, "_blank", "noopener");
-  } else {
-    // placeholder: scroll to the final CTA section so the link path is obvious
-    if (e) e.preventDefault();
-    document.getElementById("calendar").scrollIntoView({ behavior: "smooth" });
+/* === BOOK-A-CALL CTAs → branded modal with Notion calendar inside === */
+const bookingModal = $("#bookingModal");
+const bookingFrame = $("#bookingFrame");
+const bookingBody  = $("#bookingModalBody");
+
+function openBookingModal(e) {
+  if (e) e.preventDefault();
+  // Lazy-load the iframe the first time the modal opens
+  if (bookingFrame.src === "about:blank" || !bookingFrame.src) {
+    bookingFrame.src = CALENDAR_URL;
+    bookingFrame.addEventListener("load", () => bookingBody.classList.add("loaded"), { once: true });
   }
+  bookingModal.classList.add("open");
+  bookingModal.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
 }
-$("#bookCta").addEventListener("click", openCalendar);
-$("#bookCtaFinal").addEventListener("click", openCalendar);
+
+function closeBookingModal() {
+  bookingModal.classList.remove("open");
+  bookingModal.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+}
+
+// Close on backdrop click, X button, or Escape
+$$("[data-modal-close]").forEach(el => el.addEventListener("click", closeBookingModal));
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape" && bookingModal.classList.contains("open")) closeBookingModal();
+});
+
+// Wire up the two "Book a call" CTAs (calc summary + final CTA)
+$("#bookCta").addEventListener("click", openBookingModal);
+$("#bookCtaFinal").addEventListener("click", openBookingModal);
 
 /* === MOBILE MENU === */
 const navToggle  = $("#navToggle");
@@ -1922,5 +2078,6 @@ $$(".sr").forEach(el => reveal.observe(el));
 txnValue.textContent = "~" + state.txns;
 render();
 </script>
+
 </body>
 </html>
