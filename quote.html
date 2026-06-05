@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Get Your Free Quote — Frankly Financial</title>
+<meta name="description" content="No guessing. No vague estimates. Answer a few questions and we'll follow up within 1 business day with a number that makes sense for your business.">
+<link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#FAFAF8; --bg-warm:#F5F1EC; --bg-card:#FFFFFF;
+  --gold:#C08B2D; --gold-light:#D4A543; --gold-muted:rgba(192,139,45,0.1); --gold-glow:rgba(192,139,45,0.15);
+  --green:#1A8754; --green-bg:#E8F5EC;
+  --text:#111111; --text-2:#555555; --text-3:#999999;
+  --border:#E8E4DE; --border-hover:#D4CFC7;
+  --radius:20px; --radius-sm:12px;
+  --shadow:0 1px 3px rgba(0,0,0,0.04),0 8px 24px rgba(0,0,0,0.04);
+  --shadow-lg:0 4px 12px rgba(0,0,0,0.04),0 24px 64px rgba(0,0,0,0.08);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-size:15px;line-height:1.6;min-height:100vh;-webkit-font-smoothing:antialiased}
+.italic{font-family:'Instrument Serif',serif;font-style:italic;color:var(--gold);font-weight:400}
+
+/* Nav — matches main site */
+nav{position:fixed;top:0;width:100%;z-index:100;padding:16px 40px;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(24px) saturate(1.5);-webkit-backdrop-filter:blur(24px) saturate(1.5);background:rgba(250,250,248,.82);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:'DM Serif Display',serif;font-size:1.5rem;color:var(--text);text-decoration:none;letter-spacing:-0.02em}
+.nav-logo span{color:var(--gold);font-size:2rem;line-height:0}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{color:var(--text-2);text-decoration:none;font-size:.88rem;font-weight:500;transition:color .3s}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{padding:10px 26px;background:var(--text);color:#fff;border:none;border-radius:100px;font-family:'Outfit',sans-serif;font-size:.88rem;font-weight:600;cursor:pointer;text-decoration:none;transition:all .3s}
+.nav-cta:hover{background:#333;transform:translateY(-1px);box-shadow:var(--shadow)}
+
+/* Page container */
+.page{max-width:680px;margin:0 auto;padding:120px 24px 100px}
+
+/* Header */
+.header{margin-bottom:48px;text-align:center}
+.header h1{font-family:'DM Serif Display',serif;font-size:clamp(28px,5vw,42px);font-weight:400;letter-spacing:-0.02em;line-height:1.1;margin-bottom:14px}
+.header h1 .italic{font-size:clamp(28px,5vw,42px)}
+.header p{color:var(--text-2);font-size:16px;max-width:480px;margin:0 auto;line-height:1.6}
+
+/* Progress */
+.progress-wrap{height:4px;background:var(--bg-warm);border-radius:99px;margin-bottom:44px;overflow:hidden}
+.progress-bar{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-light));border-radius:99px;width:0%;transition:width 0.4s ease}
+
+/* Section cards */
+.section{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;margin-bottom:16px;transition:border-color 0.2s;box-shadow:var(--shadow)}
+.section:focus-within{border-color:var(--gold)}
+.section-label{font-family:'DM Serif Display',serif;font-size:16px;font-weight:400;color:var(--text);margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.section-label .req{color:var(--gold);font-family:'Instrument Serif',serif;font-style:italic;font-size:13px}
+.section-hint{font-size:13px;color:var(--text-2);margin-bottom:18px}
+.step-num{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;background:var(--gold-muted);border:1px solid rgba(192,139,45,0.25);border-radius:50%;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;color:var(--gold);flex-shrink:0}
+
+/* Service cards */
+.service-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:10px}
+.service-card{background:var(--bg-warm);border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:16px;cursor:pointer;transition:border-color 0.15s,background 0.15s;user-select:none}
+.service-card:hover{border-color:var(--border-hover);background:#F0EBE2}
+.service-card.active{border-color:var(--gold);background:var(--gold-muted)}
+.service-card.active .svc-name{color:var(--gold)}
+.svc-icon{font-size:20px;margin-bottom:8px;display:block}
+.svc-name{font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:var(--text);margin-bottom:3px}
+.svc-desc{font-size:11.5px;color:var(--text-2);line-height:1.4}
+
+/* Pills */
+.pill-group{display:flex;flex-wrap:wrap;gap:8px}
+.pill{background:var(--bg-warm);border:1.5px solid var(--border);border-radius:100px;padding:8px 16px;font-family:'Outfit',sans-serif;font-size:13.5px;color:var(--text-2);cursor:pointer;transition:all 0.15s;user-select:none}
+.pill:hover{border-color:var(--border-hover);color:var(--text)}
+.pill.active{background:var(--gold-muted);border-color:var(--gold);color:var(--gold)}
+
+/* Conditional sub-questions */
+.sub-q{display:none;margin-top:16px;padding-top:16px;border-top:1px solid var(--border)}
+.sub-q.show{display:block;animation:subReveal .3s ease}
+.sub-q .section-hint{margin-bottom:0}
+@keyframes subReveal{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+
+/* Inputs */
+textarea,input[type="text"],input[type="email"],input[type="tel"]{
+  width:100%;background:var(--bg-warm);border:1.5px solid var(--border);
+  border-radius:var(--radius-sm);padding:12px 16px;color:var(--text);
+  font-family:'Outfit',sans-serif;font-size:14px;outline:none;
+  transition:border-color 0.15s;
+}
+textarea{resize:vertical;min-height:96px;line-height:1.6}
+textarea::placeholder,input::placeholder{color:var(--text-3)}
+textarea:focus,input:focus{border-color:var(--gold)}
+.input-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+/* File upload */
+.file-zone{
+  border:1.5px dashed var(--border);border-radius:var(--radius-sm);
+  padding:24px;text-align:center;cursor:pointer;
+  transition:border-color 0.2s,background 0.2s;position:relative;
+}
+.file-zone:hover,.file-zone.drag-over{border-color:var(--gold);background:var(--gold-muted)}
+.file-zone input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.file-zone-icon{font-size:28px;margin-bottom:8px}
+.file-zone-text{font-size:13.5px;color:var(--text-2)}
+.file-zone-text span{color:var(--gold)}
+.file-zone-hint{font-size:11.5px;color:var(--text-3);margin-top:4px}
+.file-list{margin-top:12px;display:flex;flex-direction:column;gap:6px}
+.file-item{background:var(--bg-warm);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px 12px;display:flex;align-items:center;justify-content:space-between;font-size:13px}
+.file-item-name{color:var(--text-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:80%}
+.file-item-remove{background:none;border:none;color:var(--text-3);cursor:pointer;font-size:16px;line-height:1;padding:0 4px;transition:color 0.15s}
+.file-item-remove:hover{color:#D14343}
+
+/* Submit */
+.submit-wrap{margin-top:32px;text-align:center}
+.btn-submit{background:var(--text);color:#fff;font-family:'Outfit',sans-serif;font-size:16px;font-weight:600;letter-spacing:-0.2px;border:none;border-radius:100px;padding:16px 48px;cursor:pointer;transition:background 0.15s,transform 0.1s,box-shadow 0.15s;box-shadow:var(--shadow-lg)}
+.btn-submit:hover{background:#333;box-shadow:var(--shadow-lg);transform:translateY(-1px)}
+.btn-submit:active{transform:translateY(0)}
+.btn-submit:disabled{opacity:0.4;cursor:not-allowed;transform:none}
+.submit-note{margin-top:12px;font-size:12.5px;color:var(--text-3);font-family:'Instrument Serif',serif;font-style:italic}
+
+/* Loading overlay */
+.loading-overlay{display:none;position:fixed;inset:0;background:rgba(250,250,248,0.9);backdrop-filter:blur(8px);z-index:200;align-items:center;justify-content:center;flex-direction:column;gap:16px}
+.loading-overlay.show{display:flex}
+.spinner{width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin 0.8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-text{color:var(--text-2);font-size:14px}
+
+/* Success */
+.success-state{display:none;text-align:center;padding:60px 24px}
+.success-icon{width:64px;height:64px;background:var(--green-bg);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;font-size:28px}
+.success-state h2{font-family:'DM Serif Display',serif;font-size:28px;font-weight:400;letter-spacing:-0.02em;margin-bottom:10px}
+.success-state p{color:var(--text-2);max-width:420px;margin:0 auto;line-height:1.6}
+
+/* Footer — matches main site */
+footer{padding:36px 40px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;background:var(--bg)}
+footer p{font-size:.75rem;color:var(--text-3)}
+.footer-links{display:flex;gap:24px;list-style:none}
+.footer-links a{color:var(--text-3);text-decoration:none;font-size:.75rem;transition:color .3s}
+.footer-links a:hover{color:var(--text-2)}
+
+/* Hamburger menu (mobile) */
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px;margin-left:auto;margin-right:12px;-webkit-tap-highlight-color:transparent}
+.nav-toggle span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:all .3s ease}
+.nav-toggle span+span{margin-top:5px}
+.nav-toggle.open span:nth-child(1){transform:rotate(45deg) translate(3.5px,3.5px)}
+.nav-toggle.open span:nth-child(2){opacity:0}
+.nav-toggle.open span:nth-child(3){transform:rotate(-45deg) translate(3.5px,-3.5px)}
+.mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(250,250,248,.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:0;opacity:0;transition:opacity .3s ease}
+.mobile-menu.open{display:flex;opacity:1}
+.mobile-menu a{font-family:'DM Serif Display',serif;font-size:28px;color:var(--text);text-decoration:none;padding:16px 0;letter-spacing:-.02em;transition:color .2s}
+.mobile-menu a:hover{color:var(--gold)}
+.mobile-menu .mm-cta{margin-top:24px;padding:14px 32px;background:var(--text);color:#fff;border-radius:100px;font-family:'Outfit',sans-serif;font-size:15px;font-weight:600}
+.mobile-menu .mm-close{position:absolute;top:18px;right:20px;background:none;border:none;font-size:28px;color:var(--text-3);cursor:pointer;padding:8px}
+
+/* Responsive */
+@media(max-width:900px){
+  nav{padding:14px 20px}
+  .nav-links{display:none}
+  .nav-toggle{display:block}
+  .nav-cta{display:none}
+}
+@media(max-width:480px){
+  .page{padding:100px 16px 80px}
+  .input-row{grid-template-columns:1fr}
+  .service-grid{grid-template-columns:1fr 1fr}
+  .header h1{font-size:28px}
+  .header h1 .italic{font-size:28px}
+  .section{padding:20px}
+  footer{padding:24px 20px;flex-direction:column;gap:12px;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="spinner"></div>
+  <div class="loading-text">Sending your info to Frankly...</div>
+</div>
+
+<!-- NAV — same as main site -->
+<nav>
+  <a href="/" class="nav-logo">Frankly<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="/#how">How It Works</a></li>
+    <li><a href="/#features">Features</a></li>
+    <li><a href="/#pricing">Pricing</a></li>
+    <li><a href="/#team">Team</a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  <a href="/assessment" class="nav-cta">Get your free assessment</a>
+</nav>
+
+<!-- MOBILE MENU OVERLAY -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mm-close" id="mmClose" aria-label="Close">&times;</button>
+  <a href="/#how" class="mm-link">How It Works</a>
+  <a href="/#features" class="mm-link">Features</a>
+  <a href="/#pricing" class="mm-link">Pricing</a>
+  <a href="/#team" class="mm-link">Team</a>
+  <a href="/assessment" class="mm-cta">Get your free assessment</a>
+</div>
+
+<div class="page">
+
+  <div class="header">
+    <h1>Let's get you a <span class="italic">real</span> quote.</h1>
+    <p>No guessing. No vague estimates. Answer a few questions and we'll follow up within 1 business day with a number that makes sense for your business.</p>
+  </div>
+
+  <div class="progress-wrap"><div class="progress-bar" id="progressBar"></div></div>
+
+  <form id="intakeForm">
+
+    <!-- 1. Contact -->
+    <div class="section">
+      <div class="section-label"><span class="step-num">1</span> Your details <span class="req">required</span></div>
+      <div class="section-hint">Who should we follow up with?</div>
+      <div class="input-row" style="margin-bottom:12px">
+        <input type="text" id="first_name" placeholder="First name" required />
+        <input type="text" id="last_name" placeholder="Last name" required />
+      </div>
+      <div class="input-row" style="margin-bottom:12px">
+        <input type="email" id="email" placeholder="Email address" required />
+        <input type="tel" id="phone" placeholder="Phone" required />
+      </div>
+      <input type="text" id="business_name" placeholder="Business name" style="margin-bottom:12px" />
+      <input type="text" id="website" placeholder="Website (optional)" />
+    </div>
+
+    <!-- 2. Services -->
+    <div class="section">
+      <div class="section-label"><span class="step-num">2</span> What are you looking for? <span class="req">required</span></div>
+      <div class="section-hint">Select everything that applies.</div>
+      <div class="service-grid" id="serviceGrid">
+        <div class="service-card" data-value="Monthly bookkeeping"><span class="svc-icon">&#128210;</span><div class="svc-name">Monthly bookkeeping</div><div class="svc-desc">Ongoing reconciliation & reporting</div></div>
+        <div class="service-card" data-value="HST / sales tax filing"><span class="svc-icon">&#127809;</span><div class="svc-name">HST / sales tax filing</div><div class="svc-desc">Quarterly or annual returns</div></div>
+        <div class="service-card" data-value="Tax return (T1 or T2)"><span class="svc-icon">&#128203;</span><div class="svc-name">Tax return (T1 or T2)</div><div class="svc-desc">Personal or corporate filing</div></div>
+        <div class="service-card" data-value="Payroll"><span class="svc-icon">&#128101;</span><div class="svc-name">Payroll</div><div class="svc-desc">T4s, remittances, ROEs</div></div>
+        <div class="service-card" data-value="Catch-up / cleanup"><span class="svc-icon">&#128260;</span><div class="svc-name">Catch-up / cleanup</div><div class="svc-desc">Getting behind books current</div></div>
+        <div class="service-card" data-value="CFO / advisory"><span class="svc-icon">&#128200;</span><div class="svc-name">CFO / advisory</div><div class="svc-desc">Forecasting, KPIs, strategy</div></div>
+        <div class="service-card" data-value="T5018 subcontractor slips"><span class="svc-icon">&#128296;</span><div class="svc-name">T5018 slips</div><div class="svc-desc">Construction contractor filings</div></div>
+        <div class="service-card" data-value="Not sure — need guidance"><span class="svc-icon">&#129335;</span><div class="svc-name">Not sure yet</div><div class="svc-desc">Help me figure out what I need</div></div>
+      </div>
+    </div>
+
+    <!-- 3. Structure -->
+    <div class="section">
+      <div class="section-label"><span class="step-num">3</span> Business structure</div>
+      <div class="section-hint">How is the business set up legally?</div>
+      <div class="pill-group" id="structureGroup">
+        <div class="pill" data-value="Sole proprietor">Sole proprietor</div>
+        <div class="pill" data-value="Incorporated (Corp)">Incorporated (Corp)</div>
+        <div class="pill" data-value="Partnership">Partnership</div>
+        <div class="pill" data-value="Not sure">Not sure</div>
+      </div>
+      <div class="sub-q" id="relatedEntitiesQ">
+        <div class="section-hint" style="margin-bottom:4px">Any related entities?</div>
+        <div class="section-hint" style="font-size:12px;color:var(--text-3)">Holding company, sister corps, etc.</div>
+        <div class="pill-group" id="relatedEntitiesGroup" style="margin-top:10px">
+          <div class="pill" data-value="Yes">Yes</div>
+          <div class="pill" data-value="No">No</div>
+        </div>
+        <input type="text" id="related_entities_detail" placeholder='Briefly describe (e.g., "HoldCo + 2 OpCos")' style="display:none;margin-top:10px" />
+      </div>
+    </div>
+
+    <!-- 4. Revenue -->
+    <div class="section">
+      <div class="section-label"><span class="step-num">4</span> Annual revenue</div>
+      <div class="section-hint">Ballpark is fine.</div>
+      <div class="pill-group" id="revenueGroup">
+        <div class="pill" data-value="Under $100k">Under $100k</div>
+        <div class="pill" data-value="$100k-$300k">$100k&ndash;$300k</div>
+        <div class="pill" data-value="$300k-$750k">$300k&ndash;$750k</div>
+        <div class="pill" data-value="$750k-$2M">$750k&ndash;$2M</div>
+        <div class="pill" data-value="Over $2M">Over $2M</div>
+      </div>
+    </div>
+
+    <!-- 5. Transactions -->
+    <div class="section">
+      <div class="section-label"><span class="step-num">5</span> Monthly transactions</div>
+      <div class="section-hint">Roughly how many items flow through your bank + credit cards per month?</div>
+      <div class="pill-group" id="txnGroup">
+        <div class="pill" data-value="Under 50">Under 50</div>
+        <div class="pill" data-value="50-150">50&ndash;150</div>
+        <div class="pill" data-value="150-300">150&ndash;300</div>
+        <div class="pill" data-value="300+">300+</div>
+        <div class="pill" data-value="Not sure">Not sure</div>
+      </div>
+    </div>
+
+    <!-- 6. Payroll -->
+    <div class="section">
+      <div class="section-label"><span class="step-num">6</span> Employees or subcontractors</div>
+      <div class="section-hint">Do you pay anyone other than yourself?</div>
+      <div class="pill-group" id="payrollGroup">
+        <div class="pill" data-value="Employees only">Employees only</div>
+        <div class="pill" data-value="Subcontractors only">Subcontractors only</div>
+        <div class="pill" data-value="Both">Both</div>
+        <div class="pill" data-value="Neither — just me">Neither &mdash; just me</div>
+      </div>
+      <div class="sub-q" id="headcountQ">
+        <div class="section-hint">How many people total?</div>
+        <div class="pill-group" id="headcountGroup" style="margin-top:10px">
+          <div class="pill" data-value="1-3">1&ndash;3</div>
+          <div class="pill" data-value="4-9">4&ndash;9</div>
+          <div class="pill" data-value="10-19">10&ndash;19</div>
+          <div class="pill" data-value="20+">20+</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. Industry -->
+    <div class="section">
+      <div class="section-label"><span class="step-num">7</span> Industry</div>
+      <div class="section-hint">What kind of business is it?</div>
+      <div class="pill-group" id="industryGroup">
+        <div class="pill" data-value="Construction / trades / renovation">Construction / trades</div>
+        <div class="pill" data-value="Retail / e-commerce">Retail / e-commerce</div>
+        <div class="pill" data-value="Professional services">Professional services</div>
+        <div class="pill" data-value="Food & hospitality">Food &amp; hospitality</div>
+        <div class="pill" data-value="Health & wellness">Health &amp; wellness</div>
+        <div class="pill" data-value="SaaS / tech">SaaS / tech</div>
+        <div class="pill" data-value="Other">Other</div>
+      </div>
+      <input type="text" id="industryOther" style="margin-top:10px;display:none" placeholder="Describe the industry" />
+    </div>
+
+    <!-- 8. HST -->
+    <div class="section">
+      <div class="section-label"><span class="step-num">8</span> HST registration</div>
+      <div class="section-hint">Are you currently registered for HST with the CRA?</div>
+      <div class="pill-group" id="hstGroup">
+        <div class="pill" data-value="Yes — quarterly">Yes &mdash; quarterly</div>
+        <div class="pill" data-value="Yes — annually">Yes &mdash; annually</div>
+        <div class="pill" data-value="Yes — not sure of frequency">Yes &mdash; not sure of frequency</div>
+        <div class="pill" data-value="No / not yet">No / not yet</div>
+      </div>
+    </div>
+
+    <!-- 9. Books -->
+    <div class="section">
+      <div class="section-label"><span class="step-num">9</span> Current state of the books</div>
+      <div class="section-hint">No judgment &mdash; we've seen it all.</div>
+      <div class="pill-group" id="booksGroup">
+        <div class="pill" data-value="Up to date in accounting software">Up to date in software</div>
+        <div class="pill" data-value="Behind — receipts are organized">Behind but organized</div>
+        <div class="pill" data-value="Behind and messy — catch-up needed">Behind and messy</div>
+        <div class="pill" data-value="Starting fresh — no prior books">Starting fresh</div>
+      </div>
+      <div class="sub-q" id="monthsBehindQ">
+        <div class="section-hint">Roughly how many months behind?</div>
+        <div class="pill-group" id="monthsBehindGroup" style="margin-top:10px">
+          <div class="pill" data-value="1-3">1&ndash;3</div>
+          <div class="pill" data-value="3-6">3&ndash;6</div>
+          <div class="pill" data-value="6-12">6&ndash;12</div>
+          <div class="pill" data-value="12+">12+</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10. Systems -->
+    <div class="section">
+      <div class="section-label"><span class="step-num">10</span> Systems &amp; software</div>
+      <div class="section-hint">What tools do you currently use to run the business?</div>
+      <textarea id="systems" placeholder="e.g. QuickBooks Online, Wave, Xero, Excel, Jobber, Housecall Pro, Square, Stripe, Shopify... or 'nothing yet'"></textarea>
+    </div>
+
+    <!-- 11. File Upload -->
+    <div class="section">
+      <div class="section-label"><span class="step-num">11</span> Upload documents</div>
+      <div class="section-hint">Bank statements, prior tax returns, HST returns, invoices &mdash; anything useful. These go straight into your folder on our Drive.</div>
+      <div class="file-zone" id="fileZone">
+        <input type="file" id="fileInput" multiple accept=".pdf,.xlsx,.xls,.csv,.docx,.doc,.png,.jpg,.jpeg" />
+        <div class="file-zone-icon">&#128206;</div>
+        <div class="file-zone-text">Drop files here or <span>browse</span></div>
+        <div class="file-zone-hint">PDF, Excel, Word, images &mdash; up to 10MB per file</div>
+      </div>
+      <div class="file-list" id="fileList"></div>
+    </div>
+
+    <!-- 12. Notes -->
+    <div class="section">
+      <div class="section-label"><span class="step-num">12</span> Anything else?</div>
+      <div class="section-hint">Specific concerns, deadlines, CRA letters, general chaos &mdash; drop it here.</div>
+      <textarea id="additional_notes" placeholder="Optional — but the more context you give us, the better."></textarea>
+    </div>
+
+    <div class="submit-wrap">
+      <button type="submit" class="btn-submit" id="submitBtn">Get my free quote &rarr;</button>
+      <p class="submit-note">We'll follow up within 1 business day. No spam, no pressure.</p>
+    </div>
+
+  </form>
+
+  <div class="success-state" id="successState">
+    <div class="success-icon">&#10003;</div>
+    <h2>You're in <span class="italic">good</span> hands.</h2>
+    <p>We got everything and we'll be in touch within 1 business day with a real quote &mdash; no fluff, no surprises.</p>
+    <p style="margin-top:16px;font-size:13px;color:var(--text-3)">Questions in the meantime? Email <a href="mailto:shay@franklyfinancial.co" style="color:var(--gold);text-decoration:none;font-weight:500">shay@franklyfinancial.co</a></p>
+  </div>
+
+</div><!-- /page -->
+
+<footer>
+  <p>&copy; 2026 Frankly AI &middot; Made with &#9749; in Toronto</p>
+  <ul class="footer-links"><li><a href="/#how">How It Works</a></li><li><a href="/#features">Features</a></li><li><a href="/#pricing">Pricing</a></li><li><a href="/#team">Team</a></li></ul>
+</footer>
+
+<script>
+  // Mobile menu toggle
+  const navToggle=document.getElementById('navToggle');
+  const mobileMenu=document.getElementById('mobileMenu');
+  const mmClose=document.getElementById('mmClose');
+  navToggle.addEventListener('click',()=>{navToggle.classList.toggle('open');mobileMenu.classList.toggle('open');document.body.style.overflow=mobileMenu.classList.contains('open')?'hidden':''});
+  mmClose.addEventListener('click',()=>{navToggle.classList.remove('open');mobileMenu.classList.remove('open');document.body.style.overflow=''});
+  document.querySelectorAll('.mobile-menu .mm-link, .mobile-menu .mm-cta').forEach(a=>{a.addEventListener('click',()=>{navToggle.classList.remove('open');mobileMenu.classList.remove('open');document.body.style.overflow=''})});
+
+  // ── Replace this with your Apps Script Web App URL ──────────
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyZBCw1PUzX1HKc_-yi0-LTa0ZoHKsVxydWQqbzttSFfhiTfD6ib0Udhjn3KLp-ViDM_A/exec';
+  // ────────────────────────────────────────────────────────────
+
+  let uploadedFiles = [];
+
+  // Multi-select service cards
+  document.querySelectorAll('#serviceGrid .service-card').forEach(c => {
+    c.addEventListener('click', () => { c.classList.toggle('active'); updateProgress(); });
+  });
+
+  // Single-select pill groups (simple — no conditionals)
+  [['revenueGroup'],['txnGroup'],['hstGroup']].forEach(([id]) => {
+    document.querySelectorAll('#' + id + ' .pill').forEach(p => {
+      p.addEventListener('click', () => {
+        document.querySelectorAll('#' + id + ' .pill').forEach(x => x.classList.remove('active'));
+        p.classList.add('active');
+        updateProgress();
+      });
+    });
+  });
+
+  // ── Q3 Structure → conditional related-entities ──
+  document.querySelectorAll('#structureGroup .pill').forEach(p => {
+    p.addEventListener('click', () => {
+      document.querySelectorAll('#structureGroup .pill').forEach(x => x.classList.remove('active'));
+      p.classList.add('active');
+      const subQ = document.getElementById('relatedEntitiesQ');
+      if (p.dataset.value === 'Incorporated (Corp)') {
+        subQ.classList.add('show');
+      } else {
+        subQ.classList.remove('show');
+        document.querySelectorAll('#relatedEntitiesGroup .pill').forEach(x => x.classList.remove('active'));
+        document.getElementById('related_entities_detail').style.display = 'none';
+        document.getElementById('related_entities_detail').value = '';
+      }
+      updateProgress();
+    });
+  });
+
+  // Related entities Yes / No → detail input
+  document.querySelectorAll('#relatedEntitiesGroup .pill').forEach(p => {
+    p.addEventListener('click', () => {
+      document.querySelectorAll('#relatedEntitiesGroup .pill').forEach(x => x.classList.remove('active'));
+      p.classList.add('active');
+      const detail = document.getElementById('related_entities_detail');
+      if (p.dataset.value === 'Yes') { detail.style.display = 'block'; }
+      else { detail.style.display = 'none'; detail.value = ''; }
+    });
+  });
+
+  // ── Q6 Payroll → conditional headcount ──
+  document.querySelectorAll('#payrollGroup .pill').forEach(p => {
+    p.addEventListener('click', () => {
+      document.querySelectorAll('#payrollGroup .pill').forEach(x => x.classList.remove('active'));
+      p.classList.add('active');
+      const subQ = document.getElementById('headcountQ');
+      if (!p.dataset.value.startsWith('Neither')) {
+        subQ.classList.add('show');
+      } else {
+        subQ.classList.remove('show');
+        document.querySelectorAll('#headcountGroup .pill').forEach(x => x.classList.remove('active'));
+      }
+      updateProgress();
+    });
+  });
+
+  // Headcount pills (single-select)
+  document.querySelectorAll('#headcountGroup .pill').forEach(p => {
+    p.addEventListener('click', () => {
+      document.querySelectorAll('#headcountGroup .pill').forEach(x => x.classList.remove('active'));
+      p.classList.add('active');
+    });
+  });
+
+  // ── Q9 Books → conditional months behind ──
+  document.querySelectorAll('#booksGroup .pill').forEach(p => {
+    p.addEventListener('click', () => {
+      document.querySelectorAll('#booksGroup .pill').forEach(x => x.classList.remove('active'));
+      p.classList.add('active');
+      const subQ = document.getElementById('monthsBehindQ');
+      if (p.dataset.value.startsWith('Behind')) {
+        subQ.classList.add('show');
+      } else {
+        subQ.classList.remove('show');
+        document.querySelectorAll('#monthsBehindGroup .pill').forEach(x => x.classList.remove('active'));
+      }
+      updateProgress();
+    });
+  });
+
+  // Months-behind pills (single-select)
+  document.querySelectorAll('#monthsBehindGroup .pill').forEach(p => {
+    p.addEventListener('click', () => {
+      document.querySelectorAll('#monthsBehindGroup .pill').forEach(x => x.classList.remove('active'));
+      p.classList.add('active');
+    });
+  });
+
+  // Industry with "Other" text
+  document.querySelectorAll('#industryGroup .pill').forEach(p => {
+    p.addEventListener('click', () => {
+      document.querySelectorAll('#industryGroup .pill').forEach(x => x.classList.remove('active'));
+      p.classList.add('active');
+      document.getElementById('industryOther').style.display = p.dataset.value === 'Other' ? 'block' : 'none';
+      updateProgress();
+    });
+  });
+
+  // File upload
+  const fileInput = document.getElementById('fileInput');
+  const fileList  = document.getElementById('fileList');
+  const fileZone  = document.getElementById('fileZone');
+
+  fileInput.addEventListener('change', () => handleFiles(fileInput.files));
+
+  fileZone.addEventListener('dragover', e => { e.preventDefault(); fileZone.classList.add('drag-over'); });
+  fileZone.addEventListener('dragleave', () => fileZone.classList.remove('drag-over'));
+  fileZone.addEventListener('drop', e => {
+    e.preventDefault();
+    fileZone.classList.remove('drag-over');
+    handleFiles(e.dataTransfer.files);
+  });
+
+  function handleFiles(files) {
+    [...files].forEach(file => {
+      if (file.size > 10 * 1024 * 1024) { alert(file.name + ' is over 10MB and was skipped.'); return; }
+      uploadedFiles.push(file);
+      renderFileItem(file, uploadedFiles.length - 1);
+    });
+    fileInput.value = '';
+  }
+
+  function renderFileItem(file, idx) {
+    const item = document.createElement('div');
+    item.className = 'file-item';
+    item.dataset.idx = idx;
+    item.innerHTML = '<span class="file-item-name">' + file.name + '</span><button class="file-item-remove" type="button" title="Remove">&times;</button>';
+    item.querySelector('.file-item-remove').addEventListener('click', () => {
+      uploadedFiles[idx] = null;
+      item.remove();
+    });
+    fileList.appendChild(item);
+  }
+
+  // Progress bar
+  function updateProgress() {
+    let filled = 0;
+    const checks = [
+      () => document.getElementById('first_name').value.trim(),
+      () => document.getElementById('email').value.trim(),
+      () => document.querySelectorAll('#serviceGrid .service-card.active').length > 0,
+      () => document.querySelector('#structureGroup .pill.active'),
+      () => document.querySelector('#revenueGroup .pill.active'),
+      () => document.querySelector('#txnGroup .pill.active'),
+      () => document.querySelector('#payrollGroup .pill.active'),
+      () => document.querySelector('#industryGroup .pill.active'),
+      () => document.querySelector('#hstGroup .pill.active'),
+      () => document.querySelector('#booksGroup .pill.active'),
+      () => document.getElementById('systems').value.trim(),
+    ];
+    checks.forEach(fn => { if (fn()) filled++; });
+    document.getElementById('progressBar').style.width = Math.round((filled / checks.length) * 100) + '%';
+  }
+
+  document.querySelectorAll('input[type="text"], input[type="email"], textarea').forEach(el => {
+    el.addEventListener('input', updateProgress);
+  });
+
+  // Convert file to base64
+  function fileToBase64(file) {
+    return new Promise((res, rej) => {
+      const reader = new FileReader();
+      reader.onload = () => res(reader.result.split(',')[1]);
+      reader.onerror = () => rej(new Error('Read failed'));
+      reader.readAsDataURL(file);
+    });
+  }
+
+  // Submit
+  document.getElementById('intakeForm').addEventListener('submit', async e => {
+    e.preventDefault();
+
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    document.getElementById('loadingOverlay').classList.add('show');
+
+    // Collect pill values
+    const getActivePill = id => (document.querySelector('#' + id + ' .pill.active') || {}).dataset?.value || '';
+    const industryActive = (document.querySelector('#industryGroup .pill.active') || {}).dataset?.value || '';
+    const industry = industryActive === 'Other' ? document.getElementById('industryOther').value : industryActive;
+
+    // Collect files
+    const validFiles = uploadedFiles.filter(Boolean);
+    const filesData = await Promise.all(validFiles.map(async f => ({
+      name: f.name,
+      type: f.type,
+      data: await fileToBase64(f)
+    })));
+
+    const payload = {
+      first_name:            document.getElementById('first_name').value.trim(),
+      last_name:             document.getElementById('last_name').value.trim(),
+      email:                 document.getElementById('email').value.trim(),
+      phone:                 document.getElementById('phone').value.trim(),
+      business_name:         document.getElementById('business_name').value.trim(),
+      website:               document.getElementById('website').value.trim(),
+      services:              [...document.querySelectorAll('#serviceGrid .service-card.active')].map(c => c.dataset.value).join(', '),
+      business_structure:    getActivePill('structureGroup'),
+      annual_revenue:        getActivePill('revenueGroup'),
+      monthly_transactions:  getActivePill('txnGroup'),
+      employees_subs:        getActivePill('payrollGroup'),
+      industry:              industry,
+      hst_status:            getActivePill('hstGroup'),
+      books_state:           getActivePill('booksGroup'),
+      related_entities:      getActivePill('relatedEntitiesGroup') || null,
+      related_entities_detail: document.getElementById('related_entities_detail').value.trim() || null,
+      headcount_band:        getActivePill('headcountGroup') || null,
+      months_behind_band:    getActivePill('monthsBehindGroup') || null,
+      systems:               document.getElementById('systems').value.trim(),
+      additional_notes:      document.getElementById('additional_notes').value.trim(),
+      files:                 filesData
+    };
+
+    try {
+      const res = await fetch(SCRIPT_URL, {
+        method: 'POST',
+        body: JSON.stringify(payload)
+      });
+      const result = await res.json();
+      if (result.result === 'success') {
+        document.getElementById('intakeForm').style.display = 'none';
+        document.getElementById('progressBar').style.width = '100%';
+        document.getElementById('successState').style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        throw new Error(result.message || 'Unknown error');
+      }
+    } catch (err) {
+      alert('Something went wrong. Please email shay@franklyfinancial.co directly.\n\nError: ' + err.message);
+      btn.disabled = false;
+    } finally {
+      document.getElementById('loadingOverlay').classList.remove('show');
+    }
+  });
+</script>
+</body>
+</html>

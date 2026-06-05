@@ -1,0 +1,1926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Frankly Financial — Bookkeeping for businesses that hate bookkeeping.</title>
+
+<meta name="description" content="Frankly is bookkeeping for growing Canadian and US businesses. Real humans, real numbers, real answers — delivered monthly. CFO-grade rigour, no CFO-grade invoice.">
+<meta name="author" content="Frankly Financial">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://franklyfinancial.co/">
+<meta property="og:title" content="Frankly Financial — Bookkeeping for businesses that hate bookkeeping.">
+<meta property="og:description" content="Real humans, real numbers, real answers — delivered monthly. CFO-grade rigour, no CFO-grade invoice.">
+<meta property="og:image" content="https://franklyfinancial.co/images/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="Frankly Financial">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Frankly Financial — Bookkeeping for businesses that hate bookkeeping.">
+<meta name="twitter:description" content="Real humans, real numbers, real answers — delivered monthly.">
+<meta name="twitter:image" content="https://franklyfinancial.co/images/og-image.png">
+
+<link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#F4EFE5">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ========== RESET ========== */
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+img, svg { display: block; max-width: 100%; }
+button { font: inherit; cursor: pointer; background: none; border: none; color: inherit; }
+a { color: inherit; }
+ul { list-style: none; }
+input[type="range"] { width: 100%; }
+
+/* ========== TOKENS ========== */
+:root {
+  --cream:       #F4EFE5;
+  --cream-deep:  #ECE4D2;
+  --cream-soft:  #FAF6EE;
+  --ink:         #131311;
+  --ink-soft:    #2A2A26;
+  --ink-muted:   #6B665A;
+  --ink-faint:   #9C9684;
+  --rule:        #D9CFBC;
+  --rule-soft:   #E3DAC8;
+  --accent:      #B85C38;
+  --accent-deep: #934023;
+  --accent-soft: rgba(184, 92, 56, 0.08);
+  --serif: 'Instrument Serif', 'Times New Roman', serif;
+  --sans:  'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono:  'JetBrains Mono', monospace;
+  --shadow-lg: 0 30px 60px -20px rgba(19,19,17,0.18), 0 8px 24px -8px rgba(19,19,17,0.08);
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-weight: 400;
+  line-height: 1.55;
+  font-size: 17px;
+  overflow-x: hidden;
+}
+
+/* paper grain */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px;
+  mix-blend-mode: multiply;
+}
+
+/* ========== TYPE HELPERS ========== */
+.serif { font-family: var(--serif); letter-spacing: -0.02em; line-height: 0.98; font-weight: 400; }
+.mono  { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500; }
+em { font-style: italic; }
+
+.section-label {
+  display: inline-block;
+  margin-bottom: 28px;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  font-weight: 500;
+}
+.section-label::before {
+  content: '';
+  display: inline-block;
+  width: 28px;
+  height: 1px;
+  background: var(--accent);
+  vertical-align: middle;
+  margin-right: 14px;
+  margin-bottom: 3px;
+}
+.section-title {
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 5vw, 4.4rem);
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+  max-width: 18ch;
+  font-weight: 400;
+}
+.section-title em { color: var(--accent); }
+.section-desc {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--ink-soft);
+  max-width: 50ch;
+  margin-top: 24px;
+}
+
+/* ========== NAV ========== */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 18px 32px;
+  display: flex; align-items: center; justify-content: space-between;
+  backdrop-filter: blur(20px) saturate(1.5);
+  -webkit-backdrop-filter: blur(20px) saturate(1.5);
+  background: rgba(244, 239, 229, 0.78);
+  border-bottom: 1px solid rgba(217, 207, 188, 0.5);
+}
+.nav-logo {
+  font-family: var(--serif);
+  font-size: 1.6rem;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+  color: var(--ink);
+  display: inline-flex; align-items: baseline;
+}
+.nav-logo .dot { color: var(--accent); font-size: 1.9rem; line-height: 0; margin-left: 1px; }
+.nav-links {
+  display: flex; gap: 36px;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+.nav-links a {
+  color: var(--ink-muted);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+.nav-links a:hover { color: var(--ink); }
+.nav-cta {
+  padding: 12px 22px;
+  background: var(--ink); color: var(--cream);
+  border: 1px solid var(--ink);
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.nav-cta:hover { background: var(--accent); border-color: var(--accent); }
+.nav-cta .arrow { transition: transform 0.2s ease; }
+.nav-cta:hover .arrow { transform: translateX(3px); }
+
+/* hamburger */
+.nav-toggle {
+  display: none;
+  padding: 6px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.nav-toggle span {
+  display: block; width: 24px; height: 1.5px;
+  background: var(--ink); border-radius: 2px;
+  transition: all 0.3s ease;
+}
+.nav-toggle span + span { margin-top: 6px; }
+.nav-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(4px, 5px); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(4px, -5px); }
+.mobile-menu {
+  display: none;
+  position: fixed; inset: 0;
+  background: var(--cream);
+  z-index: 99;
+  flex-direction: column; align-items: flex-start; justify-content: center;
+  padding: 80px 32px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.mobile-menu.open { display: flex; opacity: 1; }
+.mobile-menu a {
+  font-family: var(--serif);
+  font-size: 2.8rem;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  text-decoration: none;
+  padding: 10px 0;
+  transition: color 0.2s;
+}
+.mobile-menu a:hover { color: var(--accent); }
+.mobile-menu .mm-cta {
+  margin-top: 28px;
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 14px 28px;
+  background: var(--ink);
+  color: var(--cream);
+}
+
+/* ========== HERO ========== */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 160px 32px 80px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-wrap { max-width: 1180px; margin: 0 auto; width: 100%; position: relative; z-index: 1; }
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  margin-bottom: 48px;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--ink-muted);
+  font-weight: 500;
+}
+.hero-eyebrow .pulse {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 0 rgba(184, 92, 56, 0.5);
+  animation: pulse-dot 2.4s ease-in-out infinite;
+}
+@keyframes pulse-dot {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(184, 92, 56, 0.5); }
+  50%      { box-shadow: 0 0 0 10px rgba(184, 92, 56, 0); }
+}
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(3.5rem, 11vw, 9rem);
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+  max-width: 16ch;
+  margin-bottom: 56px;
+  font-weight: 400;
+}
+.hero h1 em { color: var(--accent); font-weight: 400; }
+.hero-sub {
+  font-size: clamp(1.1rem, 1.5vw, 1.4rem);
+  line-height: 1.55;
+  color: var(--ink-soft);
+  max-width: 44ch;
+  margin-bottom: 56px;
+  font-weight: 400;
+}
+.hero-sub em { font-family: var(--serif); font-size: 1.08em; color: var(--ink); }
+.hero-actions {
+  display: flex; gap: 18px;
+  flex-wrap: wrap; align-items: center;
+}
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 18px 34px;
+  background: var(--ink); color: var(--cream);
+  border: 1px solid var(--ink);
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+  letter-spacing: -0.005em;
+  transition: all 0.25s ease;
+}
+.btn-primary:hover { background: var(--accent); border-color: var(--accent); }
+.btn-primary .arrow { transition: transform 0.2s ease; }
+.btn-primary:hover .arrow { transform: translateX(4px); }
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 18px 34px;
+  background: transparent; color: var(--ink);
+  border: 1px solid var(--ink);
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+.btn-ghost:hover { background: var(--ink); color: var(--cream); }
+.hero-meta {
+  margin-top: 80px;
+  padding-top: 28px;
+  border-top: 1px solid var(--rule);
+  display: flex; gap: 64px; flex-wrap: wrap;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--ink-muted);
+}
+.hero-meta strong { color: var(--ink); font-weight: 500; }
+
+/* ========== ABOUT ========== */
+.about { padding: 160px 32px 120px; }
+.about-grid {
+  max-width: 1180px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px;
+  align-items: start;
+}
+.about-statement {
+  font-family: var(--serif);
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  line-height: 1.18;
+  letter-spacing: -0.025em;
+  margin-bottom: 36px;
+  font-weight: 400;
+}
+.about-statement em { color: var(--accent); }
+.about-body {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--ink-soft);
+  max-width: 56ch;
+}
+.about-body p + p { margin-top: 18px; }
+
+/* ========== HOW IT WORKS ========== */
+.how {
+  background: #1E1A12;
+  color: var(--cream);
+  border-top: 1px solid rgba(217, 207, 188, 0.08);
+  border-bottom: 1px solid rgba(217, 207, 188, 0.08);
+  padding: 140px 32px;
+  position: relative;
+  overflow: hidden;
+}
+.how .section-title { color: var(--cream); }
+.how .section-title em { color: var(--accent); }
+.how .section-label { color: var(--accent); }
+.how .how-steps { border-top-color: rgba(217, 207, 188, 0.10); }
+.how .how-step { border-right-color: rgba(217, 207, 188, 0.10); }
+.how .how-step h3 { color: var(--cream); }
+.how .how-step p  { color: rgba(244, 239, 229, 0.88); }
+.how .how-num     { color: var(--accent); }
+.how-wrap { max-width: 1180px; margin: 0 auto; }
+.how-header { margin-bottom: 72px; }
+.how-steps {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--rule);
+}
+.how-step {
+  padding: 56px 36px 0 0;
+  border-right: 1px solid var(--rule);
+}
+.how-step:last-child { border-right: none; padding-right: 0; }
+.how-step:not(:first-child) { padding-left: 36px; }
+.how-num {
+  font-family: var(--serif);
+  font-size: 4.5rem; line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--accent);
+  margin-bottom: 32px;
+  font-weight: 400;
+}
+.how-num em { font-style: italic; }
+.how-step h3 {
+  font-family: var(--serif);
+  font-size: 1.6rem;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 14px;
+  font-weight: 400;
+}
+.how-step p {
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  max-width: 32ch;
+}
+
+/* ========== INDUSTRIES ========== */
+.industries {
+  padding: 90px 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  overflow: hidden;
+}
+.industries-label {
+  text-align: center;
+  margin-bottom: 56px;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--ink-muted);
+  font-weight: 500;
+}
+.industries-track {
+  display: flex; gap: 56px;
+  width: max-content;
+  animation: scroll-x 50s linear infinite;
+}
+.industries-item {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 3.6vw, 3.4rem);
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  display: flex; align-items: center; gap: 56px;
+  color: var(--ink);
+  font-weight: 400;
+}
+.industries-item.alt { font-style: italic; color: var(--accent); }
+.industries-item .sep {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--rule);
+}
+@keyframes scroll-x {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ========== CALCULATOR ========== */
+.calc { padding: 160px 32px 140px; }
+.calc-header { max-width: 1180px; margin: 0 auto 80px; }
+.calc-wrap {
+  max-width: 1180px; margin: 0 auto;
+  display: grid; grid-template-columns: 1.3fr 1fr; gap: 56px;
+  align-items: start;
+}
+.calc-inputs {
+  background: var(--cream-soft);
+  border: 1px solid var(--rule);
+  padding: 48px 44px;
+}
+.calc-group {
+  padding: 28px 0;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.calc-group:first-child { padding-top: 0; }
+.calc-group:last-child  { border-bottom: none; padding-bottom: 0; }
+.calc-q {
+  display: flex; align-items: baseline; justify-content: space-between;
+  margin-bottom: 18px;
+  gap: 14px;
+}
+.calc-q-num {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  font-weight: 500;
+  flex-shrink: 0;
+}
+.calc-q-text {
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  flex: 1;
+  font-weight: 400;
+}
+.calc-q-value {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--ink);
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+/* slider */
+.calc-slider {
+  -webkit-appearance: none; appearance: none;
+  width: 100%; height: 2px;
+  background: var(--rule);
+  outline: none;
+  margin: 16px 0 8px;
+  border-radius: 1px;
+}
+.calc-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--ink);
+  cursor: pointer;
+  border: 3px solid var(--cream-soft);
+  box-shadow: 0 0 0 1px var(--ink);
+  transition: all 0.15s ease;
+}
+.calc-slider::-webkit-slider-thumb:hover,
+.calc-slider:focus::-webkit-slider-thumb {
+  background: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+  transform: scale(1.08);
+}
+.calc-slider::-moz-range-thumb {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--ink); cursor: pointer;
+  border: 3px solid var(--cream-soft);
+  box-shadow: 0 0 0 1px var(--ink);
+}
+.calc-slider-ticks {
+  display: flex; justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-top: 8px;
+}
+
+/* chip group */
+.calc-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.calc-chip {
+  padding: 9px 18px;
+  background: transparent;
+  border: 1px solid var(--rule);
+  color: var(--ink-muted);
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  border-radius: 100px;
+}
+.calc-chip:hover { border-color: var(--ink); color: var(--ink); }
+.calc-chip.active { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+
+/* tier picker */
+.calc-tiers {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;
+  margin-top: 14px;
+}
+.calc-tier {
+  padding: 16px 14px;
+  background: transparent;
+  border: 1px solid var(--rule);
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  position: relative;
+}
+.calc-tier:hover { border-color: var(--ink); }
+.calc-tier.active { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+.calc-tier.recommended::after {
+  content: 'Suggested';
+  position: absolute; top: -10px; right: 8px;
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  background: var(--accent);
+  color: var(--cream);
+  padding: 3px 8px;
+  font-weight: 500;
+}
+.calc-tier-name {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 4px;
+  font-weight: 400;
+}
+.calc-tier-price {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  opacity: 0.7;
+}
+
+/* toggle add-ons */
+.calc-toggles { display: flex; flex-direction: column; gap: 10px; margin-top: 14px; }
+.calc-toggle {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 18px;
+  background: var(--cream);
+  border: 1px solid var(--rule);
+  cursor: pointer;
+  transition: all 0.18s ease;
+  text-align: left;
+  width: 100%;
+}
+.calc-toggle:hover { border-color: var(--ink-muted); }
+.calc-toggle.active { background: var(--accent-soft); border-color: var(--accent); }
+.calc-toggle-info { flex: 1; }
+.calc-toggle-name {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+}
+.calc-toggle-meta {
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-muted);
+  margin-top: 4px;
+}
+.calc-toggle-switch {
+  width: 38px; height: 22px;
+  background: var(--rule);
+  border-radius: 100px;
+  position: relative;
+  transition: background 0.2s ease;
+  flex-shrink: 0;
+  margin-left: 16px;
+}
+.calc-toggle-switch::after {
+  content: '';
+  position: absolute; top: 2px; left: 2px;
+  width: 18px; height: 18px; border-radius: 50%;
+  background: var(--cream-soft);
+  transition: transform 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}
+.calc-toggle.active .calc-toggle-switch { background: var(--accent); }
+.calc-toggle.active .calc-toggle-switch::after { transform: translateX(16px); }
+
+/* sub-input under toggle */
+.calc-subinput {
+  display: none;
+  padding: 16px 18px 12px;
+  background: var(--cream);
+  border: 1px solid var(--rule);
+  border-top: none;
+  margin-top: -10px;
+}
+.calc-subinput.show { display: block; }
+
+/* === RIGHT COLUMN: summary === */
+.calc-summary {
+  position: sticky; top: 100px;
+  background: var(--ink); color: var(--cream);
+  padding: 44px 40px;
+  border: 1px solid var(--ink);
+}
+.calc-summary-eyebrow {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  font-weight: 500;
+  margin-bottom: 24px;
+}
+.calc-summary-tier {
+  font-family: var(--serif);
+  font-size: 1.8rem;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  margin-bottom: 6px;
+  font-weight: 400;
+}
+.calc-summary-tier em { color: var(--accent); }
+.calc-summary-tagline {
+  font-size: 0.88rem;
+  color: rgba(244, 239, 229, 0.6);
+  line-height: 1.55;
+  margin-bottom: 32px;
+  max-width: 30ch;
+}
+.calc-summary-total {
+  display: flex; align-items: baseline; gap: 8px;
+  padding: 26px 0;
+  border-top: 1px solid rgba(244, 239, 229, 0.12);
+}
+.calc-summary-total-amount {
+  font-family: var(--serif);
+  font-size: 4.2rem;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  font-weight: 400;
+  transition: opacity 0.15s ease;
+}
+.calc-summary-total-unit {
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(244, 239, 229, 0.6);
+}
+
+.calc-summary-lines {
+  border-top: 1px solid rgba(244, 239, 229, 0.12);
+  padding-top: 18px;
+  display: flex; flex-direction: column; gap: 8px;
+  font-size: 0.85rem;
+  color: rgba(244, 239, 229, 0.62);
+}
+.calc-summary-line {
+  display: flex; justify-content: space-between; align-items: baseline;
+  gap: 12px;
+}
+.calc-summary-line .amt {
+  font-family: var(--mono); font-size: 0.82rem;
+  color: rgba(244, 239, 229, 0.85);
+  white-space: nowrap;
+}
+.calc-summary-line.total {
+  color: var(--cream);
+  padding-top: 14px;
+  border-top: 1px solid rgba(244, 239, 229, 0.12);
+  margin-top: 8px;
+  font-weight: 500;
+}
+.calc-summary-line.total .amt { color: var(--cream); }
+
+.calc-summary-onetime {
+  margin-top: 22px; padding: 16px 0 0;
+  border-top: 1px dashed rgba(244, 239, 229, 0.18);
+  font-size: 0.85rem;
+  color: rgba(244, 239, 229, 0.62);
+  display: flex; flex-direction: column; gap: 8px;
+}
+.calc-summary-onetime.hidden { display: none; }
+
+.calc-summary-cta {
+  display: block; width: 100%;
+  margin-top: 32px;
+  padding: 18px 24px;
+  background: var(--accent);
+  color: var(--cream);
+  border: 1px solid var(--accent);
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.calc-summary-cta:hover {
+  background: var(--cream);
+  color: var(--ink);
+  border-color: var(--cream);
+}
+.calc-summary-footnote {
+  margin-top: 16px;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: rgba(244, 239, 229, 0.55);
+  line-height: 1.5;
+}
+
+/* ========== TEAM ========== */
+.team {
+  background: var(--cream-deep);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  padding: 140px 32px;
+  position: relative;
+  overflow: hidden;
+}
+.team-wrap { max-width: 1180px; margin: 0 auto; position: relative; z-index: 1; }
+.team-header { margin-bottom: 80px; max-width: 720px; }
+.team-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 56px;
+}
+.team-photo {
+  width: 100%; aspect-ratio: 4 / 5;
+  background: var(--cream);
+  border: 1px solid var(--rule);
+  margin-bottom: 28px;
+  overflow: hidden;
+  position: relative;
+}
+.team-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: transform 0.8s var(--ease);
+}
+.team-card:hover .team-photo img { transform: scale(1.04); }
+.team-name {
+  font-family: var(--serif);
+  font-size: 2rem;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  margin-bottom: 6px;
+  font-weight: 400;
+}
+.team-name a { text-decoration: none; color: inherit; transition: color 0.2s; }
+.team-name a:hover { color: var(--accent); }
+.team-role {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  font-weight: 500;
+  margin-bottom: 18px;
+}
+.team-bio {
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  max-width: 44ch;
+}
+
+/* ========== FINAL CTA ========== */
+.final-cta {
+  padding: 180px 32px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background: #1E1A12;
+  color: var(--cream);
+  border-top: 1px solid rgba(217, 207, 188, 0.08);
+}
+.final-cta-wrap { position: relative; z-index: 1; }
+.how-wrap { position: relative; z-index: 1; }
+section.final-cta h2 { color: var(--cream); }
+section.final-cta h2 em { color: var(--accent); }
+section.final-cta p { color: rgba(244, 239, 229, 0.95); }
+section.final-cta .section-label { color: var(--accent); }
+section.final-cta .final-cta-contact { border-top-color: rgba(217, 207, 188, 0.12); }
+section.final-cta .final-cta-contact a { color: rgba(244, 239, 229, 0.80); }
+section.final-cta .final-cta-contact .val { color: var(--cream); }
+section.final-cta .final-cta-contact a:hover { color: var(--accent); }
+/* primary button on dark bg — invert to cream */
+.final-cta .btn-primary {
+  background: var(--cream);
+  color: var(--ink);
+  border-color: var(--cream);
+}
+.final-cta .btn-primary:hover { background: var(--accent); color: var(--cream); border-color: var(--accent); }
+.final-cta-wrap { max-width: 880px; margin: 0 auto; }
+.final-cta h2 {
+  font-family: var(--serif);
+  font-size: clamp(3rem, 7vw, 6rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  margin-bottom: 36px;
+  font-weight: 400;
+}
+.final-cta h2 em { color: var(--accent); }
+.final-cta p {
+  font-size: 1.15rem;
+  color: var(--ink-soft);
+  max-width: 50ch; margin: 0 auto 48px;
+  line-height: 1.6;
+}
+.final-cta-contact {
+  margin-top: 56px;
+  padding-top: 36px;
+  border-top: 1px solid var(--rule);
+  display: flex; gap: 64px; justify-content: center; flex-wrap: wrap;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+.final-cta-contact a {
+  color: var(--ink-muted);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+  display: inline-flex; align-items: center; gap: 10px;
+}
+.final-cta-contact a:hover { color: var(--accent); }
+.final-cta-contact .val {
+  color: var(--ink);
+  font-family: var(--sans);
+  text-transform: none;
+  letter-spacing: -0.005em;
+  font-size: 0.95rem;
+  font-weight: 400;
+}
+
+/* ========== FOOTER ========== */
+footer {
+  padding: 48px 32px;
+  border-top: 1px solid var(--rule);
+  background: var(--cream);
+}
+.footer-wrap {
+  max-width: 1280px; margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 24px;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--ink-muted);
+  font-weight: 500;
+}
+
+/* ========== LINE ART ========== */
+.line-art {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+}
+.line-art svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.line-art path {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  stroke-dasharray: var(--len, 2000);
+  stroke-dashoffset: var(--len, 2000);
+  transition: stroke-dashoffset 2.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.line-art.visible path { stroke-dashoffset: 0; }
+
+/* HERO — full-bleed flowing line behind the headline */
+/* BIG BACKGROUND ILLUSTRATIONS — intricate continuous-line paths injected by JS */
+.line-art-bg {
+  position: absolute; inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.line-art-bg svg {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+}
+.line-art-bg path {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.22;
+  --len: 12000;
+  stroke-dasharray: var(--len);
+  stroke-dashoffset: var(--len);
+  transition: stroke-dashoffset 5.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.line-art-bg.visible path { stroke-dashoffset: 0; }
+
+/* hero variant: ink colour, sits behind the heaviest type */
+.line-art-bg-hero path {
+  stroke: var(--ink);
+  opacity: 0.16;
+  stroke-width: 2.2;
+}
+
+/* Hero fox illustration — sits behind hero text on the right */
+.line-art-hero-fox {
+  position: absolute;
+  right: 0;
+  bottom: 120px;
+  width: 56%;
+  max-width: 780px;
+  pointer-events: none;
+  z-index: 0;
+}
+.line-art-hero-fox img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+/* On phones, show the fox as a faded full-width watermark behind text */
+@media (max-width: 960px) {
+  .line-art-hero-fox {
+    width: 130%;
+    max-width: none;
+    right: -15%;
+    bottom: 80px;
+    opacity: 0.22;
+  }
+}
+
+/* dark sections — line art uses cream stroke for visibility against deep bg */
+.line-art-bg-how path,
+.line-art-bg-cta path {
+  stroke: var(--cream);
+  opacity: 0.09;
+  stroke-width: 2.4;
+}
+
+/* SECTION LABEL — small squiggle injected by JS, sits inline */
+.line-art-inline {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  width: 44px; height: 14px;
+  margin-right: 14px;
+  margin-bottom: 3px;
+}
+.line-art-inline svg { width: 100%; height: 100%; overflow: visible; }
+.line-art-inline path {
+  stroke-width: 1.2;
+  --len: 180;
+  transition-duration: 1.2s;
+}
+.section-label:has(.line-art-inline)::before { display: none; }
+
+/* ABOUT — vertical flowing illustration filling the empty left column */
+.line-art-about {
+  position: relative;
+  margin-top: 24px;
+  width: 100%;
+  max-width: 440px;
+  aspect-ratio: 1874 / 2272;
+}
+.line-art-about img {
+  width: 100%; height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* Decorative line-art images === */
+.line-art-cash {
+  position: absolute;
+  right: 5%;
+  top: 200px;
+  width: 480px;
+  aspect-ratio: 2816 / 1536;
+  pointer-events: none;
+  z-index: 1;
+  display: none;
+}
+.line-art-cash img {
+  width: 100%; height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.line-art-phone {
+  position: absolute;
+  right: 6%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 300px;
+  aspect-ratio: 1984 / 2150;
+  pointer-events: none;
+  z-index: 2;
+  display: none;
+}
+.line-art-phone img {
+  width: 100%; height: 100%;
+  object-fit: contain;
+  display: block;
+  /* phone sits on dark bg — invert so black lines render as cream */
+  filter: invert(0.92) sepia(0.05);
+}
+@media (min-width: 1100px) {
+  .line-art-cash,
+  .line-art-phone { display: block; }
+}
+
+/* CALCULATOR HEADER — tiny mark in negative space */
+.line-art-calc {
+  position: absolute;
+  right: 6%; top: 60px;
+  width: 200px; height: 80px;
+  display: none;
+}
+@media (min-width: 1100px) {
+  .line-art-calc { display: block; }
+}
+.line-art-calc svg { width: 100%; height: 100%; overflow: visible; }
+.line-art-calc path { --len: 600; transition-duration: 1.8s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .line-art path,
+  .line-art-bg path { transition: none; stroke-dashoffset: 0; }
+}
+
+/* ========== REVEAL ========== */
+.sr {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity 1s var(--ease), transform 1s var(--ease);
+}
+.sr.visible { opacity: 1; transform: translateY(0); }
+.sr-delay-1 { transition-delay: 0.1s; }
+.sr-delay-2 { transition-delay: 0.2s; }
+.sr-delay-3 { transition-delay: 0.3s; }
+.sr-delay-4 { transition-delay: 0.4s; }
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 960px) {
+  nav { padding: 14px 20px; }
+  .nav-links { display: none; }
+  .nav-toggle { display: block; }
+  .nav-cta { display: none; }
+
+  .hero { padding: 140px 20px 60px; }
+  .hero-meta { gap: 32px; }
+
+  .about { padding: 100px 20px 60px; }
+  .about-grid { grid-template-columns: 1fr; gap: 36px; }
+
+  .how { padding: 100px 20px; }
+  .how-steps { grid-template-columns: 1fr; border-top: none; }
+  .how-step {
+    border-right: none;
+    border-top: 1px solid var(--rule);
+    padding: 40px 0 !important;
+  }
+
+  .calc { padding: 100px 20px; }
+  .calc-wrap { grid-template-columns: 1fr; gap: 36px; }
+  .calc-inputs { padding: 32px 24px; }
+  .calc-summary { position: relative; top: 0; padding: 36px 28px; }
+  .calc-tiers { grid-template-columns: repeat(2, 1fr); }
+
+  .team { padding: 100px 20px; }
+  .team-grid { grid-template-columns: 1fr; gap: 56px; }
+
+  .final-cta { padding: 120px 20px; }
+  .final-cta-contact { gap: 28px; }
+  footer { padding: 32px 20px; }
+  .footer-wrap { flex-direction: column; text-align: center; gap: 12px; }
+}
+@media (max-width: 600px) {
+  .hero h1 { margin-bottom: 36px; }
+  .hero-actions { flex-direction: column; align-items: stretch; }
+  .btn-primary, .btn-ghost { justify-content: center; }
+  .calc-q { flex-wrap: wrap; }
+  .calc-q-num { order: 0; }
+  .calc-q-text { flex: 1 1 100%; order: 2; margin-top: 6px; }
+  .calc-q-value { order: 1; }
+  .calc-summary-total-amount { font-size: 3.2rem; }
+  .industries-item { font-size: 1.8rem; gap: 32px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav>
+  <a href="#top" class="nav-logo">Frankly<span class="dot">.</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">What we do</a></li>
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#calculator">Pricing</a></li>
+    <li><a href="#team">Team</a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  <a href="#calculator" class="nav-cta">Book your quote <span class="arrow">→</span></a>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" class="mm-link">What we do</a>
+  <a href="#how" class="mm-link">How it works</a>
+  <a href="#calculator" class="mm-link">Pricing</a>
+  <a href="#team" class="mm-link">Team</a>
+  <a href="#calculator" class="mm-link mm-cta">Book your quote →</a>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <!-- Real line-art illustration: fox with glasses (decorative, right of hero) -->
+  <div class="line-art-hero-fox sr sr-delay-2" aria-hidden="true">
+    <img src="images/hero-fox.png" alt="">
+  </div>
+  <div class="hero-wrap">
+    <div class="hero-eyebrow sr"><span class="pulse"></span> Now onboarding Canadian & US businesses</div>
+    <h1 class="sr sr-delay-1">Frankly, your books should <em>make sense.</em></h1>
+    <p class="hero-sub sr sr-delay-2">Real humans. Real numbers. <em>Real answers.</em> Delivered monthly. CFO-grade rigour, no CFO-grade invoice.</p>
+    <div class="hero-actions sr sr-delay-3">
+      <a href="#calculator" class="btn-primary">Book your quote <span class="arrow">→</span></a>
+      <a href="#how" class="btn-ghost">How it works</a>
+    </div>
+    <div class="hero-meta sr sr-delay-4">
+      <div><strong>Frankly Financial Advisors</strong> · Toronto</div>
+      <div>Canadian & US business specialists</div>
+      <div>Month-to-month. No lock-ins.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="about" id="about">
+  <div class="about-grid">
+    <div>
+      <span class="section-label sr">What we do</span>
+      <div class="line-art line-art-about sr sr-delay-2" aria-hidden="true">
+        <img src="images/about-businessman.png" alt="">
+      </div>
+    </div>
+    <div>
+      <p class="about-statement sr sr-delay-1">
+        We're the <em>bookkeeping team</em> for businesses that have outgrown their accountant — but aren't ready for a full-time CFO.
+      </p>
+      <div class="about-body sr sr-delay-2">
+        <p>Frankly is a small, deliberate team of CPAs and ex-finance folks who do one thing properly: keep your books clean, your reports honest, and your tax surprises to a minimum.</p>
+        <p>We work with growing Canadian and US businesses — construction crews, design studios, therapy practices, e-comm brands, agencies, restaurants — anyone who'd rather be running their business than reconciling it.</p>
+        <p>No app. No platform. No "AI co-pilot dashboard." Just a real team, real numbers, real answers — delivered to your inbox every month.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="how" id="how">
+  <div class="how-wrap" style="position: relative;">
+    <div class="line-art-bg line-art-bg-how sr" aria-hidden="true">
+      <svg viewBox="0 0 1600 800" preserveAspectRatio="xMidYMid slice"><path d=""/></svg>
+    </div>
+    <div class="how-header sr">
+      <span class="section-label">How it works</span>
+      <h2 class="section-title">Three steps. <em>Five minutes.</em> No accounting degree required.</h2>
+    </div>
+    <div class="how-steps">
+      <div class="how-step sr sr-delay-1">
+        <div class="how-num">0<em>1</em></div>
+        <h3>Hop on a call</h3>
+        <p>Thirty minutes with Shay. He'll figure out what you actually need — not what'll fatten the invoice.</p>
+      </div>
+      <div class="how-step sr sr-delay-2">
+        <div class="how-num">0<em>2</em></div>
+        <h3>We take it from here</h3>
+        <p>Link your bank, QuickBooks or Xero. We pull everything in, clean it up, and set you up properly — usually within a week.</p>
+      </div>
+      <div class="how-step sr sr-delay-3">
+        <div class="how-num">0<em>3</em></div>
+        <h3>You get clarity</h3>
+        <p>Monthly P&amp;L, balance sheet, cash flow — in plain English, in your inbox. Plus a real person you can ping when something feels off.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INDUSTRIES ============ -->
+<div class="industries">
+  <div class="industries-label">Built for</div>
+  <div class="industries-track">
+    <span class="industries-item">Healthcare practices <span class="sep"></span></span>
+    <span class="industries-item alt">Law firms <span class="sep"></span></span>
+    <span class="industries-item">Construction &amp; trades <span class="sep"></span></span>
+    <span class="industries-item alt">Design studios <span class="sep"></span></span>
+    <span class="industries-item">E-commerce brands <span class="sep"></span></span>
+    <span class="industries-item alt">Agencies <span class="sep"></span></span>
+    <span class="industries-item">Therapy practices <span class="sep"></span></span>
+    <span class="industries-item alt">Restaurants <span class="sep"></span></span>
+    <span class="industries-item">SaaS &amp; tech <span class="sep"></span></span>
+    <span class="industries-item alt">Consultancies <span class="sep"></span></span>
+    <!-- duplicate for seamless loop -->
+    <span class="industries-item">Healthcare practices <span class="sep"></span></span>
+    <span class="industries-item alt">Law firms <span class="sep"></span></span>
+    <span class="industries-item">Construction &amp; trades <span class="sep"></span></span>
+    <span class="industries-item alt">Design studios <span class="sep"></span></span>
+    <span class="industries-item">E-commerce brands <span class="sep"></span></span>
+    <span class="industries-item alt">Agencies <span class="sep"></span></span>
+    <span class="industries-item">Therapy practices <span class="sep"></span></span>
+    <span class="industries-item alt">Restaurants <span class="sep"></span></span>
+    <span class="industries-item">SaaS &amp; tech <span class="sep"></span></span>
+    <span class="industries-item alt">Consultancies <span class="sep"></span></span>
+  </div>
+</div>
+
+<!-- ============ CALCULATOR ============ -->
+<section class="calc" id="calculator" style="position: relative;">
+
+  <!-- Real line-art illustration: cash stack -->
+  <div class="line-art-cash sr sr-delay-2" aria-hidden="true">
+    <img src="images/cash-stack.png" alt="">
+  </div>
+
+  <div class="calc-header sr">
+    <span class="section-label">Build your quote</span>
+    <h2 class="section-title">Pricing that <em>matches</em> what you actually need.</h2>
+    <p class="section-desc">Pick what fits, skip what doesn't. The number you see is the number Shay quotes — no setup fees, no surprise invoices.</p>
+  </div>
+
+  <div class="calc-wrap">
+
+    <!-- LEFT: inputs -->
+    <div class="calc-inputs sr">
+
+      <!-- Q1: monthly transactions -->
+      <div class="calc-group">
+        <div class="calc-q">
+          <span class="calc-q-num">01</span>
+          <span class="calc-q-text">How many transactions a month?</span>
+          <span class="calc-q-value" id="txnValue">~100</span>
+        </div>
+        <input type="range" id="txnSlider" class="calc-slider" min="10" max="600" step="10" value="100">
+        <div class="calc-slider-ticks">
+          <span>10</span><span>150</span><span>300</span><span>450</span><span>600+</span>
+        </div>
+      </div>
+
+      <!-- Q2: tier picker -->
+      <div class="calc-group">
+        <div class="calc-q">
+          <span class="calc-q-num">02</span>
+          <span class="calc-q-text">Pick a plan</span>
+          <span class="calc-q-value">override</span>
+        </div>
+        <div class="calc-tiers" id="tierGroup">
+          <button type="button" class="calc-tier" data-tier="essentials">
+            <div class="calc-tier-name">Essentials</div>
+            <div class="calc-tier-price">$149/mo · ≤50 txns</div>
+          </button>
+          <button type="button" class="calc-tier" data-tier="growth">
+            <div class="calc-tier-name">Growth</div>
+            <div class="calc-tier-price">$349/mo · ≤150 txns</div>
+          </button>
+          <button type="button" class="calc-tier" data-tier="complete">
+            <div class="calc-tier-name">Complete</div>
+            <div class="calc-tier-price">$649/mo · ≤400 txns</div>
+          </button>
+          <button type="button" class="calc-tier" data-tier="cfo">
+            <div class="calc-tier-name">CFO Partner</div>
+            <div class="calc-tier-price">$1,200/mo · 400+ txns</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Q3: business structure -->
+      <div class="calc-group">
+        <div class="calc-q">
+          <span class="calc-q-num">03</span>
+          <span class="calc-q-text">Business structure</span>
+        </div>
+        <div class="calc-chips" id="structureGroup">
+          <button type="button" class="calc-chip" data-value="sole">Sole prop</button>
+          <button type="button" class="calc-chip" data-value="corp">Incorporated</button>
+          <button type="button" class="calc-chip" data-value="partnership">Partnership</button>
+          <button type="button" class="calc-chip" data-value="unsure">Not sure yet</button>
+        </div>
+      </div>
+
+      <!-- Q4: monthly add-ons -->
+      <div class="calc-group">
+        <div class="calc-q">
+          <span class="calc-q-num">04</span>
+          <span class="calc-q-text">Monthly add-ons</span>
+        </div>
+        <div class="calc-toggles">
+          <button type="button" class="calc-toggle" data-addon="hst">
+            <div class="calc-toggle-info">
+              <div class="calc-toggle-name">HST / GST filing</div>
+              <div class="calc-toggle-meta">+ $50 / month</div>
+            </div>
+            <div class="calc-toggle-switch"></div>
+          </button>
+
+          <button type="button" class="calc-toggle" data-addon="payroll">
+            <div class="calc-toggle-info">
+              <div class="calc-toggle-name">Payroll</div>
+              <div class="calc-toggle-meta">+ $75 base · $15 / employee</div>
+            </div>
+            <div class="calc-toggle-switch"></div>
+          </button>
+          <div class="calc-subinput" id="payrollSubinput">
+            <div class="calc-q" style="margin-bottom: 10px;">
+              <span class="calc-q-text" style="font-size: 1rem;">How many people on payroll?</span>
+              <span class="calc-q-value" id="empValue">1</span>
+            </div>
+            <input type="range" id="empSlider" class="calc-slider" min="1" max="25" step="1" value="1">
+          </div>
+
+          <button type="button" class="calc-toggle" data-addon="ar">
+            <div class="calc-toggle-info">
+              <div class="calc-toggle-name">Accounts Receivable management</div>
+              <div class="calc-toggle-meta">+ $150 / month · invoicing &amp; collections</div>
+            </div>
+            <div class="calc-toggle-switch"></div>
+          </button>
+
+          <button type="button" class="calc-toggle" data-addon="ap">
+            <div class="calc-toggle-info">
+              <div class="calc-toggle-name">Accounts Payable management</div>
+              <div class="calc-toggle-meta">+ $150 / month · bill pay &amp; scheduling</div>
+            </div>
+            <div class="calc-toggle-switch"></div>
+          </button>
+
+          <button type="button" class="calc-toggle" data-addon="t2">
+            <div class="calc-toggle-info">
+              <div class="calc-toggle-name">Corporate tax return (T2)</div>
+              <div class="calc-toggle-meta">$1,800/yr · billed $150 / month</div>
+            </div>
+            <div class="calc-toggle-switch"></div>
+          </button>
+
+          <button type="button" class="calc-toggle" data-addon="t1">
+            <div class="calc-toggle-info">
+              <div class="calc-toggle-name">Personal tax return (T1)</div>
+              <div class="calc-toggle-meta">$500/yr · billed ~$42 / month</div>
+            </div>
+            <div class="calc-toggle-switch"></div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Q5: one-time -->
+      <div class="calc-group">
+        <div class="calc-q">
+          <span class="calc-q-num">05</span>
+          <span class="calc-q-text">One-time work</span>
+        </div>
+        <div class="calc-toggles">
+          <button type="button" class="calc-toggle" data-addon="catchup">
+            <div class="calc-toggle-info">
+              <div class="calc-toggle-name">Catch-up / clean-up</div>
+              <div class="calc-toggle-meta">$250 per month behind · one-time</div>
+            </div>
+            <div class="calc-toggle-switch"></div>
+          </button>
+          <div class="calc-subinput" id="catchupSubinput">
+            <div class="calc-q" style="margin-bottom: 10px;">
+              <span class="calc-q-text" style="font-size: 1rem;">How many months behind?</span>
+              <span class="calc-q-value" id="monthsValue">3</span>
+            </div>
+            <input type="range" id="monthsSlider" class="calc-slider" min="1" max="24" step="1" value="3">
+          </div>
+
+          <button type="button" class="calc-toggle" data-addon="setup">
+            <div class="calc-toggle-info">
+              <div class="calc-toggle-name">System setup &amp; onboarding</div>
+              <div class="calc-toggle-meta">$350 · QBO/Xero, chart of accounts, integrations</div>
+            </div>
+            <div class="calc-toggle-switch"></div>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT: summary -->
+    <aside class="calc-summary sr sr-delay-2">
+      <div class="calc-summary-eyebrow">Your quote</div>
+      <div class="calc-summary-tier" id="summaryTier">Growth</div>
+      <div class="calc-summary-tagline" id="summaryTagline">Full monthly close plus a quarterly review call. The sweet spot for most growing businesses.</div>
+
+      <div class="calc-summary-total">
+        <span class="calc-summary-total-amount" id="summaryAmount">$349</span>
+        <span class="calc-summary-total-unit">/ month</span>
+      </div>
+
+      <div class="calc-summary-lines" id="summaryLines"></div>
+
+      <div class="calc-summary-onetime hidden" id="summaryOnetime">
+        <div class="calc-summary-line"><span>One-time today</span><span class="amt" id="summaryOnetimeAmt">$0</span></div>
+        <div class="calc-summary-line" id="summaryAnnualLine" style="opacity: 0.5; font-size: 0.78rem;">
+          <span>Annual recurring</span><span class="amt" id="summaryAnnual">$4,188</span>
+        </div>
+      </div>
+
+      <button type="button" class="calc-summary-cta" id="bookCta">Book 30 min with Shay →</button>
+      <p class="calc-summary-footnote">This is a starting point — final scope locks in on the call.</p>
+    </aside>
+
+  </div>
+</section>
+
+<!-- ============ TEAM ============ -->
+<section class="team" id="team">
+  <div class="line-art-bg line-art-bg-team sr" aria-hidden="true">
+    <svg viewBox="0 0 1600 800" preserveAspectRatio="xMidYMid slice"><path d=""/></svg>
+  </div>
+  <div class="team-wrap">
+    <div class="team-header sr">
+      <span class="section-label">The humans behind it</span>
+      <h2 class="section-title">Two of us. <em>That's the point.</em></h2>
+      <p class="section-desc">No outsourced support pool. No anonymous junior accountant. Just us — running your books and answering the phone.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card sr sr-delay-1">
+        <div class="team-photo"><img src="images/shay.png?v=2" alt="Shay Shafique"></div>
+        <h3 class="team-name"><a href="https://www.linkedin.com/in/shayshafique/" target="_blank" rel="noopener">Shay Shafique</a></h3>
+        <div class="team-role">Growth · Strategy · Your first call</div>
+        <p class="team-bio">Has helped scale more startups than he can count. Now he's helping small businesses get the same caliber of financial strategy that venture-backed startups take for granted.</p>
+      </div>
+      <div class="team-card sr sr-delay-2">
+        <div class="team-photo"><img src="images/ata.png?v=2" alt="Ata Haee"></div>
+        <h3 class="team-name"><a href="https://www.linkedin.com/in/atahaee/" target="_blank" rel="noopener">Ata Haee</a></h3>
+        <div class="team-role">Finance · Operations · CPA reviewer</div>
+        <p class="team-bio">Former VP of Finance who got tired of watching small businesses get overcharged for basic financial advice. Now he's making sure your numbers are right — without the markup.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="final-cta" id="calendar">
+  <div class="line-art-bg line-art-bg-cta sr" aria-hidden="true">
+    <svg viewBox="0 0 1600 800" preserveAspectRatio="xMidYMid slice"><path d=""/></svg>
+  </div>
+
+  <!-- Real line-art illustration: vintage phone receiver -->
+  <div class="line-art-phone sr sr-delay-3" aria-hidden="true">
+    <img src="images/phone-receiver.png" alt="">
+  </div>
+
+  <div class="final-cta-wrap">
+    <span class="section-label sr" style="display: block; text-align: center; margin-bottom: 24px;">Let's talk</span>
+    <h2 class="sr sr-delay-1">Let's be <em>frank.</em></h2>
+    <p class="sr sr-delay-2">Thirty minutes with Shay. No deck, no script — just a quick chat to figure out if we're a fit. If we're not, he'll tell you who is.</p>
+    <button type="button" id="bookCtaFinal" class="btn-primary sr sr-delay-3" style="cursor: pointer;">Book your 30 minutes <span class="arrow">→</span></button>
+    <div class="final-cta-contact sr sr-delay-4">
+      <a href="mailto:shay@franklyfinancial.co">Email · <span class="val">shay@franklyfinancial.co</span></a>
+      <a href="tel:+16473720294">Phone · <span class="val">+1 647 372 0294</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="footer-wrap">
+    <div>© 2026 Frankly Financial · Made in Toronto</div>
+    <div>franklyfinancial.co</div>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   FRANKLY — interactive pricing calculator
+   Source of truth for rates: Frankly_Pricing_Calculator_Tiered.xlsx
+   ============================================================ */
+
+/* === CONFIG — swap this with Shay's real Notion calendar URL === */
+const CALENDAR_URL = "https://calendar.notion.so/meet/shayfrankly/ye47g3ulh";
+
+/* === PRICING MODEL === */
+const TIERS = {
+  essentials: {
+    name: "Essentials",
+    price: 149,
+    tagline: "Bookkeeping only — reconciled monthly. For brand-new and micro businesses keeping things tidy."
+  },
+  growth: {
+    name: "Growth",
+    price: 349,
+    tagline: "Full monthly close plus a quarterly review call. The sweet spot for most growing businesses."
+  },
+  complete: {
+    name: "Complete",
+    price: 649,
+    tagline: "Adds a KPI dashboard and monthly exec summary. For incorporated businesses that need to actually use their numbers."
+  },
+  cfo: {
+    name: "CFO Partner",
+    displayName: '<em>CFO</em> Partner',
+    price: 1200,
+    tagline: "Monthly strategy, forecasting, board-ready reporting. A real CFO partner — without the six-figure salary."
+  }
+};
+const ADDONS_MONTHLY = {
+  hst:     { label: "HST / GST filing",      amount: 50 },
+  t2:      { label: "Corporate tax (T2)",    amount: 150 },        // $1,800 / 12
+  t1:      { label: "Personal tax (T1)",     amount: 41.67 },      // $500 / 12
+  payroll: { label: "Payroll",               amount: 75, perEmployee: 15 },
+  ar:      { label: "AR management",         amount: 150 },
+  ap:      { label: "AP management",         amount: 150 }
+};
+const ONETIME = {
+  catchup: { label: "Catch-up / clean-up",        perMonthBehind: 250 },
+  setup:   { label: "System setup & onboarding",  amount: 350 }
+};
+
+/* === STATE === */
+const state = {
+  txns: 100,
+  tierOverride: null,    // null = follow the slider; otherwise an explicit tier key
+  structure: null,
+  addons: { hst: false, t2: false, t1: false, payroll: false, ar: false, ap: false },
+  employees: 1,
+  catchupOn: false,
+  monthsBehind: 3,
+  setupOn: false
+};
+
+function recommendedTier(txns) {
+  if (txns <= 50)  return "essentials";
+  if (txns <= 150) return "growth";
+  if (txns <= 400) return "complete";
+  return "cfo";
+}
+function currentTierKey() {
+  return state.tierOverride || recommendedTier(state.txns);
+}
+function fmt$(n) {
+  const rounded = Math.round(n);
+  if (rounded >= 1000) return "$" + rounded.toLocaleString("en-US");
+  return "$" + rounded;
+}
+
+/* === DOM HELPERS === */
+const $  = sel => document.querySelector(sel);
+const $$ = sel => document.querySelectorAll(sel);
+
+const txnSlider    = $("#txnSlider");
+const txnValue     = $("#txnValue");
+const empSlider    = $("#empSlider");
+const empValue     = $("#empValue");
+const monthsSlider = $("#monthsSlider");
+const monthsValue  = $("#monthsValue");
+const payrollSub   = $("#payrollSubinput");
+const catchupSub   = $("#catchupSubinput");
+
+const summaryTier       = $("#summaryTier");
+const summaryTagline    = $("#summaryTagline");
+const summaryAmount     = $("#summaryAmount");
+const summaryLines      = $("#summaryLines");
+const summaryOnetime    = $("#summaryOnetime");
+const summaryOnetimeAmt = $("#summaryOnetimeAmt");
+const summaryAnnual     = $("#summaryAnnual");
+
+/* === CALCULATION === */
+function calculate() {
+  const tierKey = currentTierKey();
+  const tier = TIERS[tierKey];
+
+  let monthly = tier.price;
+  const lines = [{ label: tier.name + " plan", amt: tier.price }];
+
+  if (state.addons.hst) {
+    monthly += ADDONS_MONTHLY.hst.amount;
+    lines.push({ label: "HST / GST filing", amt: ADDONS_MONTHLY.hst.amount });
+  }
+  if (state.addons.payroll) {
+    const payrollAmt = ADDONS_MONTHLY.payroll.amount + state.employees * ADDONS_MONTHLY.payroll.perEmployee;
+    monthly += payrollAmt;
+    lines.push({
+      label: "Payroll · " + state.employees + (state.employees === 1 ? " person" : " people"),
+      amt: payrollAmt
+    });
+  }
+  if (state.addons.ar) {
+    monthly += ADDONS_MONTHLY.ar.amount;
+    lines.push({ label: "AR management", amt: ADDONS_MONTHLY.ar.amount });
+  }
+  if (state.addons.ap) {
+    monthly += ADDONS_MONTHLY.ap.amount;
+    lines.push({ label: "AP management", amt: ADDONS_MONTHLY.ap.amount });
+  }
+  if (state.addons.t2) {
+    monthly += ADDONS_MONTHLY.t2.amount;
+    lines.push({ label: "Corporate tax (T2)", amt: ADDONS_MONTHLY.t2.amount });
+  }
+  if (state.addons.t1) {
+    monthly += ADDONS_MONTHLY.t1.amount;
+    lines.push({ label: "Personal tax (T1)", amt: ADDONS_MONTHLY.t1.amount });
+  }
+
+  let oneTime = 0;
+  if (state.catchupOn) oneTime += state.monthsBehind * ONETIME.catchup.perMonthBehind;
+  if (state.setupOn)   oneTime += ONETIME.setup.amount;
+
+  return { tierKey, tier, monthly, lines, oneTime, annual: monthly * 12 };
+}
+
+/* === RENDER === */
+function render() {
+  const result = calculate();
+  const autoTier = recommendedTier(state.txns);
+
+  // tier buttons
+  $$("#tierGroup .calc-tier").forEach(b => {
+    b.classList.remove("active", "recommended");
+    const k = b.dataset.tier;
+    if (k === result.tierKey) b.classList.add("active");
+    // show "Suggested" badge ONLY when user has overridden away from the auto pick
+    if (state.tierOverride && k === autoTier && state.tierOverride !== autoTier) {
+      b.classList.add("recommended");
+    }
+  });
+
+  // summary card
+  summaryTier.innerHTML = result.tier.displayName || result.tier.name;
+  summaryTagline.textContent = result.tier.tagline;
+  summaryAmount.textContent = fmt$(result.monthly);
+
+  summaryLines.innerHTML =
+    result.lines.map(l =>
+      '<div class="calc-summary-line"><span>' + l.label + '</span><span class="amt">' + fmt$(l.amt) + '</span></div>'
+    ).join("") +
+    '<div class="calc-summary-line total"><span>Monthly total</span><span class="amt">' + fmt$(result.monthly) + '</span></div>';
+
+  if (result.oneTime > 0) {
+    summaryOnetime.classList.remove("hidden");
+    summaryOnetimeAmt.textContent = fmt$(result.oneTime);
+  } else {
+    summaryOnetime.classList.add("hidden");
+  }
+  summaryAnnual.textContent = fmt$(result.annual);
+}
+
+/* === EVENTS === */
+txnSlider.addEventListener("input", () => {
+  state.txns = parseInt(txnSlider.value, 10);
+  txnValue.textContent = state.txns >= 600 ? "600+" : "~" + state.txns;
+  state.tierOverride = null;   // sliding clears any manual override
+  render();
+});
+
+$$("#tierGroup .calc-tier").forEach(b => {
+  b.addEventListener("click", () => {
+    state.tierOverride = b.dataset.tier;
+    render();
+  });
+});
+
+$$("#structureGroup .calc-chip").forEach(c => {
+  c.addEventListener("click", () => {
+    $$("#structureGroup .calc-chip").forEach(x => x.classList.remove("active"));
+    c.classList.add("active");
+    state.structure = c.dataset.value;
+  });
+});
+
+$$(".calc-toggle[data-addon]").forEach(t => {
+  t.addEventListener("click", () => {
+    const key = t.dataset.addon;
+    if (key === "catchup") {
+      state.catchupOn = !state.catchupOn;
+      t.classList.toggle("active", state.catchupOn);
+      catchupSub.classList.toggle("show", state.catchupOn);
+    } else if (key === "setup") {
+      state.setupOn = !state.setupOn;
+      t.classList.toggle("active", state.setupOn);
+    } else if (key === "payroll") {
+      state.addons.payroll = !state.addons.payroll;
+      t.classList.toggle("active", state.addons.payroll);
+      payrollSub.classList.toggle("show", state.addons.payroll);
+    } else {
+      state.addons[key] = !state.addons[key];
+      t.classList.toggle("active", state.addons[key]);
+    }
+    render();
+  });
+});
+
+empSlider.addEventListener("input", () => {
+  state.employees = parseInt(empSlider.value, 10);
+  empValue.textContent = state.employees + (state.employees >= 25 ? "+" : "");
+  render();
+});
+monthsSlider.addEventListener("input", () => {
+  state.monthsBehind = parseInt(monthsSlider.value, 10);
+  monthsValue.textContent = state.monthsBehind + (state.monthsBehind >= 24 ? "+" : "");
+  render();
+});
+
+/* === BOOK-A-CALL CTAs === */
+function openCalendar(e) {
+  if (CALENDAR_URL && !CALENDAR_URL.includes("REPLACE-WITH-REAL")) {
+    if (e) e.preventDefault();
+    window.open(CALENDAR_URL, "_blank", "noopener");
+  } else {
+    // placeholder: scroll to the final CTA section so the link path is obvious
+    if (e) e.preventDefault();
+    document.getElementById("calendar").scrollIntoView({ behavior: "smooth" });
+  }
+}
+$("#bookCta").addEventListener("click", openCalendar);
+$("#bookCtaFinal").addEventListener("click", openCalendar);
+
+/* === MOBILE MENU === */
+const navToggle  = $("#navToggle");
+const mobileMenu = $("#mobileMenu");
+navToggle.addEventListener("click", () => {
+  const open = navToggle.classList.toggle("open");
+  mobileMenu.classList.toggle("open", open);
+  document.body.style.overflow = open ? "hidden" : "";
+});
+$$(".mobile-menu a").forEach(a =>
+  a.addEventListener("click", () => {
+    navToggle.classList.remove("open");
+    mobileMenu.classList.remove("open");
+    document.body.style.overflow = "";
+  })
+);
+
+/* === LINE ART: procedurally-generated intricate background illustrations === */
+(function injectBackgroundLineArt() {
+  // Generate an organic continuous line path using a sum of sine/cosine harmonics.
+  // Produces a closed Lissajous-like curve with rich self-intersecting structure.
+  function generatePath(opts) {
+    const { width = 1600, height = 800, seed = 0, scale = 0.42, harmonics, steps = 520 } = opts;
+    const cx = width / 2;
+    const cy = height / 2;
+    const r = Math.min(width, height) * scale;
+    let d = '';
+    for (let i = 0; i <= steps; i++) {
+      const t = (i / steps) * Math.PI * 2;
+      let x = cx, y = cy;
+      for (const h of harmonics) {
+        x += r * h.ax * Math.cos(h.fx * t + seed * 0.13 + h.px);
+        y += r * h.ay * Math.sin(h.fy * t + seed * 0.17 + h.py);
+      }
+      d += (i === 0 ? 'M ' : 'L ') + x.toFixed(1) + ' ' + y.toFixed(1) + ' ';
+    }
+    return d;
+  }
+
+  const HERO_A = [
+    { fx: 1,    fy: 1.3,  ax: 1.10, ay: 0.62, px: 0,    py: 0.4 },
+    { fx: 2.7,  fy: 3.3,  ax: 0.46, ay: 0.36, px: 0.3,  py: 0.5 },
+    { fx: 5.1,  fy: 4.9,  ax: 0.22, ay: 0.18, px: 0.6,  py: 0.3 },
+    { fx: 11.3, fy: 9.7,  ax: 0.08, ay: 0.06, px: 0.7,  py: 0.2 }
+  ];
+  const HERO_B = [
+    { fx: 1.4,  fy: 1,    ax: 1.00, ay: 0.74, px: 0.5,  py: 0.1 },
+    { fx: 3.3,  fy: 2.7,  ax: 0.42, ay: 0.42, px: 0.6,  py: 0.3 },
+    { fx: 4.9,  fy: 5.7,  ax: 0.20, ay: 0.20, px: 0.4,  py: 0.6 },
+    { fx: 9.7,  fy: 11.3, ax: 0.07, ay: 0.07, px: 0.2,  py: 0.8 }
+  ];
+  const HOW_H = [
+    { fx: 2,    fy: 1,    ax: 1.10, ay: 0.55, px: 0,    py: 0.3 },
+    { fx: 3.5,  fy: 4.5,  ax: 0.45, ay: 0.34, px: 0.4,  py: 0.2 },
+    { fx: 6.3,  fy: 5.7,  ax: 0.20, ay: 0.16, px: 0.7,  py: 0.5 },
+    { fx: 13.1, fy: 11.7, ax: 0.07, ay: 0.06, px: 0.8,  py: 0.6 }
+  ];
+  const CTA_H = [
+    { fx: 1,    fy: 1.2,  ax: 1.05, ay: 0.70, px: 0.2,  py: 0.5 },
+    { fx: 3,    fy: 2.6,  ax: 0.52, ay: 0.38, px: 0.7,  py: 0.3 },
+    { fx: 5.7,  fy: 6.3,  ax: 0.22, ay: 0.20, px: 0.3,  py: 0.7 },
+    { fx: 11.3, fy: 13.7, ax: 0.07, ay: 0.06, px: 0.1,  py: 0.4 }
+  ];
+  const TEAM_H = [
+    { fx: 1.2,  fy: 1,    ax: 1.08, ay: 0.62, px: 0.4,  py: 0.3 },
+    { fx: 3.7,  fy: 2.9,  ax: 0.46, ay: 0.34, px: 0.5,  py: 0.4 },
+    { fx: 5.3,  fy: 6.7,  ax: 0.20, ay: 0.18, px: 0.8,  py: 0.6 },
+    { fx: 12.7, fy: 10.3, ax: 0.07, ay: 0.06, px: 0.3,  py: 0.7 }
+  ];
+
+  const heroPath = document.querySelector('.line-art-bg-hero path');
+  const howPath  = document.querySelector('.line-art-bg-how path');
+  const ctaPath  = document.querySelector('.line-art-bg-cta path');
+  const teamPath = document.querySelector('.line-art-bg-team path');
+
+  // Set path d, then compute actual length and stash it in --len so the
+  // stroke-dasharray / stroke-dashoffset transition draws the line correctly.
+  function applyPath(pathEl, d) {
+    pathEl.setAttribute('d', d);
+    try {
+      const L = pathEl.getTotalLength();
+      pathEl.style.setProperty('--len', L);
+    } catch (e) { /* SVGGeometryElement may not be ready in older browsers */ }
+  }
+
+  if (heroPath) applyPath(heroPath, generatePath({ seed: 1.3,  scale: 0.46, harmonics: HERO_A }));
+  if (howPath)  applyPath(howPath,  generatePath({ seed: 5.7,  scale: 0.48, harmonics: HOW_H  }));
+  if (ctaPath)  applyPath(ctaPath,  generatePath({ seed: 8.9,  scale: 0.44, harmonics: CTA_H  }));
+  if (teamPath) applyPath(teamPath, generatePath({ seed: 11.4, scale: 0.46, harmonics: TEAM_H }));
+
+  /* Continuous slow morph for the hero — kicks in AFTER the draw-in transition
+     completes, so the dashoffset animation isn't interrupted by per-frame --len
+     changes. During the morph we turn dashing off entirely (fully-solid line). */
+  if (heroPath && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const HALF_CYCLE = 16000; // ms for a one-way A→B traversal
+    const ease = t => -(Math.cos(Math.PI * t) - 1) / 2;
+    const lerp = (a, b, t) => a + (b - a) * t;
+    const lerpHarm = (A, B, t) => A.map((a, i) => ({
+      fx: lerp(a.fx, B[i].fx, t), fy: lerp(a.fy, B[i].fy, t),
+      ax: lerp(a.ax, B[i].ax, t), ay: lerp(a.ay, B[i].ay, t),
+      px: lerp(a.px, B[i].px, t), py: lerp(a.py, B[i].py, t)
+    }));
+    setTimeout(() => {
+      // draw-in is done — kill the dash so the path stays solid as it morphs
+      heroPath.style.strokeDasharray = 'none';
+      heroPath.style.strokeDashoffset = '0';
+      let started = null;
+      function tick(now) {
+        if (started === null) started = now;
+        const elapsed = now - started;
+        const phase = (elapsed / HALF_CYCLE) % 2;
+        const t = phase < 1 ? ease(phase) : ease(2 - phase);
+        const seed = 1.3 + elapsed / 3000;
+        const harm = lerpHarm(HERO_A, HERO_B, t);
+        heroPath.setAttribute('d', generatePath({ seed, scale: 0.46, harmonics: harm }));
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }, 5500);
+  }
+})();
+
+/* === LINE ART: inject a small hand-drawn squiggle before each section label === */
+(function injectSectionMarks() {
+  const paths = [
+    'M 2,7 Q 11,1 20,7 T 38,7',
+    'M 2,8 C 8,2 16,14 26,7 C 34,2 40,12 42,9',
+    'M 2,9 C 12,2 22,12 32,6 L 42,8',
+    'M 2,7 Q 8,2 14,7 Q 20,12 26,7 Q 32,2 40,8'
+  ];
+  document.querySelectorAll('.section-label').forEach((el, idx) => {
+    const wrap = document.createElement('span');
+    wrap.className = 'line-art line-art-inline sr';
+    wrap.setAttribute('aria-hidden', 'true');
+    wrap.innerHTML = '<svg viewBox="0 0 44 14"><path d="' + paths[idx % paths.length] + '"/></svg>';
+    el.prepend(wrap);
+  });
+})();
+
+/* === SCROLL REVEAL === */
+const reveal = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add("visible");
+      reveal.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
+$$(".sr").forEach(el => reveal.observe(el));
+
+/* === BOOT === */
+txnValue.textContent = "~" + state.txns;
+render();
+</script>
+</body>
+</html>

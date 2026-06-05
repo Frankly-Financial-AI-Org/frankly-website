@@ -1,0 +1,37 @@
+# Netlify headers for caching and security
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Legacy /assessment and /platform routes — both retired in the redesign.
+# Send anyone hitting old links to the new single-page flow.
+[[redirects]]
+  from = "/assessment"
+  to = "/#calculator"
+  status = 301
+
+[[redirects]]
+  from = "/platform"
+  to = "/"
+  status = 301
+
+# Client intake / get-a-quote form (legacy — keep working while we migrate)
+[[redirects]]
+  from = "/quote"
+  to = "/quote.html"
+  status = 200
+
+# Redirect www to non-www (optional — adjust to your preference)
+[[redirects]]
+  from = "https://www.franklyfinancial.co/*"
+  to = "https://franklyfinancial.co/:splat"
+  status = 301
+  force = true
