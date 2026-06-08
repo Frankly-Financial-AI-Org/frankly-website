@@ -1,3 +1,12 @@
+# Serverless functions for the quote-form → Frankly Pipeline webhook signing
+# proxy. The function lives at /.netlify/functions/calculator-webhook and
+# uses CALCULATOR_WEBHOOK_SECRET (set as a Netlify environment variable) to
+# HMAC-sign requests forwarded to the pipeline. Keeping this directory
+# explicit means Netlify finds the function without needing to auto-detect.
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
 # Netlify headers for caching and security
 [[headers]]
   for = "/images/*"

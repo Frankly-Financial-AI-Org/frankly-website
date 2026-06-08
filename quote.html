@@ -640,11 +640,34 @@ footer p{font-size:.75rem;color:var(--text-3)}
     };
 
     try {
+      // Fire BOTH submissions in parallel so the user-facing flow doesn't
+      // get any slower than today. The Google Apps Script call (existing
+      // Google Sheet write) is treated as the SOURCE OF TRUTH for the
+      // success state — if Apps Script returns success we show the success
+      // page even if the pipeline call had a hiccup. The pipeline call is
+      // best-effort: it auto-adds the lead to the Frankly Sales Agent and
+      // fires a first-touch email; a failure there is logged in the browser
+      // console but doesn't block the form's success flow.
+      const pipelineCall = fetch('/.netlify/functions/calculator-webhook', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(payload),
+      }).then(async r => {
+        if (!r.ok) {
+          console.warn('Frankly pipeline returned', r.status, await r.text());
+        }
+      }).catch(err => {
+        console.warn('Frankly pipeline call failed (non-blocking)', err);
+      });
+
       const res = await fetch(SCRIPT_URL, {
         method: 'POST',
         body: JSON.stringify(payload)
       });
       const result = await res.json();
+      // Don't block the success page on the pipeline call resolving.
+      // Pipeline runs in the background; we already gave it the payload.
+      void pipelineCall;
       if (result.result === 'success') {
         document.getElementById('intakeForm').style.display = 'none';
         document.getElementById('progressBar').style.width = '100%';

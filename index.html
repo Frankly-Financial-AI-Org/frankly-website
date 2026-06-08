@@ -1891,6 +1891,41 @@ const bookingBody  = $("#bookingModalBody");
 
 function openBookingModal(e) {
   if (e) e.preventDefault();
+
+  // Fire anonymous calculator-state capture so the Frankly Pipeline can
+  // pair the resulting Notion Calendar booking with the lead's quote.
+  // No email here — that's collected by Notion in the modal below. The
+  // pipeline's calendar_lead_ingest cron matches the pending quote by
+  // recency (last 10 min) when the booking lands on Shay's Google Calendar.
+  // Non-blocking: we don't await it, we just fire-and-forget.
+  try {
+    const result = calculate();
+    const pendingPayload = {
+      booked_meeting: true,
+      plan: result.tier.name,                  // 'Growth' / 'Essentials' / etc.
+      monthly_total: result.monthly,            // number
+      monthly_transactions: state.txns,
+      business_structure: state.structure,
+      add_ons: state.addons,
+      employees: state.employees,
+      catchup: state.catchupOn ? { months_behind: state.monthsBehind } : null,
+      page: "index",
+      _captured_at: new Date().toISOString(),
+    };
+    fetch('/.netlify/functions/calculator-webhook', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(pendingPayload),
+    }).then(async r => {
+      if (!r.ok) console.warn('Frankly Pipeline pending-quote returned', r.status, await r.text());
+    }).catch(err => {
+      console.warn('Frankly Pipeline pending-quote call failed (non-blocking)', err);
+    });
+  } catch (err) {
+    // Any failure here must NOT block the Notion modal from opening.
+    console.warn('Failed to capture pending calculator quote', err);
+  }
+
   // Lazy-load the iframe the first time the modal opens
   if (bookingFrame.src === "about:blank" || !bookingFrame.src) {
     bookingFrame.src = CALENDAR_URL;
