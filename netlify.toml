@@ -38,6 +38,12 @@
   to = "/quote.html"
   status = 200
 
+# Pretty URL for the Data Handling, Confidentiality & Use of Technology Policy
+[[redirects]]
+  from = "/termsofservice"
+  to = "/termsofservice.html"
+  status = 200
+
 # Redirect www to non-www (optional — adjust to your preference)
 [[redirects]]
   from = "https://www.franklyfinancial.co/*"

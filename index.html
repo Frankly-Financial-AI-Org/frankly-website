@@ -912,6 +912,10 @@ footer {
   color: var(--ink-muted);
   font-weight: 500;
 }
+.footer-links { display: inline-flex; align-items: center; gap: 14px; }
+.footer-links a { color: var(--ink-muted); text-decoration: none; transition: color 0.2s ease; }
+.footer-links a:hover { color: var(--accent); }
+.footer-links .sep { color: var(--rule); }
 
 /* ========== LINE ART ========== */
 .line-art {
@@ -1640,7 +1644,11 @@ footer {
 <footer>
   <div class="footer-wrap">
     <div>© 2026 Frankly Financial · Made in Toronto</div>
-    <div>franklyfinancial.co</div>
+    <div class="footer-links">
+      <a href="/termsofservice">Terms of Service</a>
+      <span class="sep">·</span>
+      <span>franklyfinancial.co</span>
+    </div>
   </div>
 </footer>
 

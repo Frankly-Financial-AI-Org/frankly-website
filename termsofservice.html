@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Service — Frankly Financial</title>
+<meta name="description" content="Data handling, confidentiality, and use of technology policy for Frankly Financial Ltd.">
+<meta name="robots" content="index, follow">
+
+<link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#F4EFE5">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+:root {
+  --cream:       #F4EFE5;
+  --cream-deep:  #ECE4D2;
+  --cream-soft:  #FAF6EE;
+  --ink:         #131311;
+  --ink-soft:    #2A2A26;
+  --ink-muted:   #6B665A;
+  --rule:        #D9CFBC;
+  --accent:      #B85C38;
+  --accent-deep: #934023;
+  --serif: 'Instrument Serif', 'Times New Roman', serif;
+  --sans:  'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono:  'Nunito', sans-serif;
+}
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+/* paper grain (matches main site) */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px;
+  mix-blend-mode: multiply;
+}
+
+/* === NAV === */
+nav {
+  padding: 18px 32px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid var(--rule);
+  background: var(--cream);
+}
+.nav-logo {
+  font-family: var(--serif);
+  font-size: 1.6rem;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+  color: var(--ink);
+  display: inline-flex; align-items: baseline;
+}
+.nav-logo .dot { color: var(--accent); font-size: 1.9rem; line-height: 0; margin-left: 1px; }
+.nav-back {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--ink-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.nav-back:hover { color: var(--ink); }
+
+/* === MAIN === */
+main {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 100px 32px 120px;
+}
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 28px;
+  display: inline-flex; align-items: center; gap: 12px;
+}
+.eyebrow::before {
+  content: '';
+  width: 28px; height: 1px;
+  background: var(--accent);
+}
+
+h1 {
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 4.8vw, 3.8rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin-bottom: 20px;
+  font-weight: 400;
+  max-width: 16ch;
+}
+h1 em { color: var(--accent); }
+
+.meta {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  font-weight: 700;
+  margin-bottom: 72px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--rule);
+}
+
+section { margin-bottom: 56px; }
+section:last-of-type { margin-bottom: 0; }
+
+h2 {
+  font-family: var(--serif);
+  font-size: 1.7rem;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 18px;
+  font-weight: 400;
+  color: var(--ink);
+}
+h2 .num {
+  font-style: italic;
+  color: var(--accent);
+  margin-right: 14px;
+  font-weight: 400;
+}
+
+p {
+  font-size: 1.02rem;
+  line-height: 1.7;
+  color: var(--ink-soft);
+  margin-bottom: 18px;
+}
+p:last-child { margin-bottom: 0; }
+
+a { color: var(--accent); transition: color 0.2s ease; }
+a:hover { color: var(--accent-deep); }
+
+.policy-list { padding-left: 0; list-style: none; }
+.policy-list li {
+  position: relative;
+  padding-left: 26px;
+  margin-bottom: 14px;
+  font-size: 1.02rem;
+  line-height: 1.7;
+  color: var(--ink-soft);
+}
+.policy-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 14px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.5;
+}
+
+.contact-block {
+  margin-top: 8px;
+  font-size: 1.02rem;
+  line-height: 1.7;
+  color: var(--ink-soft);
+}
+.contact-block strong {
+  font-weight: 500;
+  color: var(--ink);
+  display: block;
+  margin-bottom: 2px;
+}
+
+/* === FOOTER === */
+footer {
+  padding: 48px 32px;
+  border-top: 1px solid var(--rule);
+  background: var(--cream);
+}
+.footer-wrap {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 24px;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ink-muted);
+  font-weight: 700;
+}
+.footer-wrap a { color: var(--ink-muted); text-decoration: none; transition: color 0.2s ease; }
+.footer-wrap a:hover { color: var(--accent); }
+.footer-links { display: inline-flex; gap: 18px; align-items: center; }
+.footer-links .sep { color: var(--rule); }
+
+/* === RESPONSIVE === */
+@media (max-width: 600px) {
+  nav { padding: 14px 20px; }
+  .nav-back { font-size: 0.66rem; }
+  main { padding: 60px 20px 80px; }
+  .meta { margin-bottom: 52px; padding-bottom: 30px; }
+  section { margin-bottom: 44px; }
+  h2 { font-size: 1.35rem; }
+  h2 .num { margin-right: 10px; }
+  footer { padding: 32px 20px; }
+  .footer-wrap { flex-direction: column; text-align: center; gap: 12px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">Frankly<span class="dot">.</span></a>
+  <a href="/" class="nav-back">← Back to home</a>
+</nav>
+
+<main>
+  <div class="eyebrow">Legal</div>
+  <h1>Data Handling, Confidentiality &amp; Use of Technology <em>Policy.</em></h1>
+  <div class="meta">Frankly Financial Ltd. · Last updated June 12, 2026</div>
+
+  <section>
+    <h2><span class="num">1</span>Purpose and Scope</h2>
+    <p>This Policy describes how Frankly Financial Ltd. (&ldquo;Frankly,&rdquo; &ldquo;we,&rdquo; &ldquo;us&rdquo;) collects, uses, protects, and retains information provided by clients and prospective clients (&ldquo;you&rdquo;) in connection with our bookkeeping, tax, and advisory services (the &ldquo;Services&rdquo;). This Policy forms part of, and is incorporated by reference into, our engagement agreements. In the event of a conflict between this Policy and a signed engagement agreement, the engagement agreement governs.</p>
+  </section>
+
+  <section>
+    <h2><span class="num">2</span>Confidentiality</h2>
+    <p>All information you provide to us &mdash; including financial statements, banking records, tax records, payroll information, and business documents (&ldquo;Client Information&rdquo;) &mdash; is treated as confidential. We use Client Information solely for the purpose of delivering the Services, meeting our professional obligations, and complying with applicable law. We do not sell Client Information, and we do not disclose it to any third party except as described in this Policy or as required by law.</p>
+  </section>
+
+  <section>
+    <h2><span class="num">3</span>Use of Technology, Including Artificial Intelligence</h2>
+    <p>Frankly uses proprietary processes and third-party technology, including artificial intelligence (&ldquo;AI&rdquo;) tools, to assist in the delivery of the Services &mdash; for example, in transaction categorization, financial reporting, and drafting of documents and communications.</p>
+    <p>Where AI tools are used:</p>
+    <ul class="policy-list">
+      <li>(a) they are engaged under commercial agreements that contractually prohibit the provider from using Client Information to train its models;</li>
+      <li>(b) Client Information processed through such tools remains subject to the confidentiality obligations in Section 2; and</li>
+      <li>(c) all client deliverables &mdash; including financial reports, filings, and recommendations &mdash; are reviewed and approved by a qualified member of our professional team before release. Responsibility and accountability for all work product rests with Frankly at all times.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="num">4</span>Third-Party Service Providers</h2>
+    <p>We engage a limited number of third-party service providers (such as cloud hosting, accounting software, payment processing, and AI infrastructure providers) to support the delivery of the Services. These providers are permitted to process Client Information only to the extent necessary to perform their functions and are bound by contractual confidentiality and data protection obligations consistent with this Policy. A current list of the categories of service providers we use is available on request.</p>
+  </section>
+
+  <section>
+    <h2><span class="num">5</span>Cross-Border Processing</h2>
+    <p>Some of our service providers store or process information on servers located outside of Canada, including in the United States. Where Client Information is processed outside of Canada, it may be subject to the laws of those jurisdictions, including lawful access by courts and government authorities. We take reasonable contractual and technical measures to ensure that Client Information receives a comparable level of protection wherever it is processed.</p>
+  </section>
+
+  <section>
+    <h2><span class="num">6</span>Security</h2>
+    <p>We protect Client Information using administrative, technical, and physical safeguards appropriate to its sensitivity, including access controls limiting Client Information to team members working on your engagement, encryption in transit, and secure cloud-based storage. No method of transmission or storage is completely secure; in the event of a breach of security safeguards creating a real risk of significant harm, we will notify affected clients and the appropriate authorities as required by applicable law.</p>
+  </section>
+
+  <section>
+    <h2><span class="num">7</span>Retention</h2>
+    <p>We retain Client Information only as long as necessary to deliver the Services, satisfy our professional and legal record-keeping obligations (including obligations under the <em>Income Tax Act</em> (Canada) and the <em>Excise Tax Act</em>), and resolve disputes. When Client Information is no longer required, it is securely deleted or anonymized.</p>
+  </section>
+
+  <section>
+    <h2><span class="num">8</span>Your Rights</h2>
+    <p>Subject to applicable law, you may request access to, or correction of, personal information we hold about you, and you may withdraw consent to certain uses of your information (which may limit our ability to deliver the Services). Requests should be directed to our Privacy Officer using the contact details below.</p>
+  </section>
+
+  <section>
+    <h2><span class="num">9</span>Compliance</h2>
+    <p>This Policy is intended to comply with the <em>Personal Information Protection and Electronic Documents Act</em> (PIPEDA) and other applicable Canadian privacy legislation, as well as the professional standards applicable to our team.</p>
+  </section>
+
+  <section>
+    <h2><span class="num">10</span>Changes to This Policy</h2>
+    <p>We may update this Policy from time to time. The &ldquo;Last updated&rdquo; date above reflects the most recent revision. Material changes will be communicated to active clients.</p>
+  </section>
+
+  <section>
+    <h2><span class="num">11</span>Contact</h2>
+    <div class="contact-block">
+      <strong>Privacy Officer</strong>
+      Frankly Financial Ltd.<br>
+      Etobicoke, ON<br>
+      <a href="mailto:hello@franklyfinancial.co">hello@franklyfinancial.co</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-wrap">
+    <div>© 2026 Frankly Financial · Made in Toronto</div>
+    <div class="footer-links">
+      <a href="/termsofservice">Terms of Service</a>
+      <span class="sep">·</span>
+      <span>franklyfinancial.co</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
