@@ -824,6 +824,25 @@ nav {
   color: var(--ink-soft);
   max-width: 44ch;
 }
+.team-credential {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 14px;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+.team-credential:hover { color: var(--accent-deep); border-bottom-color: var(--accent); }
+.team-credential .arrow { font-size: 0.85em; transition: transform 0.2s ease; }
+.team-credential:hover .arrow { transform: translate(2px, -2px); }
 
 /* ========== FINAL CTA ========== */
 .final-cta {
@@ -1612,6 +1631,7 @@ footer {
         <h3 class="team-name"><a href="https://www.linkedin.com/in/atahaee/" target="_blank" rel="noopener">Ata Haee</a></h3>
         <div class="team-role">Finance · Operations · CPA reviewer</div>
         <p class="team-bio">Former VP of Finance who got tired of watching small businesses get overcharged for basic financial advice. Now he's making sure your numbers are right — without the markup.</p>
+        <a class="team-credential" href="https://www.cpaontario.ca/protecting-the-public/directories/member/haee-pjknie" target="_blank" rel="noopener" aria-label="Verify Ata Haee's CPA status on CPA Ontario">Verified on CPA Ontario <span class="arrow">↗</span></a>
       </div>
     </div>
   </div>
