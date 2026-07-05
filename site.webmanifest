@@ -1,11 +1,11 @@
 {
-  "name": "Frankly AI",
+  "name": "Frankly Financial",
   "short_name": "Frankly",
-  "description": "Your AI CFO that actually speaks English",
+  "description": "Bookkeeping for businesses that hate bookkeeping. Real humans, real numbers, real answers.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#FAFAF8",
-  "theme_color": "#111111",
+  "background_color": "#F4EFE5",
+  "theme_color": "#F4EFE5",
   "icons": [
     {
       "src": "/images/icon-192.png",
