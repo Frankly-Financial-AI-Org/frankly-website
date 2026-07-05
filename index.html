@@ -1113,6 +1113,48 @@ footer {
   .line-art-bg path { transition: none; stroke-dashoffset: 0; }
 }
 
+/* ========== MICRO-INTERACTIONS ========== */
+/* thin terracotta reading-progress line above the nav */
+.scroll-progress {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--accent);
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  z-index: 300;
+  pointer-events: none;
+}
+
+/* nav condenses slightly + lifts once you start scrolling */
+nav { transition: padding 0.35s var(--ease), box-shadow 0.35s ease; }
+nav.scrolled {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  box-shadow: 0 10px 30px -22px rgba(19, 19, 17, 0.35);
+}
+
+/* industries ticker pauses so people can actually read it */
+.industries-track:hover { animation-play-state: paused; }
+
+/* hero headline reveals word by word on load */
+.hero h1 .w {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.45em);
+  animation: word-in 0.8s var(--ease) forwards;
+  animation-delay: calc(0.1s + var(--wi) * 0.075s);
+}
+@keyframes word-in {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.btn-magnetic { will-change: transform; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero h1 .w { animation: none; opacity: 1; transform: none; }
+  .scroll-progress { display: none; }
+}
+
 /* ========== BOOKING MODAL ========== */
 .booking-modal {
   position: fixed; inset: 0;
@@ -1846,7 +1888,7 @@ function render() {
   // summary card
   summaryTier.innerHTML = result.tier.displayName || result.tier.name;
   summaryTagline.textContent = result.tier.tagline;
-  summaryAmount.textContent = fmt$(result.monthly);
+  animateAmount(result.monthly);
 
   summaryLines.innerHTML =
     result.lines.map(l =>
@@ -2121,6 +2163,121 @@ $$(".mobile-menu a").forEach(a =>
     el.prepend(wrap);
   });
 })();
+
+/* === MICRO-INTERACTIONS: motion layer === */
+const REDUCED_MOTION = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const FINE_POINTER   = window.matchMedia("(pointer: fine)").matches;
+
+/* Scroll progress bar + condensing nav */
+const progressBar = document.createElement("div");
+progressBar.className = "scroll-progress";
+document.body.appendChild(progressBar);
+const navEl = document.querySelector("nav");
+let progressQueued = false;
+function updateScrollUI() {
+  const max = document.documentElement.scrollHeight - window.innerHeight;
+  progressBar.style.transform = "scaleX(" + (max > 0 ? Math.min(1, window.scrollY / max) : 0) + ")";
+  navEl.classList.toggle("scrolled", window.scrollY > 40);
+  progressQueued = false;
+}
+window.addEventListener("scroll", () => {
+  if (!progressQueued) { progressQueued = true; requestAnimationFrame(updateScrollUI); }
+}, { passive: true });
+updateScrollUI();
+
+/* Hero headline: split into words for a staggered entrance */
+(function splitHeroHeadline() {
+  const h1 = document.querySelector(".hero h1");
+  if (!h1 || REDUCED_MOTION) return;
+  let wi = 0;
+  function splitNode(node) {
+    if (node.nodeType === Node.TEXT_NODE) {
+      const frag = document.createDocumentFragment();
+      node.textContent.split(/(\s+)/).forEach(part => {
+        if (!part) return;
+        if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+        const span = document.createElement("span");
+        span.className = "w";
+        span.style.setProperty("--wi", wi++);
+        span.textContent = part;
+        frag.appendChild(span);
+      });
+      node.parentNode.replaceChild(frag, node);
+    } else if (node.nodeType === Node.ELEMENT_NODE) {
+      Array.from(node.childNodes).forEach(splitNode);
+    }
+  }
+  Array.from(h1.childNodes).forEach(splitNode);
+  // words own the entrance now — release the h1 from the scroll-reveal system
+  h1.classList.remove("sr", "sr-delay-1");
+  h1.style.opacity = "1";
+  h1.style.transform = "none";
+})();
+
+/* Hero parallax: dog and background line drift gently with the cursor */
+(function heroParallax() {
+  if (REDUCED_MOTION || !FINE_POINTER) return;
+  const hero = document.querySelector(".hero");
+  const dog  = document.querySelector(".line-art-hero-fox img");
+  const bg   = document.querySelector(".line-art-bg-hero svg");
+  if (!hero || !dog || !bg) return;
+  let tx = 0, ty = 0, cx = 0, cy = 0, raf = null;
+  function loop() {
+    cx += (tx - cx) * 0.08;
+    cy += (ty - cy) * 0.08;
+    dog.style.transform = "translate(" + (cx * 12).toFixed(2) + "px, " + (cy * 8).toFixed(2) + "px)";
+    bg.style.transform  = "translate(" + (cx * -20).toFixed(2) + "px, " + (cy * -14).toFixed(2) + "px)";
+    if (Math.abs(tx - cx) > 0.001 || Math.abs(ty - cy) > 0.001) raf = requestAnimationFrame(loop);
+    else raf = null;
+  }
+  hero.addEventListener("mousemove", e => {
+    const r = hero.getBoundingClientRect();
+    tx = (e.clientX - r.left) / r.width - 0.5;
+    ty = (e.clientY - r.top) / r.height - 0.5;
+    if (!raf) raf = requestAnimationFrame(loop);
+  });
+  hero.addEventListener("mouseleave", () => {
+    tx = 0; ty = 0;
+    if (!raf) raf = requestAnimationFrame(loop);
+  });
+})();
+
+/* Magnetic CTAs: primary buttons lean toward the cursor */
+(function magneticButtons() {
+  if (REDUCED_MOTION || !FINE_POINTER) return;
+  $$(".btn-primary, .nav-cta, .calc-summary-cta").forEach(btn => {
+    btn.classList.add("btn-magnetic");
+    btn.addEventListener("mousemove", e => {
+      const r = btn.getBoundingClientRect();
+      const x = (e.clientX - r.left - r.width / 2) / r.width;
+      const y = (e.clientY - r.top - r.height / 2) / r.height;
+      btn.style.transform = "translate(" + (x * 6).toFixed(2) + "px, " + (y * 4).toFixed(2) + "px)";
+    });
+    btn.addEventListener("mouseleave", () => { btn.style.transform = ""; });
+  });
+})();
+
+/* Price count-up: the big monthly number rolls to its new value */
+let amountShown = null, amountRaf = null;
+function animateAmount(to) {
+  if (REDUCED_MOTION || amountShown === null) {
+    amountShown = to;
+    summaryAmount.textContent = fmt$(to);
+    return;
+  }
+  const from = amountShown;
+  if (from === to) { summaryAmount.textContent = fmt$(to); return; }
+  if (amountRaf) cancelAnimationFrame(amountRaf);
+  const start = performance.now(), dur = 420;
+  function step(now) {
+    const t = Math.min(1, (now - start) / dur);
+    const eased = 1 - Math.pow(1 - t, 3);
+    summaryAmount.textContent = fmt$(from + (to - from) * eased);
+    if (t < 1) amountRaf = requestAnimationFrame(step);
+    else { amountShown = to; amountRaf = null; }
+  }
+  amountRaf = requestAnimationFrame(step);
+}
 
 /* === SCROLL REVEAL === */
 const reveal = new IntersectionObserver(entries => {
