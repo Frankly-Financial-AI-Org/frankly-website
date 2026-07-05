@@ -1150,9 +1150,65 @@ nav.scrolled {
 
 .btn-magnetic { will-change: transform; }
 
+/* ── the dog is alive ── */
+.dog-hop-stage { transform-origin: 50% 100%; }
+.line-art-hero-fox img { transform-origin: 50% 100%; }
+@media (pointer: fine) {
+  /* idle breathing — chest rises from the ground up */
+  .dog-hop-stage { animation: dog-breathe 5.5s ease-in-out infinite; }
+}
+@keyframes dog-breathe {
+  0%, 100% { transform: scaleY(1); }
+  50%      { transform: scaleY(1.018) scaleX(1.004); }
+}
+/* squash-and-stretch hop: crouch → leap → land → settle */
+.dog-hop-stage.hopping { animation: dog-hop 0.65s cubic-bezier(0.34, 1.3, 0.5, 1); }
+@keyframes dog-hop {
+  0%   { transform: scaleY(1); }
+  18%  { transform: scaleY(0.90) scaleX(1.05) translateY(0); }
+  46%  { transform: scaleY(1.06) scaleX(0.97) translateY(-36px); }
+  72%  { transform: scaleY(0.94) scaleX(1.04) translateY(0); }
+  100% { transform: scaleY(1) translateY(0); }
+}
+/* woof bubble above the dog's head */
+.dog-bubble {
+  position: absolute;
+  left: 42%;
+  top: -16%;
+  background: var(--cream-soft);
+  border: 1px solid var(--rule);
+  padding: 10px 18px;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.1rem;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(8px) scale(0.92);
+  transform-origin: 20% 100%;
+  transition: opacity 0.25s var(--ease), transform 0.3s var(--ease);
+  box-shadow: 0 14px 30px -20px rgba(19, 19, 17, 0.4);
+  pointer-events: none;
+  z-index: 2;
+}
+.dog-bubble::after {
+  content: '';
+  position: absolute;
+  left: 26px;
+  bottom: -6px;
+  width: 10px; height: 10px;
+  background: var(--cream-soft);
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  transform: rotate(45deg);
+}
+.dog-bubble.show { opacity: 1; transform: translateY(0) scale(1); }
+
 @media (prefers-reduced-motion: reduce) {
   .hero h1 .w { animation: none; opacity: 1; transform: none; }
   .scroll-progress { display: none; }
+  .dog-hop-stage, .dog-hop-stage.hopping { animation: none; }
 }
 
 /* ========== BOOKING MODAL ========== */
@@ -1363,7 +1419,9 @@ nav.scrolled {
   </div>
   <!-- Real line-art illustration: dachshund with glasses + knit sweater (decorative, right of hero) -->
   <div class="line-art-hero-fox sr sr-delay-2" aria-hidden="true">
-    <img src="images/hero-dog.png?v=3" alt="">
+    <div class="dog-hop-stage">
+      <img src="images/hero-dog.png?v=3" alt="">
+    </div>
   </div>
   <div class="hero-wrap">
     <div class="hero-eyebrow sr"><span class="pulse"></span> Now onboarding Canadian & US businesses</div>
@@ -2214,31 +2272,101 @@ updateScrollUI();
   h1.style.transform = "none";
 })();
 
-/* Hero parallax: dog and background line drift gently with the cursor */
-(function heroParallax() {
+/* Hero dog: parallax drift, cursor lean, proximity pounce, click woof */
+(function heroDog() {
   if (REDUCED_MOTION || !FINE_POINTER) return;
-  const hero = document.querySelector(".hero");
-  const dog  = document.querySelector(".line-art-hero-fox img");
-  const bg   = document.querySelector(".line-art-bg-hero svg");
-  if (!hero || !dog || !bg) return;
-  let tx = 0, ty = 0, cx = 0, cy = 0, raf = null;
+  const hero   = document.querySelector(".hero");
+  const dogBox = document.querySelector(".line-art-hero-fox");
+  const stage  = document.querySelector(".dog-hop-stage");
+  const dog    = stage ? stage.querySelector("img") : null;
+  const bg     = document.querySelector(".line-art-bg-hero svg");
+  if (!hero || !dogBox || !stage || !dog || !bg) return;
+
+  let tx = 0, ty = 0, cx = 0, cy = 0;   // parallax target / current
+  let tLean = 0, lean = 0;               // lean toward cursor (degrees)
+  let raf = null, lastHop = 0;
+
+  // the dog's body occupies the right-middle of the wide PNG — approximate it
+  function dogAnchor() {
+    const r = dog.getBoundingClientRect();
+    return {
+      x: r.left + r.width * 0.63,
+      y: r.top + r.height * 0.52,
+      r: Math.max(130, r.height * 0.65)
+    };
+  }
+
   function loop() {
     cx += (tx - cx) * 0.08;
     cy += (ty - cy) * 0.08;
-    dog.style.transform = "translate(" + (cx * 12).toFixed(2) + "px, " + (cy * 8).toFixed(2) + "px)";
+    lean += (tLean - lean) * 0.10;
+    dog.style.transform = "translate(" + (cx * 12).toFixed(2) + "px, " + (cy * 8).toFixed(2) + "px) rotate(" + lean.toFixed(2) + "deg)";
     bg.style.transform  = "translate(" + (cx * -20).toFixed(2) + "px, " + (cy * -14).toFixed(2) + "px)";
-    if (Math.abs(tx - cx) > 0.001 || Math.abs(ty - cy) > 0.001) raf = requestAnimationFrame(loop);
+    if (Math.abs(tx - cx) > 0.001 || Math.abs(ty - cy) > 0.001 || Math.abs(tLean - lean) > 0.01) raf = requestAnimationFrame(loop);
     else raf = null;
   }
+  function wake() { if (!raf) raf = requestAnimationFrame(loop); }
+
+  function hop() {
+    const now = performance.now();
+    if (now - lastHop < 1100) return;
+    lastHop = now;
+    stage.classList.remove("hopping");
+    void stage.offsetWidth;   // restart the keyframe animation
+    stage.classList.add("hopping");
+  }
+  stage.addEventListener("animationend", e => {
+    if (e.animationName === "dog-hop") stage.classList.remove("hopping");
+  });
+
+  // woof bubble — on-brand one-liners, rotating
+  const WOOFS = [
+    "Woof.",
+    "That’s dog for “book a call.”",
+    "I fetch receipts.",
+    "Reconciled. Good boy."
+  ];
+  let woofIdx = 0, bubbleTimer = null;
+  const bubble = document.createElement("div");
+  bubble.className = "dog-bubble";
+  dogBox.appendChild(bubble);
+  function woof() {
+    bubble.textContent = WOOFS[woofIdx++ % WOOFS.length];
+    bubble.classList.add("show");
+    clearTimeout(bubbleTimer);
+    bubbleTimer = setTimeout(() => bubble.classList.remove("show"), 2000);
+  }
+
   hero.addEventListener("mousemove", e => {
     const r = hero.getBoundingClientRect();
     tx = (e.clientX - r.left) / r.width - 0.5;
     ty = (e.clientY - r.top) / r.height - 0.5;
-    if (!raf) raf = requestAnimationFrame(loop);
+    const a = dogAnchor();
+    const dx = e.clientX - a.x, dy = e.clientY - a.y;
+    const dist = Math.hypot(dx, dy);
+    // lean toward the cursor — a little from afar, more when close
+    const reach = Math.max(0, 1 - dist / 700);
+    tLean = Math.max(-4.5, Math.min(4.5, (dx / 300) * 4 * (0.4 + reach)));
+    // pounce when the cursor wanders into reach
+    if (dist < a.r) hop();
+    hero.style.cursor = dist < a.r ? "pointer" : "";
+    wake();
   });
   hero.addEventListener("mouseleave", () => {
-    tx = 0; ty = 0;
-    if (!raf) raf = requestAnimationFrame(loop);
+    tx = 0; ty = 0; tLean = 0;
+    hero.style.cursor = "";
+    wake();
+  });
+
+  // click on (or near) the dog → hop + woof
+  hero.addEventListener("click", e => {
+    if (e.target.closest("a, button, input")) return;
+    const a = dogAnchor();
+    if (Math.hypot(e.clientX - a.x, e.clientY - a.y) < a.r * 1.15) {
+      lastHop = 0;   // a click always earns a hop
+      hop();
+      woof();
+    }
   });
 })();
 
