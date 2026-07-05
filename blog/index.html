@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4472WPYKS1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-4472WPYKS1');
+</script>
+
+<title>Small Business Accounting, Bookkeeping & Tax Guides for Toronto — Frankly Financial Blog</title>
+
+<!-- SEO Meta -->
+<meta name="description" content="Plain-English guides on accounting, bookkeeping, corporate tax, HST, and payroll for Toronto small businesses. Real 2026 numbers, no jargon. From Frankly Financial.">
+<link rel="canonical" href="https://franklyfinancial.co/blog/">
+<meta name="author" content="Frankly Financial">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://franklyfinancial.co/blog/">
+<meta property="og:title" content="The Frankly Blog — Money Answers for Toronto Small Businesses">
+<meta property="og:description" content="Plain-English guides on accounting, bookkeeping, corporate tax, HST, and payroll for Toronto small businesses. Real 2026 numbers, no jargon.">
+<meta property="og:image" content="https://franklyfinancial.co/images/og-image.png">
+<meta property="og:site_name" content="Frankly Financial">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Frankly Blog — Money Answers for Toronto Small Businesses">
+<meta name="twitter:description" content="Plain-English guides on accounting, bookkeeping, tax, HST, and payroll for Toronto small businesses.">
+<meta name="twitter:image" content="https://franklyfinancial.co/images/og-image.png">
+
+<!-- Favicons -->
+<link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<meta name="theme-color" content="#F4EFE5">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- Structured Data: Blog + Local Business -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "The Frankly Blog",
+  "url": "https://franklyfinancial.co/blog/",
+  "description": "Plain-English guides on accounting, bookkeeping, corporate tax, HST, and payroll for Toronto small businesses.",
+  "publisher": {"@type": "Organization", "name": "Frankly Financial", "logo": {"@type": "ImageObject", "url": "https://franklyfinancial.co/images/icon-512.png"}}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AccountingService",
+  "name": "Frankly Financial",
+  "url": "https://franklyfinancial.co",
+  "image": "https://franklyfinancial.co/images/og-image.png",
+  "description": "Bookkeeping, financial reporting, and tax support for small businesses in Toronto and across Canada. Real humans, real numbers, real answers.",
+  "areaServed": [
+    {"@type": "City", "name": "Toronto"},
+    {"@type": "AdministrativeArea", "name": "Ontario"},
+    {"@type": "Country", "name": "Canada"}
+  ],
+  "priceRange": "$149+/month",
+  "address": {"@type": "PostalAddress", "addressLocality": "Toronto", "addressRegion": "ON", "addressCountry": "CA"},
+  "sameAs": []
+}
+</script>
+
+<style>
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+:root {
+  --cream:       #F4EFE5;
+  --cream-deep:  #ECE4D2;
+  --cream-soft:  #FAF6EE;
+  --ink:         #131311;
+  --ink-soft:    #2A2A26;
+  --ink-muted:   #6B665A;
+  --rule:        #D9CFBC;
+  --accent:      #B85C38;
+  --accent-deep: #934023;
+  --dark:        #1E1A12;
+  --serif: 'Instrument Serif', 'Times New Roman', serif;
+  --sans:  'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono:  'Nunito', sans-serif;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+body::before {
+  content: ''; position: fixed; inset: 0; z-index: 9999; pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px; mix-blend-mode: multiply;
+}
+img, svg { display: block; max-width: 100%; }
+a { color: var(--accent); }
+a:hover { color: var(--accent-deep); }
+
+/* ===== NAV ===== */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  padding: 16px 32px;
+  display: flex; align-items: center; justify-content: space-between;
+  backdrop-filter: blur(20px) saturate(1.5);
+  -webkit-backdrop-filter: blur(20px) saturate(1.5);
+  background: rgba(244, 239, 229, 0.82);
+  border-bottom: 1px solid rgba(217, 207, 188, 0.5);
+}
+.nav-logo {
+  font-family: var(--serif); font-size: 1.6rem; letter-spacing: -0.02em;
+  text-decoration: none; color: var(--ink);
+  display: inline-flex; align-items: baseline;
+}
+.nav-logo .dot, .nav-logo span { color: var(--accent); }
+.nav-links {
+  display: flex; gap: 32px; list-style: none;
+  font-family: var(--mono); font-size: 0.68rem;
+  text-transform: uppercase; letter-spacing: 0.14em; font-weight: 700;
+}
+.nav-links a { color: var(--ink-muted); text-decoration: none; transition: color 0.2s ease; }
+.nav-links a:hover, .nav-links a.active { color: var(--ink); }
+.nav-links a.active { color: var(--accent); }
+.nav-cta {
+  padding: 11px 20px;
+  background: var(--ink); color: var(--cream);
+  border: 1px solid var(--ink);
+  font-family: var(--sans); font-size: 0.82rem; font-weight: 500;
+  text-decoration: none; transition: all 0.2s ease;
+}
+.nav-cta:hover { background: var(--accent); border-color: var(--accent); color: var(--cream); }
+
+/* ===== BLOG INDEX ===== */
+.blog-hero { max-width: 1180px; margin: 0 auto; padding: 90px 32px 56px; }
+.hero-badge {
+  display: inline-block; margin-bottom: 24px;
+  font-family: var(--mono); font-size: 0.7rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent);
+}
+.blog-hero h1 {
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  line-height: 0.98; letter-spacing: -0.03em;
+  margin-bottom: 24px; max-width: 16ch;
+}
+.blog-hero h1 em { color: var(--accent); }
+.blog-hero p { font-size: 1.1rem; color: var(--ink-soft); max-width: 52ch; line-height: 1.7; }
+
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 32px 100px; }
+
+.featured {
+  display: grid; grid-template-columns: 1.6fr 1fr; gap: 0;
+  background: var(--cream-soft);
+  border: 1px solid var(--rule);
+  text-decoration: none; color: var(--ink);
+  margin-bottom: 20px;
+  transition: border-color 0.2s ease, transform 0.3s var(--ease);
+}
+.featured:hover { border-color: var(--ink-muted); transform: translateY(-3px); }
+.featured-content { padding: 44px 40px; }
+.f-chip {
+  display: inline-block; margin-bottom: 18px;
+  font-family: var(--mono); font-size: 0.66rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent);
+}
+.featured-content h2 {
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+  line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 14px;
+}
+.featured-content p { color: var(--ink-soft); font-size: 1rem; line-height: 1.65; margin-bottom: 20px; }
+.f-meta { font-family: var(--mono); font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-muted); }
+.featured-visual {
+  display: flex; align-items: center; justify-content: center;
+  background: var(--cream-deep); border-left: 1px solid var(--rule);
+}
+.featured-visual span { font-family: var(--serif); font-size: 7rem; color: var(--ink); line-height: 1; }
+.featured-visual span i { font-style: normal; color: var(--accent); }
+
+.post-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 20px; }
+.post-card {
+  display: block; padding: 30px 28px;
+  background: var(--cream-soft);
+  border: 1px solid var(--rule);
+  text-decoration: none; color: var(--ink);
+  transition: border-color 0.2s ease, transform 0.3s var(--ease);
+}
+.post-card:hover { border-color: var(--ink-muted); transform: translateY(-3px); }
+.p-chip {
+  display: inline-block; margin-bottom: 14px;
+  font-family: var(--mono); font-size: 0.64rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent);
+}
+.post-card h3 {
+  font-family: var(--serif); font-weight: 400;
+  font-size: 1.35rem; line-height: 1.15; letter-spacing: -0.015em;
+  margin-bottom: 12px;
+}
+.post-card p { color: var(--ink-soft); font-size: 0.92rem; line-height: 1.6; margin-bottom: 16px; }
+.p-meta { font-family: var(--mono); font-size: 0.64rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-muted); }
+
+.blog-cta {
+  margin-top: 56px; padding: 72px 40px;
+  background: var(--dark); color: var(--cream);
+  text-align: center;
+}
+.blog-cta h2 {
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  letter-spacing: -0.025em; line-height: 1.02; margin-bottom: 16px;
+}
+.blog-cta h2 em { color: var(--accent); }
+.blog-cta p { color: rgba(244, 239, 229, 0.85); max-width: 50ch; margin: 0 auto 32px; }
+.btn-primary {
+  display: inline-block; padding: 16px 30px;
+  background: var(--cream); color: var(--ink);
+  border: 1px solid var(--cream);
+  font-family: var(--sans); font-size: 0.95rem; font-weight: 500;
+  text-decoration: none; transition: all 0.2s ease;
+}
+.btn-primary:hover { background: var(--accent); border-color: var(--accent); color: var(--cream); }
+
+/* ===== ARTICLE ===== */
+.article-wrap { max-width: 760px; margin: 0 auto; padding: 70px 32px 100px; }
+.breadcrumb {
+  font-family: var(--mono); font-size: 0.66rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.14em; color: var(--ink-muted);
+  margin-bottom: 28px;
+}
+.breadcrumb a { color: var(--ink-muted); text-decoration: none; }
+.breadcrumb a:hover { color: var(--accent); }
+.article-wrap h1 {
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(2.3rem, 5vw, 3.6rem);
+  line-height: 1.04; letter-spacing: -0.03em;
+  margin-bottom: 22px;
+}
+.article-wrap h1 em { color: var(--accent); }
+.article-meta {
+  font-family: var(--mono); font-size: 0.68rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-muted);
+  margin-bottom: 40px; padding-bottom: 28px;
+  border-bottom: 1px solid var(--rule);
+}
+.dot-sep { color: var(--rule); margin: 0 6px; }
+.cat-chip { color: var(--accent); }
+
+.quick-answer {
+  background: var(--cream-deep);
+  border-left: 3px solid var(--accent);
+  padding: 26px 28px;
+  margin-bottom: 44px;
+}
+.qa-label {
+  font-family: var(--mono); font-size: 0.66rem; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent);
+  margin-bottom: 10px;
+}
+.quick-answer p { color: var(--ink-soft); font-size: 1.02rem; line-height: 1.7; }
+
+.article-body h2 {
+  font-family: var(--serif); font-weight: 400;
+  font-size: 1.85rem; line-height: 1.12; letter-spacing: -0.02em;
+  margin: 52px 0 18px;
+}
+.article-body h2 em { color: var(--accent); }
+.article-body h3 {
+  font-family: var(--serif); font-weight: 400;
+  font-size: 1.4rem; line-height: 1.2; letter-spacing: -0.015em;
+  margin: 36px 0 12px;
+}
+.article-body p { color: var(--ink-soft); margin-bottom: 18px; line-height: 1.75; }
+.article-body ul, .article-body ol { margin: 0 0 20px 22px; color: var(--ink-soft); }
+.article-body li { margin-bottom: 10px; line-height: 1.7; }
+.article-body strong { color: var(--ink); font-weight: 600; }
+.article-body a { color: var(--accent); text-decoration: underline; text-decoration-color: rgba(184,92,56,0.35); text-underline-offset: 3px; }
+.article-body a:hover { text-decoration-color: var(--accent); }
+.article-body table {
+  width: 100%; border-collapse: collapse; margin: 26px 0 30px;
+  font-size: 0.92rem; background: var(--cream-soft);
+  border: 1px solid var(--rule);
+}
+.article-body th {
+  font-family: var(--mono); font-size: 0.66rem; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  text-align: left; color: var(--ink);
+  background: var(--cream-deep);
+  padding: 12px 14px; border-bottom: 1px solid var(--rule);
+}
+.article-body td { padding: 12px 14px; border-bottom: 1px solid var(--rule); color: var(--ink-soft); vertical-align: top; }
+.article-body tr:last-child td { border-bottom: none; }
+
+.callout {
+  background: var(--cream-soft);
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--accent);
+  padding: 22px 26px;
+  margin: 28px 0;
+}
+.co-title {
+  font-family: var(--mono); font-size: 0.66rem; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent);
+  margin-bottom: 8px;
+}
+.callout p { margin-bottom: 0; }
+
+.faq-section { margin-top: 52px; }
+.faq-item {
+  border: 1px solid var(--rule);
+  background: var(--cream-soft);
+  padding: 22px 26px;
+  margin-bottom: 12px;
+}
+.faq-item h3 {
+  font-family: var(--serif); font-weight: 400;
+  font-size: 1.25rem; letter-spacing: -0.01em;
+  margin: 0 0 10px;
+}
+.faq-item p { color: var(--ink-soft); margin-bottom: 0; line-height: 1.7; }
+
+.article-cta {
+  margin-top: 60px; padding: 52px 40px;
+  background: var(--dark); color: var(--cream);
+  text-align: center;
+}
+.article-cta h2 {
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+  letter-spacing: -0.02em; line-height: 1.05;
+  margin: 0 0 14px;
+}
+.article-cta h2 em { color: var(--accent); }
+.article-cta p { color: rgba(244, 239, 229, 0.85); max-width: 52ch; margin: 0 auto 28px; line-height: 1.65; }
+.cta-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.btn-gold {
+  display: inline-block; padding: 15px 28px;
+  background: var(--cream); color: var(--ink);
+  border: 1px solid var(--cream);
+  font-family: var(--sans); font-size: 0.95rem; font-weight: 500;
+  text-decoration: none; transition: all 0.2s ease;
+}
+.btn-gold:hover { background: var(--accent); border-color: var(--accent); color: var(--cream); }
+.btn-outline {
+  display: inline-block; padding: 15px 28px;
+  background: transparent; color: var(--cream);
+  border: 1px solid rgba(244, 239, 229, 0.45);
+  font-family: var(--sans); font-size: 0.95rem; font-weight: 500;
+  text-decoration: none; transition: all 0.2s ease;
+}
+.btn-outline:hover { border-color: var(--cream); background: rgba(244, 239, 229, 0.08); color: var(--cream); }
+
+.related { margin-top: 56px; }
+.related > h2, .related h2 {
+  font-family: var(--serif); font-weight: 400;
+  font-size: 1.6rem; letter-spacing: -0.02em; margin-bottom: 20px;
+}
+.related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.related-card {
+  display: block; padding: 22px 24px;
+  background: var(--cream-soft);
+  border: 1px solid var(--rule);
+  text-decoration: none; color: var(--ink);
+  transition: border-color 0.2s ease, transform 0.3s var(--ease);
+}
+.related-card:hover { border-color: var(--ink-muted); transform: translateY(-2px); }
+.rc-cat {
+  display: block;
+  font-family: var(--mono); font-size: 0.62rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent);
+  margin-bottom: 8px;
+}
+.rc-title { font-family: var(--serif); font-size: 1.15rem; line-height: 1.2; letter-spacing: -0.01em; }
+
+/* ===== FOOTER ===== */
+footer {
+  padding: 44px 32px;
+  border-top: 1px solid var(--rule);
+  background: var(--cream);
+}
+.footer-wrap {
+  max-width: 1180px; margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 18px;
+  font-family: var(--mono); font-size: 0.68rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.14em;
+  color: var(--ink-muted);
+}
+.footer-links { display: inline-flex; align-items: center; gap: 12px; list-style: none; }
+.footer-links a { color: var(--ink-muted); text-decoration: none; transition: color 0.2s ease; }
+.footer-links a:hover { color: var(--accent); }
+.footer-links .sep { color: var(--rule); }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 960px) {
+  nav { padding: 14px 20px; }
+  .nav-links { display: none; }
+  .blog-hero { padding: 60px 20px 40px; }
+  .wrap { padding: 0 20px 70px; }
+  .featured { grid-template-columns: 1fr; }
+  .featured-visual { display: none; }
+  .featured-content { padding: 32px 26px; }
+  .post-grid { grid-template-columns: 1fr; }
+  .article-wrap { padding: 50px 20px 70px; }
+  .related-grid { grid-template-columns: 1fr; }
+  .article-cta { padding: 40px 24px; }
+  footer { padding: 32px 20px; }
+  .footer-wrap { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">Frankly<span class="dot">.</span></a>
+  <ul class="nav-links">
+    <li><a href="/#about">What we do</a></li>
+    <li><a href="/#how">How it works</a></li>
+    <li><a href="/#calculator">Pricing</a></li>
+    <li><a href="/blog/" class="active">Blog</a></li>
+    <li><a href="/#team">Team</a></li>
+  </ul>
+  <a href="/#calculator" class="nav-cta">Book your quote &rarr;</a>
+</nav>
+
+<div class="blog-hero">
+  <div class="hero-badge">📍 Toronto small business guides</div>
+  <h1>Your numbers, <em>explained.</em></h1>
+  <p>Plain-English guides on accounting, bookkeeping, tax, HST, and payroll for Toronto small businesses. Real 2026 numbers. Zero jargon.</p>
+</div>
+
+<div class="wrap">
+
+  <a href="/blog/small-business-accountant-toronto" class="featured">
+    <div class="featured-content">
+      <span class="f-chip">Featured · Accounting</span>
+      <h2>How to Choose a Small Business Accountant in Toronto (2026 Guide)</h2>
+      <p>What an accountant actually costs in Toronto, the difference between a bookkeeper and a CPA, and the 7 questions to ask before you hire anyone.</p>
+      <span class="f-meta">Updated July 4, 2026 · 9 min read</span>
+    </div>
+    <div class="featured-visual"><span>F<i>.</i></span></div>
+  </a>
+
+  <div class="post-grid">
+    <a href="/blog/bookkeeping-services-toronto" class="post-card">
+      <span class="p-chip">Bookkeeping</span>
+      <h3>Bookkeeping Services in Toronto: Costs, Options & What to Expect</h3>
+      <p>What bookkeeping costs in Toronto in 2026, DIY vs. outsourced vs. AI-powered, and how to tell if your books are actually being done right.</p>
+      <span class="p-meta">July 4, 2026 · 8 min read</span>
+    </a>
+    <a href="/blog/corporate-tax-filing-toronto" class="post-card">
+      <span class="p-chip">Corporate Tax</span>
+      <h3>Corporate Tax Filing in Toronto: T2 Deadlines, Rates & How to Save</h3>
+      <p>Every Ontario corporation files a T2, even with zero revenue. Deadlines, the new 11.2% small business rate, and the planning moves that lower your bill.</p>
+      <span class="p-meta">July 4, 2026 · 9 min read</span>
+    </a>
+    <a href="/blog/hst-small-business-ontario" class="post-card">
+      <span class="p-chip">HST</span>
+      <h3>HST for Ontario Small Businesses: Registration, Filing & Common Mistakes</h3>
+      <p>When the $30,000 threshold actually kicks in, how to file, what input tax credits you are leaving on the table, and the mistakes the CRA flags most.</p>
+      <span class="p-meta">July 4, 2026 · 8 min read</span>
+    </a>
+    <a href="/blog/incorporation-vs-sole-proprietorship-ontario" class="post-card">
+      <span class="p-chip">Tax Strategy</span>
+      <h3>Sole Proprietorship vs. Incorporation in Ontario: Taxes Compared</h3>
+      <p>The real tax math on incorporating in Ontario in 2026, what it costs, when it saves you money, and when it is honestly not worth it yet.</p>
+      <span class="p-meta">July 4, 2026 · 9 min read</span>
+    </a>
+    <a href="/blog/small-business-tax-deductions-canada" class="post-card">
+      <span class="p-chip">Deductions</span>
+      <h3>Small Business Tax Write-Offs in Canada: The 2026 Checklist</h3>
+      <p>Home office, vehicle, meals, software, salaries to family members. What you can deduct, what you cannot, and the records the CRA expects.</p>
+      <span class="p-meta">July 4, 2026 · 10 min read</span>
+    </a>
+    <a href="/blog/payroll-small-business-ontario" class="post-card">
+      <span class="p-chip">Payroll</span>
+      <h3>Payroll for Small Businesses in Ontario: CPP, EI & CRA Remittances</h3>
+      <p>Hiring your first employee? The 2026 CPP and EI numbers, remittance deadlines, WSIB, EHT, and how to not get penalized in year one.</p>
+      <span class="p-meta">July 4, 2026 · 8 min read</span>
+    </a>
+    <a href="/blog/catch-up-bookkeeping-toronto" class="post-card">
+      <span class="p-chip">Bookkeeping</span>
+      <h3>Behind on Your Books? Catch-Up Bookkeeping for Toronto Businesses</h3>
+      <p>Months or years behind on bookkeeping and filings? Here is exactly how catch-up works, what it costs, and how the CRA's Voluntary Disclosures Program helps.</p>
+      <span class="p-meta">July 4, 2026 · 7 min read</span>
+    </a>
+    <a href="/blog/small-business-accountant-toronto" class="post-card">
+      <span class="p-chip">Accounting</span>
+      <h3>How to Choose a Small Business Accountant in Toronto</h3>
+      <p>Costs, bookkeeper vs. CPA, red flags, and the 7 questions that separate a great accountant from an expensive filing service.</p>
+      <span class="p-meta">July 4, 2026 · 9 min read</span>
+    </a>
+  </div>
+
+  <div class="blog-cta">
+    <h2>Rather just have it <em>handled?</em></h2>
+    <p>Frankly Financial does the bookkeeping, reports, and tax planning for you, starting at $1,000/month. Find out where your business stands in 5 minutes.</p>
+    <a href="/#calculator" class="btn-primary">Get your free assessment →</a>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-wrap">
+    <div>&copy; 2026 Frankly Financial &middot; Made in Toronto</div>
+    <div class="footer-links">
+      <a href="/">Home</a>
+      <span class="sep">&middot;</span>
+      <a href="/blog/">Blog</a>
+      <span class="sep">&middot;</span>
+      <a href="/termsofservice">Terms of Service</a>
+      <span class="sep">&middot;</span>
+      <span>franklyfinancial.co</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

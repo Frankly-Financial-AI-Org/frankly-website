@@ -20,6 +20,14 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
 
+# Same security headers for extensionless blog article URLs
+[[headers]]
+  for = "/blog/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
 # Legacy /assessment and /platform routes — both retired in the redesign.
 # Send anyone hitting old links to the new single-page flow.
 [[redirects]]
@@ -42,6 +50,20 @@
 [[redirects]]
   from = "/termsofservice"
   to = "/termsofservice.html"
+  status = 200
+
+# Blog index — /blog (no trailing slash) serves blog/index.html
+[[redirects]]
+  from = "/blog"
+  to = "/blog/index.html"
+  status = 200
+
+# Blog articles — pretty URLs like /blog/hst-small-business-ontario load the
+# matching .html file without the extension showing. Netlify serves real files
+# first, so this only kicks in for extensionless article URLs.
+[[redirects]]
+  from = "/blog/*"
+  to = "/blog/:splat.html"
   status = 200
 
 # Redirect www to non-www (optional — adjust to your preference)
