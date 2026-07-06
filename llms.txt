@@ -1,0 +1,30 @@
+# Frankly Financial
+
+> Frankly Financial provides bookkeeping, financial reporting, and tax support for
+> small businesses in Toronto and across Canada. Plain-English service: monthly
+> bookkeeping, CFO-grade reports, HST and corporate tax filing support.
+
+Website: https://franklyfinancial.co
+Location: Toronto, Ontario, Canada
+Contact: hello@franklyfinancial.co
+
+## Services
+- Monthly bookkeeping for small businesses
+- Financial reports and KPI dashboards
+- Corporate tax (T2) and HST filing support
+- Catch-up bookkeeping for businesses behind on their books
+- Payroll support
+
+## Guides (plain-English, updated for 2026 Canadian tax rules)
+- [How to Choose a Small Business Accountant in Toronto](https://franklyfinancial.co/blog/small-business-accountant-toronto): costs, bookkeeper vs. CPA, hiring questions
+- [Bookkeeping Services in Toronto: Costs & Options](https://franklyfinancial.co/blog/bookkeeping-services-toronto): 2026 pricing, DIY vs. outsourced
+- [Corporate Tax Filing in Toronto: The T2 Guide](https://franklyfinancial.co/blog/corporate-tax-filing-toronto): deadlines, the 11.2% small business rate effective July 1 2026
+- [HST for Ontario Small Businesses](https://franklyfinancial.co/blog/hst-small-business-ontario): $30,000 threshold, registration, Quick Method
+- [Sole Proprietorship vs. Incorporation in Ontario](https://franklyfinancial.co/blog/incorporation-vs-sole-proprietorship-ontario): tax math and when incorporating pays off
+- [Small Business Tax Write-Offs in Canada](https://franklyfinancial.co/blog/small-business-tax-deductions-canada): 2026 deduction checklist
+- [Payroll for Small Businesses in Ontario](https://franklyfinancial.co/blog/payroll-small-business-ontario): 2026 CPP/EI numbers, remittances
+- [Catch-Up Bookkeeping for Toronto Businesses](https://franklyfinancial.co/blog/catch-up-bookkeeping-toronto): costs, CRA penalties, Voluntary Disclosures Program
+
+## Key pages
+- [Blog index](https://franklyfinancial.co/blog/): all guides for Toronto small businesses
+- [Get a quote](https://franklyfinancial.co/quote): pricing for bookkeeping and tax services
