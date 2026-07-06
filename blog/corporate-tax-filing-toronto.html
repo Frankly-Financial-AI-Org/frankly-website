@@ -125,6 +125,21 @@ nav .nav-book { font-family:var(--mono); font-size:0.66rem; font-weight:800; let
 nav .nav-book:hover { background:#fff; color:#000; }
 @media (max-width:960px) { nav { padding:14px 20px; } nav .nav-links { display:none; } }
 
+/* mobile menu */
+.nav-right { display:flex; align-items:center; gap:8px; }
+.nav-menu-btn { display:none; width:44px; height:44px; align-items:center; justify-content:center; flex-direction:column; gap:5px; }
+.nav-menu-btn span { display:block; width:22px; height:2px; background:#fff; transition:transform .3s var(--ease), opacity .2s ease; }
+@media (max-width:960px) { .nav-menu-btn { display:flex; } }
+body.menu-open .nav-menu-btn span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+body.menu-open .nav-menu-btn span:nth-child(2) { opacity:0; }
+body.menu-open .nav-menu-btn span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+.mobile-menu { position:fixed; inset:0; z-index:398; background:var(--cream); display:flex; flex-direction:column; justify-content:center; padding:0 32px; opacity:0; pointer-events:none; transition:opacity .35s var(--ease); }
+body.menu-open .mobile-menu { opacity:1; pointer-events:auto; }
+body.menu-open { overflow:hidden; }
+.mobile-menu .mm-label { font-family:var(--mono); font-size:0.62rem; font-weight:800; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent); margin-bottom:20px; }
+.mobile-menu a { font-family:var(--serif); font-size:2.4rem; letter-spacing:-0.02em; color:var(--ink); text-decoration:none; padding:12px 0; border-bottom:1px solid var(--rule); }
+.mobile-menu a:last-child { border-bottom:0; color:var(--accent); }
+
 /* page hero band */
 .page-hero { padding:180px 40px 70px; max-width:1240px; margin:0 auto; }
 .sec-label { display:inline-flex; align-items:center; gap:14px; font-family:var(--mono); font-size:0.68rem; font-weight:800; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent); }
@@ -170,7 +185,7 @@ nav .nav-book:hover { background:#fff; color:#000; }
 .blog-cta p { color:rgba(244,239,229,0.85); max-width:50ch; margin:0 auto 32px; }
 .btn-primary { display:inline-block; padding:17px 32px; background:var(--cream); color:var(--ink); font-weight:500; font-size:0.95rem; text-decoration:none; transition:all .25s; }
 .btn-primary:hover { background:var(--accent); color:var(--cream); }
-@media (max-width:960px) { .featured { grid-template-columns:1fr; } .featured-visual { display:none; } .post-grid { grid-template-columns:1fr; } .wrap { padding:0 20px 80px; } .page-hero { padding:140px 20px 50px; } }
+@media (max-width:960px) { .featured { grid-template-columns:1fr; } .featured-visual { order:-1; height:220px; border-left:0; border-bottom:1px solid var(--rule); } .post-grid { grid-template-columns:1fr; } .wrap { padding:0 20px 80px; } .page-hero { padding:140px 20px 50px; } }
 
 /* ===== article ===== */
 .article-wrap { max-width:760px; margin:0 auto; padding:180px 32px 110px; }
@@ -220,7 +235,7 @@ nav .nav-book:hover { background:#fff; color:#000; }
 .related-card:hover { transform:translateY(-3px); border-color:var(--ink-muted); }
 .rc-cat { display:block; font-family:var(--mono); font-size:0.6rem; font-weight:800; text-transform:uppercase; letter-spacing:0.16em; color:var(--accent); margin-bottom:8px; }
 .rc-title { font-family:var(--serif); font-size:1.18rem; line-height:1.18; }
-@media (max-width:720px) { .related-grid { grid-template-columns:1fr; } .article-wrap { padding:150px 20px 80px; } }
+@media (max-width:720px) { .related-grid { grid-template-columns:1fr; } .article-wrap { padding:150px 20px 80px; } .article-hero-art { height:220px; border-radius:14px; } }
 
 /* ===== terms ===== */
 main.tos { max-width:780px; margin:0 auto; padding:180px 32px 120px; }
@@ -265,8 +280,21 @@ html.is-static .rv2 { opacity:1!important; transform:none!important; }
     <li><a href="/blog/" class="active">Blog</a></li>
     <li><a href="/#team">Team</a></li>
   </ul>
-  <a href="/#calculator" class="nav-book">Book your quote</a>
+  <div class="nav-right">
+    <a href="/#calculator" class="nav-book">Book your quote</a>
+    <button class="nav-menu-btn" id="menuBtn" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
 </nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <span class="mm-label">Menu</span>
+  <a href="/#about">What we do</a>
+  <a href="/#how">How it works</a>
+  <a href="/#calculator">Pricing</a>
+  <a href="/blog/">Blog</a>
+  <a href="/#team">Team</a>
+  <a href="/#calculator">Book your quote</a>
+</div>
 <div class="article-wrap">
   <div class="breadcrumb"><a href="/">Home</a> / <a href="/blog/">Blog</a> / Corporate Tax Filing in Toronto</div>
   <span class="cat-chip">Corporate Tax</span>
@@ -421,6 +449,11 @@ if (!REDUCED && typeof Lenis !== 'undefined') {
   const lenis = new Lenis({ duration: 1.1 });
   (function raf(t){ lenis.raf(t); requestAnimationFrame(raf); })(performance.now());
 }
+(function(){ const btn=document.getElementById('menuBtn'), menu=document.getElementById('mobileMenu');
+  if (btn && menu) {
+    btn.addEventListener('click', () => document.body.classList.toggle('menu-open'));
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => document.body.classList.remove('menu-open')));
+  } })();
 (function(){ const bar=document.querySelector('.scroll-progress');
   function u(){ const m=document.documentElement.scrollHeight-innerHeight; bar.style.transform='scaleX('+(m>0?Math.min(1,scrollY/m):0)+')'; }
   addEventListener('scroll',u,{passive:true}); u(); })();

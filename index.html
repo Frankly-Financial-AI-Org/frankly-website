@@ -299,6 +299,11 @@ nav .nav-book:hover { background: #fff; color: #000; }
 .about-statement em { color: var(--accent); }
 .about-statement .ln { display: block; overflow: hidden; }
 .about-statement .ln > span { display: inline-block; }
+@media (max-width: 960px) {
+  .about { padding: 110px 20px; }
+  .about-inner { grid-template-columns: 1fr; gap: 44px; }
+  .about-man { margin-top: 0; max-width: 340px; }
+}
 .about-body { max-width: 56ch; color: var(--ink-soft); font-size: 1.06rem; line-height: 1.75; }
 .about-body p + p { margin-top: 18px; }
 .about-body .no-list { font-family: var(--serif); font-size: 1.35rem; color: var(--ink); margin-top: 34px; line-height: 1.5; }
@@ -572,6 +577,34 @@ footer { padding: 90px 40px 40px; color: var(--cream); position: relative; overf
 .foot-meta a { color: rgba(244,239,229,0.65); text-decoration: none; }
 .foot-meta a:hover { color: var(--accent); }
 
+/* ================= MOBILE MENU ================= */
+.nav-right { display: flex; align-items: center; gap: 8px; }
+.nav-menu-btn {
+  display: none; width: 44px; height: 44px;
+  align-items: center; justify-content: center; flex-direction: column; gap: 5px;
+}
+.nav-menu-btn span { display: block; width: 22px; height: 2px; background: #fff; transition: transform 0.3s var(--ease), opacity 0.2s ease; }
+@media (max-width: 960px) { .nav-menu-btn { display: flex; } }
+body.menu-open .nav-menu-btn span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+body.menu-open .nav-menu-btn span:nth-child(2) { opacity: 0; }
+body.menu-open .nav-menu-btn span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.mobile-menu {
+  position: fixed; inset: 0; z-index: 398; background: var(--cream);
+  display: flex; flex-direction: column; justify-content: center; padding: 0 32px;
+  opacity: 0; pointer-events: none; transition: opacity 0.35s var(--ease);
+}
+body.menu-open .mobile-menu { opacity: 1; pointer-events: auto; }
+body.menu-open { overflow: hidden; }
+.mobile-menu .mm-label {
+  font-family: var(--mono); font-size: 0.62rem; font-weight: 800;
+  letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px;
+}
+.mobile-menu a {
+  font-family: var(--serif); font-size: 2.4rem; letter-spacing: -0.02em;
+  color: var(--ink); text-decoration: none; padding: 12px 0; border-bottom: 1px solid var(--rule);
+}
+.mobile-menu a:last-child { border-bottom: 0; color: var(--accent); }
+
 /* ================= BOOKING MODAL ================= */
 .bmodal { position: fixed; inset: 0; z-index: 600; display: none; align-items: center; justify-content: center; padding: 30px; }
 .bmodal.open { display: flex; }
@@ -613,8 +646,21 @@ html.is-static .rv { opacity: 1 !important; transform: none !important; }
     <a href="/blog/" data-cursor="Read">Blog</a>
     <a href="#team" data-cursor="Go">Team</a>
   </div>
-  <a href="#calculator" class="nav-book" data-cursor="Book">Book your quote</a>
+  <div class="nav-right">
+    <a href="#calculator" class="nav-book" data-cursor="Book">Book your quote</a>
+    <button class="nav-menu-btn" id="menuBtn" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
 </nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <span class="mm-label">Menu</span>
+  <a href="#about">What we do</a>
+  <a href="#how">How it works</a>
+  <a href="#calculator">Pricing</a>
+  <a href="/blog/">Blog</a>
+  <a href="#team">Team</a>
+  <a href="#calculator">Book your quote</a>
+</div>
 
 <!-- ============ HERO ============ -->
 <header class="hero" id="top">
@@ -955,6 +1001,17 @@ if (!REDUCED && typeof Lenis !== 'undefined') {
       } else { pre.remove(); document.body.style.overflow = ''; heroIn(); }
     }
   })(t0);
+})();
+
+/* ---------- mobile menu ---------- */
+(function mobileMenu() {
+  const btn = document.getElementById('menuBtn'), menu = document.getElementById('mobileMenu');
+  if (!btn || !menu) return;
+  btn.addEventListener('click', () => {
+    const open = document.body.classList.toggle('menu-open');
+    btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  });
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => document.body.classList.remove('menu-open')));
 })();
 
 /* ---------- scroll progress ---------- */
