@@ -474,6 +474,58 @@ nav .nav-book:hover { background: #fff; color: #000; }
   .tiers { grid-template-columns: 1fr 1fr; }
 }
 
+/* ================= QUOTE WIZARD (mobile) =================
+   On phones the long calculator becomes a guided one-question-
+   at-a-time flow with a live price ticker. Desktop unchanged. */
+.calc-launch { display: none; }
+@media (max-width: 960px) {
+  .calc-grid { display: none; }
+  .calc-launch { display: block; margin-top: 44px; }
+}
+.calc-launch .cl-meta {
+  font-family: var(--mono); font-size: 0.64rem; font-weight: 800;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 16px;
+}
+.calc-launch .btn { width: 100%; text-align: center; }
+.quote-wiz {
+  position: fixed; inset: 0; z-index: 520; background: var(--cream);
+  display: none; flex-direction: column;
+}
+body.wiz-open .quote-wiz { display: flex; }
+body.wiz-open { overflow: hidden; }
+.qw-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 20px; border-bottom: 1px solid var(--rule); background: var(--cream);
+}
+.qw-head .qw-label { font-family: var(--mono); font-size: 0.62rem; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); }
+.qw-head .qw-step { font-family: var(--mono); font-size: 0.62rem; font-weight: 800; letter-spacing: 0.14em; color: var(--ink-muted); margin-left: auto; margin-right: 14px; }
+.qw-head .qw-x { width: 40px; height: 40px; border: 1px solid var(--rule); font-size: 1.15rem; color: var(--ink-muted); line-height: 1; }
+.qw-progress { height: 2px; background: var(--rule); }
+.qw-progress .fill { height: 100%; width: 0; background: var(--accent); transition: width 0.35s var(--ease); }
+.qw-body { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 30px 20px 40px; }
+.qw-body .cq { margin: 0; }
+.qw-body .sumwrap { opacity: 1 !important; transform: none !important; }
+.qw-body .sum { box-shadow: 0 30px 70px -40px rgba(19,19,17,0.5); }
+.qw-foot {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 20px calc(14px + env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid var(--rule); background: var(--cream-soft);
+}
+.qw-back {
+  width: 48px; height: 48px; border: 1px solid var(--rule); color: var(--ink);
+  font-size: 1.1rem; flex: none;
+}
+.qw-back:disabled { opacity: 0.3; }
+.qw-price { flex: 1; line-height: 1.15; }
+.qw-price .p { font-family: var(--serif); font-size: 1.35rem; letter-spacing: -0.02em; color: var(--ink); }
+.qw-price .l { font-family: var(--mono); font-size: 0.56rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-muted); }
+.qw-next {
+  flex: none; min-width: 46%; padding: 15px 20px; background: var(--ink); color: var(--cream);
+  font-weight: 500; font-size: 0.95rem; text-align: center;
+}
+.quote-wiz.on-last .qw-next, .quote-wiz.on-last .qw-price { display: none; }
+.quote-wiz.on-last .qw-foot { justify-content: flex-start; }
+
 /* ================= INDUSTRIES ================= */
 .industries { padding: 130px 40px; border-top: 1px solid var(--rule); }
 .ind-inner { max-width: 1240px; margin: 0 auto; }
@@ -837,7 +889,7 @@ html.is-static .rv { opacity: 1 !important; transform: none !important; }
         </div>
       </div>
 
-      <div class="sumwrap rv">
+      <div class="sumwrap rv" id="sumWrap">
         <aside class="sum" id="sumCard">
           <div class="sum-eyebrow">Your quote</div>
           <div class="sum-tier" id="sumTier">Growth</div>
@@ -853,8 +905,29 @@ html.is-static .rv { opacity: 1 !important; transform: none !important; }
         </aside>
       </div>
     </div>
+
+    <div class="calc-launch rv">
+      <p class="cl-meta">5 quick questions · about a minute</p>
+      <button class="btn btn-solid cl-btn" id="wizOpen"><span>Build your quote →</span><i class="btn-fill"></i></button>
+    </div>
   </div>
 </section>
+
+<!-- mobile quote wizard: hosts the calculator questions one at a time -->
+<div class="quote-wiz" id="quoteWiz" role="dialog" aria-modal="true" aria-label="Build your quote">
+  <div class="qw-head">
+    <span class="qw-label">Build your quote</span>
+    <span class="qw-step" id="qwStep">1 / 6</span>
+    <button class="qw-x" id="qwClose" aria-label="Close">✕</button>
+  </div>
+  <div class="qw-progress"><div class="fill" id="qwFill"></div></div>
+  <div class="qw-body" id="qwBody"></div>
+  <div class="qw-foot">
+    <button class="qw-back" id="qwBack" aria-label="Back">←</button>
+    <div class="qw-price"><div class="p" id="qwPrice">$349</div><div class="l">per month so far</div></div>
+    <button class="qw-next" id="qwNext">Next →</button>
+  </div>
+</div>
 
 <!-- ============ INDUSTRIES ============ -->
 <section class="industries" data-bg="cream">
@@ -1179,7 +1252,7 @@ const TIERS = {
   cfo:        { name: 'CFO Partner', price: 1200, tag: 'Monthly strategy, forecasting, board-ready reporting — without the six-figure salary.' }
 };
 const ADD = { hst: 100, t2: 150, t1: 41.67, payrollBase: 150, payrollPer: 30, ar: 300, ap: 300, catchupPer: 250 };
-const state = { txns: 100, override: null, addons: { hst: 0, payroll: 0, ar: 0, ap: 0, t2: 0, t1: 0 }, employees: 1, catchup: 0, months: 3 };
+const state = { txns: 100, override: null, structure: null, addons: { hst: 0, payroll: 0, ar: 0, ap: 0, t2: 0, t1: 0 }, employees: 1, catchup: 0, months: 3 };
 
 function tierFor(t) { return t <= 50 ? 'essentials' : t <= 150 ? 'growth' : t <= 400 ? 'complete' : 'cfo'; }
 function currentTier() { return state.override || tierFor(state.txns); }
@@ -1250,6 +1323,7 @@ document.getElementById('txnSlider').addEventListener('input', e => {
 document.querySelectorAll('.tier').forEach(b => b.addEventListener('click', () => { state.override = b.dataset.tier; render(); }));
 document.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => {
   document.querySelectorAll('.chip').forEach(x => x.classList.remove('active')); c.classList.add('active');
+  state.structure = c.dataset.v;
 }));
 document.querySelectorAll('.tgl').forEach(t => t.addEventListener('click', () => {
   const k = t.dataset.addon;
@@ -1272,6 +1346,62 @@ document.getElementById('moSlider').addEventListener('input', e => { state.month
   card.addEventListener('mouseleave', () => card.style.transform = '');
 })();
 
+/* mobile quote wizard: one question per step, live price ticker.
+   The real calculator blocks are reparented into the wizard, so every
+   listener, the odometer, and the booking button keep working as-is. */
+(function quoteWizard() {
+  const wiz = document.getElementById('quoteWiz');
+  const openBtn = document.getElementById('wizOpen');
+  if (!wiz || !openBtn) return;
+  const host = document.getElementById('qwBody');
+  const stepLbl = document.getElementById('qwStep'), fill = document.getElementById('qwFill');
+  const backBtn = document.getElementById('qwBack'), nextBtn = document.getElementById('qwNext');
+  const priceEl = document.getElementById('qwPrice');
+  const blocks = Array.from(document.querySelectorAll('.calc-card > .cq'));
+  const sumwrap = document.getElementById('sumWrap');
+  const steps = blocks.concat([sumwrap]);
+  const anchors = steps.map(el => { const a = document.createComment('qw'); el.parentNode.insertBefore(a, el); return a; });
+  let idx = 0, mounted = false;
+
+  function mount() { steps.forEach(el => host.appendChild(el)); mounted = true; }
+  function unmount() {
+    steps.forEach((el, i) => { el.style.display = ''; anchors[i].parentNode.insertBefore(el, anchors[i].nextSibling); });
+    mounted = false;
+    if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+  }
+  function price() { try { priceEl.textContent = fmt(calc().monthly); } catch (e) {} }
+  function show(i) {
+    idx = Math.max(0, Math.min(i, steps.length - 1));
+    steps.forEach((el, j) => { el.style.display = j === idx ? '' : 'none'; });
+    stepLbl.textContent = (idx + 1) + ' / ' + steps.length;
+    fill.style.width = (((idx + 1) / steps.length) * 100) + '%';
+    backBtn.disabled = idx === 0;
+    nextBtn.textContent = idx === steps.length - 2 ? 'See my quote →' : 'Next →';
+    wiz.classList.toggle('on-last', idx === steps.length - 1);
+    host.scrollTop = 0;
+    price();
+  }
+  function open() {
+    if (!mounted) mount();
+    document.body.classList.add('wiz-open');
+    if (typeof lenis !== 'undefined' && lenis) lenis.stop();
+    show(0);
+  }
+  function close() {
+    document.body.classList.remove('wiz-open');
+    if (typeof lenis !== 'undefined' && lenis) lenis.start();
+  }
+  openBtn.addEventListener('click', open);
+  document.getElementById('qwClose').addEventListener('click', close);
+  backBtn.addEventListener('click', () => show(idx - 1));
+  nextBtn.addEventListener('click', () => show(idx + 1));
+  const origRender = render;
+  render = function () { origRender(); if (document.body.classList.contains('wiz-open')) price(); };
+  function syncViewport() { if (matchMedia('(min-width: 961px)').matches && mounted) { close(); unmount(); } }
+  matchMedia('(min-width: 961px)').addEventListener('change', syncViewport);
+  addEventListener('resize', syncViewport);
+})();
+
 /* booking modal */
 (function modal() {
   const m = document.getElementById('bmodal'), f = document.getElementById('bframe');
@@ -1290,7 +1420,7 @@ document.getElementById('moSlider').addEventListener('input', e => { state.month
           plan: r.tier.name,
           monthly_total: r.monthly,
           monthly_transactions: state.txns,
-          business_structure: state.addons.t2 ? 'corporation' : (state.addons.t1 ? 'sole_prop' : null),
+          business_structure: state.structure || (state.addons.t2 ? 'corporation' : (state.addons.t1 ? 'sole_prop' : null)),
           add_ons: state.addons,
           employees: state.addons.payroll ? state.employees : null,
           catchup: state.catchup ? { months_behind: state.months } : null,
