@@ -14,9 +14,8 @@
   gtag('config', 'G-4472WPYKS1');
 </script>
 <title>Frankly Financial — Bookkeeping for businesses that hate bookkeeping.</title>
-<meta name="description" content="Frankly is bookkeeping for growing Canadian and US businesses. Real humans, real numbers, real answers, delivered monthly. CFO-grade rigour, no CFO-grade invoice.">
+<meta name="description" content="Frankly is bookkeeping for growing Canadian and US businesses. Real humans, real numbers, real answers — delivered monthly. CFO-grade rigour, no CFO-grade invoice.">
 <meta name="author" content="Frankly Financial">
-<link rel="canonical" href="https://franklyfinancial.co/">
 
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://franklyfinancial.co/">
@@ -31,48 +30,6 @@
 <meta name="twitter:title" content="Frankly Financial — Bookkeeping for businesses that hate bookkeeping.">
 <meta name="twitter:description" content="Real humans, real numbers, real answers — delivered monthly.">
 <meta name="twitter:image" content="https://franklyfinancial.co/images/og-image.png?v=2">
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "AccountingService",
-  "name": "Frankly Financial",
-  "url": "https://franklyfinancial.co",
-  "image": "https://franklyfinancial.co/images/og-image.png",
-  "logo": "https://franklyfinancial.co/images/icon-512.png",
-  "email": "hello@franklyfinancial.co",
-  "description": "Bookkeeping, financial reporting, and tax support for small businesses in Toronto and across Canada. Real humans, real numbers, real answers, delivered monthly.",
-  "areaServed": [
-    {"@type": "City", "name": "Toronto"},
-    {"@type": "AdministrativeArea", "name": "Ontario"},
-    {"@type": "Country", "name": "Canada"}
-  ],
-  "priceRange": "$149+/month",
-  "address": {"@type": "PostalAddress", "addressLocality": "Toronto", "addressRegion": "ON", "addressCountry": "CA"},
-  "knowsAbout": ["Small business bookkeeping", "Corporate tax (T2) filing", "HST filing", "Payroll", "Financial reporting"],
-  "hasOfferCatalog": {
-    "@type": "OfferCatalog",
-    "name": "Accounting services for small businesses",
-    "itemListElement": [
-      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Monthly bookkeeping"}},
-      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Financial reporting and KPI dashboards"}},
-      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Corporate tax (T2) and HST filing support"}},
-      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Catch-up bookkeeping"}},
-      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Payroll support"}}
-    ]
-  },
-  "sameAs": []
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Frankly Financial",
-  "url": "https://franklyfinancial.co",
-  "publisher": {"@type": "Organization", "name": "Frankly Financial", "logo": {"@type": "ImageObject", "url": "https://franklyfinancial.co/images/icon-512.png"}}
-}
-</script>
 
 <link rel="icon" type="image/svg+xml" href="/images/favicon.svg?v=2">
 <link rel="icon" type="image/x-icon" href="/images/favicon.ico?v=2">
@@ -545,7 +502,7 @@ body.wiz-open { overflow: hidden; }
 .qw-head .qw-x { width: 40px; height: 40px; border: 1px solid var(--rule); font-size: 1.15rem; color: var(--ink-muted); line-height: 1; }
 .qw-progress { height: 2px; background: var(--rule); }
 .qw-progress .fill { height: 100%; width: 0; background: var(--accent); transition: width 0.35s var(--ease); }
-.qw-body { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 30px 20px 40px; }
+.qw-body { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; touch-action: pan-y; overscroll-behavior: contain; padding: 30px 20px 40px; }
 .qw-body .cq { margin: 0; }
 .qw-body .sumwrap { opacity: 1 !important; transform: none !important; }
 .qw-body .sum { box-shadow: 0 30px 70px -40px rgba(19,19,17,0.5); }
@@ -964,7 +921,7 @@ html.is-static .rv { opacity: 1 !important; transform: none !important; }
     <button class="qw-x" id="qwClose" aria-label="Close">✕</button>
   </div>
   <div class="qw-progress"><div class="fill" id="qwFill"></div></div>
-  <div class="qw-body" id="qwBody"></div>
+  <div class="qw-body" id="qwBody" data-lenis-prevent></div>
   <div class="qw-foot">
     <button class="qw-back" id="qwBack" aria-label="Back">←</button>
     <div class="qw-price"><div class="p" id="qwPrice">$349</div><div class="l">per month so far</div></div>
@@ -1055,7 +1012,7 @@ html.is-static .rv { opacity: 1 !important; transform: none !important; }
 </footer>
 
 <!-- ============ BOOKING MODAL ============ -->
-<div class="bmodal" id="bmodal" role="dialog" aria-modal="true">
+<div class="bmodal" id="bmodal" role="dialog" aria-modal="true" data-lenis-prevent>
   <div class="bg" data-close></div>
   <div class="card">
     <div class="head">
