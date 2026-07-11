@@ -332,7 +332,9 @@ nav .nav-book:hover { background: #fff; color: #000; }
 }
 .sec-label::before { content: ''; width: 34px; height: 1.5px; background: var(--accent); }
 .about-man { margin-top: 60px; max-width: 420px; }
-.about-man img { border-radius: 20px; box-shadow: 0 24px 60px -28px rgba(19,19,17,0.35); }
+.about-man img { border-radius: 20px; box-shadow: 0 34px 80px -30px rgba(0,0,0,0.7); }
+/* about rides the bg-morph to dark, so its text is authored light */
+.about { color: var(--cream); }
 .about-statement {
   font-family: var(--serif);
   font-size: clamp(1.9rem, 3.4vw, 3rem);
@@ -347,9 +349,9 @@ nav .nav-book:hover { background: #fff; color: #000; }
   .about-inner { grid-template-columns: 1fr; gap: 44px; }
   .about-man { margin-top: 0; max-width: 340px; }
 }
-.about-body { max-width: 56ch; color: var(--ink-soft); font-size: 1.06rem; line-height: 1.75; }
+.about-body { max-width: 56ch; color: rgba(244,239,229,0.75); font-size: 1.06rem; line-height: 1.75; }
 .about-body p + p { margin-top: 18px; }
-.about-body .no-list { font-family: var(--serif); font-size: 1.35rem; color: var(--ink); margin-top: 34px; line-height: 1.5; }
+.about-body .no-list { font-family: var(--serif); font-size: 1.35rem; color: var(--cream); margin-top: 34px; line-height: 1.5; }
 .about-body .no-list s { text-decoration-color: var(--accent); text-decoration-thickness: 2px; }
 
 /* ================= HOW (pinned horizontal) ================= */
@@ -805,7 +807,7 @@ html.is-static .rv { opacity: 1 !important; transform: none !important; }
 </section>
 
 <!-- ============ ABOUT ============ -->
-<section class="about" id="about" data-bg="cream">
+<section class="about" id="about" data-bg="dark">
   <div class="about-inner">
     <div>
       <span class="sec-label rv">What we do</span>
