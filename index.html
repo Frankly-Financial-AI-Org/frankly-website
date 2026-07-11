@@ -345,10 +345,11 @@ nav .nav-book:hover { background: #fff; color: #000; }
 .about-statement .ln { display: block; overflow: hidden; }
 .about-statement .ln > span { display: inline-block; }
 @media (max-width: 960px) {
-  .about { padding: 110px 20px; }
+  .about { padding: 90px 20px; }
   .about-inner { grid-template-columns: 1fr; gap: 44px; }
-  .about-man { margin-top: 0; max-width: 340px; }
+  .about-man { margin-top: 26px; max-width: 340px; }
 }
+
 .about-body { max-width: 56ch; color: rgba(244,239,229,0.75); font-size: 1.06rem; line-height: 1.75; }
 .about-body p + p { margin-top: 18px; }
 .about-body .no-list { font-family: var(--serif); font-size: 1.35rem; color: var(--cream); margin-top: 34px; line-height: 1.5; }
@@ -381,9 +382,19 @@ nav .nav-book:hover { background: #fff; color: #000; }
 .how-progress { max-width: 1240px; margin: 0 auto; padding: 0 40px 120px; }
 .how-progress .bar { height: 1.5px; background: var(--rule); position: relative; }
 .how-progress .bar .fill { position: absolute; inset: 0; background: var(--accent); transform-origin: 0 50%; transform: scaleX(0); }
+@media (min-width: 961px) {
+  /* fill the pinned viewport: center the whole block vertically instead of
+     leaving a dead band under the progress bar */
+  .how { min-height: 96vh; display: flex; flex-direction: column; justify-content: center; }
+  .how-head { width: 100%; padding: 60px 40px 46px; }
+  .how-panel { padding: 40px 40px 80px; }
+  .how-progress { width: 100%; padding: 0 40px 60px; }
+}
 @media (max-width: 960px) {
+  .how-head { padding: 90px 20px 36px; }
   .how-track { flex-direction: column; width: auto; }
-  .how-panel { width: auto; min-width: 0; padding: 40px 20px; grid-template-columns: 1fr; gap: 16px; }
+  .how-panel { width: auto; min-width: 0; padding: 36px 20px; grid-template-columns: 1fr; gap: 16px; }
+  .how-progress { padding: 0 20px 70px; }
 }
 
 /* ================= NUMBERS (dark) ================= */
@@ -701,6 +712,22 @@ body.menu-open { overflow: hidden; }
   color: var(--ink); text-decoration: none; padding: 12px 0; border-bottom: 1px solid var(--rule);
 }
 .mobile-menu a:last-child { border-bottom: 0; color: var(--accent); }
+
+/* mobile vertical rhythm: desktop-scale paddings stack into dead space on
+   phones, so every section breathes tighter under 760px */
+@media (max-width: 760px) {
+  .hero-scroll-hint { display: none; }                 /* overlapped the dog */
+  .marquee-band { padding: 34px 0; }
+  .numbers { padding: 90px 20px; }
+  .numbers-grid { margin-top: 40px; gap: 28px; }
+  .calc { padding: 90px 20px; }
+  .industries { padding: 80px 20px; }
+  .ind-words { margin-top: 24px; }
+  .team { padding: 90px 20px; }
+  .team-grid { margin-top: 44px; gap: 44px; }
+  .final { padding: 110px 20px 90px; }
+  footer { padding: 60px 20px 28px; }
+}
 
 /* ================= BOOKING MODAL ================= */
 .bmodal { position: fixed; inset: 0; z-index: 600; display: none; align-items: center; justify-content: center; padding: 30px; }
@@ -1221,9 +1248,11 @@ if (!REDUCED && hasGSAP) {
       scrollTrigger: { trigger: st, start: 'top 82%' } });
   })();
 
-  /* about businessman parallax */
-  gsap.to('[data-parallax]', { yPercent: -14, ease: 'none',
-    scrollTrigger: { trigger: '.about', start: 'top bottom', end: 'bottom top', scrub: true } });
+  /* about art parallax (desktop only — on mobile it slid over the label) */
+  if (innerWidth > 960) {
+    gsap.to('[data-parallax]', { yPercent: -14, ease: 'none',
+      scrollTrigger: { trigger: '.about', start: 'top bottom', end: 'bottom top', scrub: true } });
+  }
 
   /* HOW: pinned horizontal */
   (function() {
