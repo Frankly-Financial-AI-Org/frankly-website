@@ -732,20 +732,6 @@ body.menu-open { overflow: hidden; }
 }
 
 /* ================= BOOKING MODAL ================= */
-.bmodal { position: fixed; inset: 0; z-index: 600; display: none; align-items: center; justify-content: center; padding: 30px; }
-.bmodal.open { display: flex; }
-.bmodal .bg { position: absolute; inset: 0; background: rgba(15,14,10,0.72); backdrop-filter: blur(12px); }
-.bmodal .card {
-  position: relative; width: 100%; max-width: 940px; height: min(760px, 92vh);
-  background: var(--cream); display: flex; flex-direction: column; overflow: hidden;
-}
-.bmodal .head { padding: 22px 26px; border-bottom: 1px solid var(--rule); display: flex; justify-content: space-between; align-items: flex-start; color: var(--ink); }
-.bmodal .head h3 { font-family: var(--serif); font-size: 1.6rem; letter-spacing: -0.02em; }
-.bmodal .head h3 em { color: var(--accent); }
-.bmodal .head .x { width: 40px; height: 40px; border: 1px solid var(--rule); font-size: 1.3rem; color: var(--ink-muted); }
-.bmodal .head .x:hover { border-color: var(--ink); color: var(--ink); }
-.bmodal iframe { flex: 1; border: 0; background: var(--cream-soft); }
-@media (max-width: 720px) { .bmodal { padding: 0; } .bmodal .card { height: 100vh; } }
 
 /* ================= REVEAL PRIMS ================= */
 .rv { opacity: 0; transform: translateY(40px); }
@@ -1086,19 +1072,6 @@ html.is-static .rv { opacity: 1 !important; transform: none !important; }
 </footer>
 
 <!-- ============ BOOKING MODAL ============ -->
-<div class="bmodal" id="bmodal" role="dialog" aria-modal="true" data-lenis-prevent>
-  <div class="bg" data-close></div>
-  <div class="card">
-    <div class="head">
-      <div>
-        <h3>Book <em>30 minutes</em> with Shay.</h3>
-      </div>
-      <button class="x" data-close aria-label="Close">×</button>
-    </div>
-    <iframe id="bframe" src="about:blank" title="Schedule with Shay"></iframe>
-  </div>
-</div>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
@@ -1480,14 +1453,14 @@ document.getElementById('moSlider').addEventListener('input', e => { state.month
   addEventListener('resize', syncViewport);
 })();
 
-/* booking modal */
-(function modal() {
-  const m = document.getElementById('bmodal'), f = document.getElementById('bframe');
-  function open(e) {
+/* booking: Notion Calendar refuses third-party embedding (its
+   frame-ancestors policy only allows app.notion.com), so an in-page
+   iframe can never load it. Booking opens the calendar in a new tab.
+   The calculator-state capture still fires first so the Frankly
+   Pipeline can pair the booking with the lead's quote. */
+(function booking() {
+  function bookNow(e) {
     if (e) e.preventDefault();
-    // Fire anonymous calculator-state capture so the Frankly Pipeline can
-    // pair the resulting Notion Calendar booking with the lead's quote.
-    // Non-blocking: a failure here must never stop the modal from opening.
     try {
       const r = calc();
       fetch('/.netlify/functions/calculator-webhook', {
@@ -1509,15 +1482,10 @@ document.getElementById('moSlider').addEventListener('input', e => { state.month
         if (!res.ok) console.warn('Frankly Pipeline pending-quote returned', res.status, await res.text());
       }).catch(err => console.warn('Frankly Pipeline pending-quote call failed (non-blocking)', err));
     } catch (err) { console.warn('Failed to capture pending calculator quote', err); }
-    if (f.src === 'about:blank' || !f.src) f.src = CAL_URL;
-    m.classList.add('open'); document.body.style.overflow = 'hidden';
-    if (lenis) lenis.stop();
+    window.open(CAL_URL, '_blank', 'noopener');
   }
-  function close() { m.classList.remove('open'); document.body.style.overflow = ''; if (lenis) lenis.start(); }
-  document.getElementById('bookBtn').addEventListener('click', open);
-  document.getElementById('bookBtn2').addEventListener('click', open);
-  m.querySelectorAll('[data-close]').forEach(el => el.addEventListener('click', close));
-  addEventListener('keydown', e => { if (e.key === 'Escape' && m.classList.contains('open')) close(); });
+  document.getElementById('bookBtn').addEventListener('click', bookNow);
+  document.getElementById('bookBtn2').addEventListener('click', bookNow);
 })();
 
 render();
