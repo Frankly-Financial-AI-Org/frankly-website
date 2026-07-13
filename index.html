@@ -560,6 +560,8 @@ body.wiz-open { overflow: hidden; }
 .qw-progress .fill { height: 100%; width: 0; background: var(--accent); transition: width 0.35s var(--ease); }
 .qw-body { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; touch-action: pan-y; overscroll-behavior: contain; padding: 30px 20px 40px; }
 .qw-body .cq { margin: 0; }
+.qw-body .cq + .cq { margin-top: 46px; }
+.qw-body .cq-num { display: none; }   /* the header's step counter carries the numbering */
 .qw-body .sumwrap { opacity: 1 !important; transform: none !important; }
 .qw-body .sum { box-shadow: 0 30px 70px -40px rgba(19,19,17,0.5); }
 .qw-foot {
@@ -979,7 +981,7 @@ html.is-static .rv { opacity: 1 !important; transform: none !important; }
     </div>
 
     <div class="calc-launch rv">
-      <p class="cl-meta">5 quick questions · about a minute</p>
+      <p class="cl-meta">4 quick questions · about a minute</p>
       <button class="btn btn-solid cl-btn" id="wizOpen"><span>Build your quote →</span><i class="btn-fill"></i></button>
     </div>
   </div>
@@ -1433,25 +1435,27 @@ document.getElementById('moSlider').addEventListener('input', e => { state.month
   const priceEl = document.getElementById('qwPrice');
   const blocks = Array.from(document.querySelectorAll('.calc-card > .cq'));
   const sumwrap = document.getElementById('sumWrap');
-  const steps = blocks.concat([sumwrap]);
-  const anchors = steps.map(el => { const a = document.createComment('qw'); el.parentNode.insertBefore(a, el); return a; });
+  const flat = blocks.concat([sumwrap]);
+  /* transactions + plan are one decision: the slider suggests the tier */
+  const groups = [[blocks[0], blocks[1]], [blocks[2]], [blocks[3]], [blocks[4]], [sumwrap]];
+  const anchors = flat.map(el => { const a = document.createComment('qw'); el.parentNode.insertBefore(a, el); return a; });
   let idx = 0, mounted = false;
 
-  function mount() { steps.forEach(el => host.appendChild(el)); mounted = true; }
+  function mount() { flat.forEach(el => host.appendChild(el)); mounted = true; }
   function unmount() {
-    steps.forEach((el, i) => { el.style.display = ''; anchors[i].parentNode.insertBefore(el, anchors[i].nextSibling); });
+    flat.forEach((el, i) => { el.style.display = ''; anchors[i].parentNode.insertBefore(el, anchors[i].nextSibling); });
     mounted = false;
     if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
   }
   function price() { try { priceEl.textContent = fmt(calc().monthly); } catch (e) {} }
   function show(i) {
-    idx = Math.max(0, Math.min(i, steps.length - 1));
-    steps.forEach((el, j) => { el.style.display = j === idx ? '' : 'none'; });
-    stepLbl.textContent = (idx + 1) + ' / ' + steps.length;
-    fill.style.width = (((idx + 1) / steps.length) * 100) + '%';
+    idx = Math.max(0, Math.min(i, groups.length - 1));
+    flat.forEach(el => { el.style.display = groups[idx].includes(el) ? '' : 'none'; });
+    stepLbl.textContent = (idx + 1) + ' / ' + groups.length;
+    fill.style.width = (((idx + 1) / groups.length) * 100) + '%';
     backBtn.disabled = idx === 0;
-    nextBtn.textContent = idx === steps.length - 2 ? 'See my quote →' : 'Next →';
-    wiz.classList.toggle('on-last', idx === steps.length - 1);
+    nextBtn.textContent = idx === groups.length - 2 ? 'See my quote →' : 'Next →';
+    wiz.classList.toggle('on-last', idx === groups.length - 1);
     host.scrollTop = 0;
     price();
   }
