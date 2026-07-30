@@ -624,6 +624,11 @@ body.wiz-open { overflow: hidden; }
 .member h3 { font-family: var(--serif); font-size: 2.1rem; letter-spacing: -0.02em; margin-top: 24px; }
 .member .role { font-family: var(--mono); font-weight: 800; font-size: 0.64rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin: 8px 0 14px; }
 .member .bio { color: var(--ink-soft); font-size: 0.98rem; line-height: 1.65; max-width: 44ch; }
+.fn-stack { display: flex; flex-direction: column; gap: 22px; }
+.fn { background: var(--cream-soft); border: 1px solid var(--rule); padding: 32px 34px; }
+.fn .fn-label { font-family: var(--mono); font-weight: 800; font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); }
+.fn h3 { font-family: var(--serif); font-weight: 400; font-size: 1.7rem; letter-spacing: -0.02em; margin: 12px 0 10px; }
+.fn p { color: var(--ink-soft); font-size: 0.98rem; line-height: 1.7; }
 .member .cred {
   display: inline-block; margin-top: 14px;
   font-family: var(--mono); font-weight: 800; font-size: 0.64rem; letter-spacing: 0.14em; text-transform: uppercase;
@@ -1011,15 +1016,9 @@ html.is-static .rv { opacity: 1 !important; transform: none !important; }
 <!-- ============ TEAM ============ -->
 <section class="team" id="team" data-bg="deep">
   <div class="team-inner">
-    <span class="sec-label rv">The humans behind it</span>
-    <h2 class="team-title rv">Two of us. <em>That's the point.</em></h2>
+    <span class="sec-label rv">The team behind it</span>
+    <h2 class="team-title rv">One team. <em>Two functions.</em></h2>
     <div class="team-grid">
-      <a class="member rv" href="https://www.linkedin.com/in/shayshafique/" target="_blank" rel="noopener" data-cursor="LinkedIn">
-        <div class="ph"><img src="images/shay.png?v=2" alt="Shay Shafique"></div>
-        <h3>Shay Shafique</h3>
-        <div class="role">Growth · Strategy · Your first call</div>
-        <p class="bio">Has helped scale more startups than he can count. Now he's helping small businesses get the same caliber of financial strategy that venture-backed startups take for granted.</p>
-      </a>
       <a class="member rv" href="https://www.linkedin.com/in/atahaee/" target="_blank" rel="noopener" data-cursor="LinkedIn">
         <div class="ph"><img src="images/ata.png?v=2" alt="Ata Haee"></div>
         <h3>Ata Haee</h3>
@@ -1027,6 +1026,18 @@ html.is-static .rv { opacity: 1 !important; transform: none !important; }
         <p class="bio">Former VP of Finance who got tired of watching small businesses get overcharged for basic financial advice. Now he's making sure your numbers are right — without the markup.</p>
         <span class="cred">Verified on CPA Ontario ↗</span>
       </a>
+      <div class="fn-stack rv">
+        <div class="fn">
+          <span class="fn-label">Function 01 · Bookkeeping</span>
+          <h3>Your monthly close, handled.</h3>
+          <p>Transactions categorized, accounts reconciled, and a month-end close you can trust — delivered on schedule with a report pack and plain-English notes, reviewed by a CPA before it ever reaches you.</p>
+        </div>
+        <div class="fn">
+          <span class="fn-label">Function 02 · Tax</span>
+          <h3>Filing season, all year round.</h3>
+          <p>Over a decade of Canadian corporate and personal tax experience, sharpened at Big Four accounting firms. Corporate T2s, personal T1s, HST/GST, CRA correspondence, trusts and estates, and cross-border Canada–US filings — planned through the year, not scrambled in April.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
