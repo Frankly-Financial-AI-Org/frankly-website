@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1264 848" width="1264" height="848" role="img" aria-label="A T2 corporation income tax return laid out as four numbered filing steps">
+  <defs>
+    <linearGradient id="sheet" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFDF8"/>
+      <stop offset="1" stop-color="#F6F0E3"/>
+    </linearGradient>
+    <filter id="soft" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+  </defs>
+
+  <rect width="1264" height="848" fill="#F4EFE5"/>
+
+  <!-- cast shadow under the stack -->
+  <ellipse cx="640" cy="682" rx="430" ry="26" fill="#B0A28A" opacity="0.32" filter="url(#soft)"/>
+
+  <!-- back sheets of the stack -->
+  <rect x="196" y="206" width="884" height="452" rx="12" fill="#EDE5D4" stroke="#D9CFBC" stroke-width="2"/>
+  <rect x="188" y="196" width="884" height="452" rx="12" fill="#F3ECDE" stroke="#D9CFBC" stroke-width="2"/>
+
+  <!-- front sheet -->
+  <rect x="180" y="186" width="884" height="452" rx="12" fill="url(#sheet)" stroke="#D9CFBC" stroke-width="2"/>
+
+  <!-- header band -->
+  <path d="M180 198 a12 12 0 0 1 12 -12 h860 a12 12 0 0 1 12 12 v70 h-884 z" fill="#B85C38"/>
+  <text x="224" y="252" font-family="Georgia, 'Times New Roman', serif" font-size="42" fill="#FBF7EF">T2</text>
+  <text x="292" y="250" font-family="Helvetica, Arial, sans-serif" font-size="16" letter-spacing="3.2" fill="#F2D5C6">CORPORATION INCOME TAX RETURN</text>
+  <text x="1020" y="250" font-family="Helvetica, Arial, sans-serif" font-size="16" letter-spacing="2" fill="#F2D5C6" text-anchor="end">2026</text>
+
+  <!-- connector rail behind the step chips -->
+  <line x1="286" y1="392" x2="852" y2="392" stroke="#DED5C3" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- four numbered steps -->
+  <g font-family="Helvetica, Arial, sans-serif" text-anchor="middle">
+    <g>
+      <circle cx="286" cy="392" r="34" fill="#B85C38"/>
+      <text x="286" y="403" font-size="30" font-weight="bold" fill="#FBF7EF">1</text>
+      <line x1="232" y1="464" x2="340" y2="464" stroke="#DED5C3" stroke-width="5" stroke-linecap="round"/>
+      <line x1="248" y1="494" x2="324" y2="494" stroke="#E5DCCA" stroke-width="5" stroke-linecap="round"/>
+    </g>
+    <g>
+      <circle cx="475" cy="392" r="34" fill="#B85C38"/>
+      <text x="475" y="403" font-size="30" font-weight="bold" fill="#FBF7EF">2</text>
+      <line x1="421" y1="464" x2="529" y2="464" stroke="#DED5C3" stroke-width="5" stroke-linecap="round"/>
+      <line x1="437" y1="494" x2="513" y2="494" stroke="#E5DCCA" stroke-width="5" stroke-linecap="round"/>
+    </g>
+    <g>
+      <circle cx="664" cy="392" r="34" fill="#B85C38"/>
+      <text x="664" y="403" font-size="30" font-weight="bold" fill="#FBF7EF">3</text>
+      <line x1="610" y1="464" x2="718" y2="464" stroke="#DED5C3" stroke-width="5" stroke-linecap="round"/>
+      <line x1="626" y1="494" x2="702" y2="494" stroke="#E5DCCA" stroke-width="5" stroke-linecap="round"/>
+    </g>
+    <g>
+      <circle cx="853" cy="392" r="34" fill="#17130C"/>
+      <text x="853" y="403" font-size="30" font-weight="bold" fill="#FBF7EF">4</text>
+      <line x1="799" y1="464" x2="907" y2="464" stroke="#DED5C3" stroke-width="5" stroke-linecap="round"/>
+      <line x1="815" y1="494" x2="891" y2="494" stroke="#E5DCCA" stroke-width="5" stroke-linecap="round"/>
+    </g>
+  </g>
+
+  <!-- filed / balance line -->
+  <line x1="232" y1="574" x2="700" y2="574" stroke="#E5DCCA" stroke-width="5" stroke-linecap="round"/>
+  <rect x="852" y="550" width="160" height="48" rx="7" fill="#F6EFE1" stroke="#B85C38" stroke-width="3"/>
+  <line x1="878" y1="574" x2="986" y2="574" stroke="#D9C3B4" stroke-width="5" stroke-linecap="round"/>
+
+  <!-- filed seal -->
+  <g transform="translate(1058 596)">
+    <circle r="62" fill="#17130C"/>
+    <circle r="51" fill="none" stroke="#B85C38" stroke-width="3"/>
+    <path d="M-25 2 L-7 21 L26 -19" fill="none" stroke="#F4EFE5" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>
