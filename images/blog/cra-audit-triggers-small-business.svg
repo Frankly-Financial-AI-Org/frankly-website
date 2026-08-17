@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1264 848" width="1264" height="848" role="img" aria-label="A ledger page with three rows flagged for review under a magnifying glass">
+  <defs>
+    <linearGradient id="sheet" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFDF8"/>
+      <stop offset="1" stop-color="#F6F0E3"/>
+    </linearGradient>
+    <filter id="soft" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+  </defs>
+
+  <rect width="1264" height="848" fill="#F4EFE5"/>
+
+  <!-- cast shadow under the sheet -->
+  <ellipse cx="620" cy="690" rx="410" ry="24" fill="#B0A28A" opacity="0.32" filter="url(#soft)"/>
+
+  <!-- ledger sheet -->
+  <rect x="188" y="150" width="860" height="516" rx="12" fill="url(#sheet)" stroke="#D9CFBC" stroke-width="2"/>
+
+  <!-- header band -->
+  <path d="M188 162 a12 12 0 0 1 12 -12 h836 a12 12 0 0 1 12 12 v66 h-860 z" fill="#17130C"/>
+  <text x="228" y="205" font-family="Helvetica, Arial, sans-serif" font-size="17" letter-spacing="3.2" fill="#F4EFE5">GENERAL LEDGER</text>
+  <text x="1008" y="205" font-family="Helvetica, Arial, sans-serif" font-size="17" letter-spacing="2" fill="#B85C38" text-anchor="end">2026</text>
+
+  <!-- ledger rows: nine rows, three flagged -->
+  <g>
+    <!-- row 1 -->
+    <line x1="228" y1="278" x2="700" y2="278" stroke="#E5DCCA" stroke-width="7" stroke-linecap="round"/>
+    <line x1="836" y1="278" x2="1008" y2="278" stroke="#EDE5D4" stroke-width="7" stroke-linecap="round"/>
+    <!-- row 2 FLAGGED -->
+    <rect x="208" y="308" width="820" height="34" rx="6" fill="#B85C38" opacity="0.12"/>
+    <line x1="228" y1="325" x2="640" y2="325" stroke="#C98A6E" stroke-width="7" stroke-linecap="round"/>
+    <line x1="836" y1="325" x2="1008" y2="325" stroke="#C98A6E" stroke-width="7" stroke-linecap="round"/>
+    <path d="M176 308 h30 l-9 13 l9 13 h-30 z" fill="#B85C38"/>
+    <!-- row 3 -->
+    <line x1="228" y1="372" x2="672" y2="372" stroke="#E5DCCA" stroke-width="7" stroke-linecap="round"/>
+    <line x1="836" y1="372" x2="1008" y2="372" stroke="#EDE5D4" stroke-width="7" stroke-linecap="round"/>
+    <!-- row 4 -->
+    <line x1="228" y1="419" x2="596" y2="419" stroke="#E5DCCA" stroke-width="7" stroke-linecap="round"/>
+    <line x1="836" y1="419" x2="1008" y2="419" stroke="#EDE5D4" stroke-width="7" stroke-linecap="round"/>
+    <!-- row 5 FLAGGED -->
+    <rect x="208" y="449" width="820" height="34" rx="6" fill="#B85C38" opacity="0.12"/>
+    <line x1="228" y1="466" x2="712" y2="466" stroke="#C98A6E" stroke-width="7" stroke-linecap="round"/>
+    <line x1="836" y1="466" x2="1008" y2="466" stroke="#C98A6E" stroke-width="7" stroke-linecap="round"/>
+    <path d="M176 449 h30 l-9 13 l9 13 h-30 z" fill="#B85C38"/>
+    <!-- row 6 -->
+    <line x1="228" y1="513" x2="654" y2="513" stroke="#E5DCCA" stroke-width="7" stroke-linecap="round"/>
+    <line x1="836" y1="513" x2="1008" y2="513" stroke="#EDE5D4" stroke-width="7" stroke-linecap="round"/>
+    <!-- row 7 FLAGGED -->
+    <rect x="208" y="543" width="820" height="34" rx="6" fill="#B85C38" opacity="0.12"/>
+    <line x1="228" y1="560" x2="608" y2="560" stroke="#C98A6E" stroke-width="7" stroke-linecap="round"/>
+    <line x1="836" y1="560" x2="1008" y2="560" stroke="#C98A6E" stroke-width="7" stroke-linecap="round"/>
+    <path d="M176 543 h30 l-9 13 l9 13 h-30 z" fill="#B85C38"/>
+    <!-- row 8 -->
+    <line x1="228" y1="607" x2="688" y2="607" stroke="#E5DCCA" stroke-width="7" stroke-linecap="round"/>
+    <line x1="836" y1="607" x2="1008" y2="607" stroke="#EDE5D4" stroke-width="7" stroke-linecap="round"/>
+  </g>
+
+  <!-- column rule -->
+  <line x1="790" y1="252" x2="790" y2="640" stroke="#E5DCCA" stroke-width="3"/>
+
+  <!-- magnifying glass over the flagged rows -->
+  <g transform="translate(742 470)">
+    <line x1="86" y1="86" x2="188" y2="188" stroke="#17130C" stroke-width="26" stroke-linecap="round"/>
+    <circle r="112" fill="#FFFDF8" opacity="0.55"/>
+    <circle r="112" fill="none" stroke="#17130C" stroke-width="16"/>
+    <circle r="96" fill="none" stroke="#B85C38" stroke-width="4"/>
+  </g>
+</svg>
