@@ -41,22 +41,24 @@
   "image": "https://franklyfinancial.co/images/og-image.png",
   "logo": "https://franklyfinancial.co/images/icon-512.png",
   "email": "hello@franklyfinancial.co",
-  "description": "Bookkeeping, financial reporting, and tax support for small businesses in Toronto and across Canada. Real humans, real numbers, real answers, delivered monthly.",
+  "description": "Bookkeeping, financial reporting, and tax support for small businesses across Canada and the United States, including cross-border Canada–US filings. Real humans, real numbers, real answers, delivered monthly.",
   "areaServed": [
     {"@type": "City", "name": "Toronto"},
     {"@type": "AdministrativeArea", "name": "Ontario"},
-    {"@type": "Country", "name": "Canada"}
+    {"@type": "Country", "name": "Canada"},
+    {"@type": "Country", "name": "United States"}
   ],
   "priceRange": "$149+/month",
   "address": {"@type": "PostalAddress", "addressLocality": "Toronto", "addressRegion": "ON", "addressCountry": "CA"},
-  "knowsAbout": ["Small business bookkeeping", "Corporate tax (T2) filing", "HST filing", "Payroll", "Financial reporting"],
+  "knowsAbout": ["Small business bookkeeping", "Canadian corporate tax (T2) filing", "US corporate tax (Form 1120) filing", "Personal tax (T1 and Form 1040)", "HST/GST and US sales tax", "Cross-border Canada–US tax", "Payroll", "Financial reporting"],
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
     "name": "Accounting services for small businesses",
     "itemListElement": [
       {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Monthly bookkeeping"}},
       {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Financial reporting and KPI dashboards"}},
-      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Corporate tax (T2) and HST filing support"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Canadian and US corporate and personal tax filing support"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Cross-border Canada–US tax"}},
       {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Catch-up bookkeeping"}},
       {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Payroll support"}}
     ]
@@ -929,6 +931,11 @@ html.is-static .rv { opacity: 1 !important; transform: none !important; }
         </div>
         <div class="cq">
           <div class="cq-head"><span class="cq-num">04</span><span class="cq-text">Do you need any other services?</span></div>
+          <div class="cq-head" style="margin:0 0 12px"><span class="cq-text" style="font-size:1rem">First — where is your business based?</span></div>
+          <div class="chips" id="countryChips" style="margin-bottom:24px">
+            <button class="chip active" data-c="ca">Canada</button>
+            <button class="chip" data-c="us">United States</button>
+          </div>
           <div class="toggles">
             <button class="tgl" data-addon="hst"><div><div class="t-label">HST / GST filing</div><div class="t-meta">+ $100 / month</div></div><span class="sw"></span></button>
             <button class="tgl" data-addon="payroll"><div><div class="t-label">Payroll</div><div class="t-meta">+ $150 base · $30 / employee</div></div><span class="sw"></span></button>
@@ -1035,7 +1042,7 @@ html.is-static .rv { opacity: 1 !important; transform: none !important; }
         <div class="fn">
           <span class="fn-label">Function 02 · Tax</span>
           <h3>Filing season, all year round.</h3>
-          <p>Over a decade of Canadian corporate and personal tax experience, sharpened at Big Four accounting firms. Corporate T2s, personal T1s, HST/GST, CRA correspondence, trusts and estates, and cross-border Canada–US filings — planned through the year, not scrambled in April.</p>
+          <p>Over a decade of corporate and personal tax experience on both sides of the border, sharpened at Big Four accounting firms. Canadian T2s and US 1120s, T1s and 1040s, HST/GST and state sales tax, CRA and IRS correspondence, trusts and estates, and cross-border Canada–US filings — planned through the year, not scrambled in April.</p>
         </div>
       </div>
     </div>
@@ -1093,7 +1100,7 @@ html.is-static .rv { opacity: 1 !important; transform: none !important; }
 const STATIC  = new URLSearchParams(location.search).has('static');
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches || STATIC;
 const FINE    = matchMedia('(pointer: fine)').matches;
-const CAL_URL = "https://calendar.notion.so/meet/franklyfinancial/ye47g3ulh";
+const CAL_URL = "https://calendar.notion.so/meet/shayfrankly/ye47g3ulh";
 if (STATIC) document.documentElement.classList.add('is-static');
 
 const hasGSAP = typeof gsap !== 'undefined';
@@ -1312,7 +1319,19 @@ const TIERS = {
   cfo:        { name: 'CFO Partner', price: 1200, tag: 'Monthly strategy, forecasting, board-ready reporting — without the six-figure salary.' }
 };
 const ADD = { hst: 100, t2: 150, t1: 41.67, payrollBase: 150, payrollPer: 30, ar: 300, ap: 300, catchupPer: 250 };
-const state = { txns: 100, override: null, structure: null, addons: { hst: 0, payroll: 0, ar: 0, ap: 0, t2: 0, t1: 0 }, employees: 1, catchup: 0, months: 3 };
+const state = { txns: 100, override: null, structure: null, country: 'ca', addons: { hst: 0, payroll: 0, ar: 0, ap: 0, t2: 0, t1: 0 }, employees: 1, catchup: 0, months: 3 };
+
+/* country-specific labels: same service shape, local filings */
+const TAXCOPY = {
+  ca: { hst: ['HST / GST filing', '+ $100 / month'],
+        t2:  ['Corporate tax return (T2)', '$1,800/yr · billed $150 / month'],
+        t1:  ['Personal tax return (T1)', '$500/yr · billed ~$42 / month'],
+        lineHst: 'HST / GST filing', lineT2: 'Corporate tax (T2)', lineT1: 'Personal tax (T1)' },
+  us: { hst: ['Sales tax filings', '+ $100 / month'],
+        t2:  ['Corporate tax return (Form 1120)', '$1,800/yr · billed $150 / month'],
+        t1:  ['Personal tax return (Form 1040)', '$500/yr · billed ~$42 / month'],
+        lineHst: 'Sales tax filings', lineT2: 'Corporate tax (1120)', lineT1: 'Personal tax (1040)' }
+};
 
 function tierFor(t) { return t <= 50 ? 'essentials' : t <= 150 ? 'growth' : t <= 400 ? 'complete' : 'cfo'; }
 function currentTier() { return state.override || tierFor(state.txns); }
@@ -1322,12 +1341,12 @@ function calc() {
   const key = currentTier(), tier = TIERS[key];
   let monthly = tier.price;
   const lines = [[tier.name + ' plan', tier.price]];
-  if (state.addons.hst) { monthly += ADD.hst; lines.push(['HST / GST filing', ADD.hst]); }
+  if (state.addons.hst) { monthly += ADD.hst; lines.push([TAXCOPY[state.country].lineHst, ADD.hst]); }
   if (state.addons.payroll) { const p = ADD.payrollBase + state.employees * ADD.payrollPer; monthly += p; lines.push(['Payroll · ' + state.employees + (state.employees === 1 ? ' person' : ' people'), p]); }
   if (state.addons.ar) { monthly += ADD.ar; lines.push(['AR management', ADD.ar]); }
   if (state.addons.ap) { monthly += ADD.ap; lines.push(['AP management', ADD.ap]); }
-  if (state.addons.t2) { monthly += ADD.t2; lines.push(['Corporate tax (T2)', ADD.t2]); }
-  if (state.addons.t1) { monthly += ADD.t1; lines.push(['Personal tax (T1)', ADD.t1]); }
+  if (state.addons.t2) { monthly += ADD.t2; lines.push([TAXCOPY[state.country].lineT2, ADD.t2]); }
+  if (state.addons.t1) { monthly += ADD.t1; lines.push([TAXCOPY[state.country].lineT1, ADD.t1]); }
   const once = state.catchup ? state.months * ADD.catchupPer : 0;
   return { key, tier, monthly, lines, once };
 }
@@ -1381,9 +1400,25 @@ document.getElementById('txnSlider').addEventListener('input', e => {
   render();
 });
 document.querySelectorAll('.tier').forEach(b => b.addEventListener('click', () => { state.override = b.dataset.tier; render(); }));
-document.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => {
-  document.querySelectorAll('.chip').forEach(x => x.classList.remove('active')); c.classList.add('active');
+document.querySelectorAll('#chips .chip').forEach(c => c.addEventListener('click', () => {
+  document.querySelectorAll('#chips .chip').forEach(x => x.classList.remove('active')); c.classList.add('active');
   state.structure = c.dataset.v;
+}));
+
+/* country switch: relabel the tax add-ons for Canadian vs US filings */
+function applyCountry() {
+  const cc = TAXCOPY[state.country];
+  [['hst', cc.hst], ['t2', cc.t2], ['t1', cc.t1]].forEach(([k, pair]) => {
+    const b = document.querySelector('.tgl[data-addon="' + k + '"]');
+    b.querySelector('.t-label').textContent = pair[0];
+    b.querySelector('.t-meta').textContent = pair[1];
+  });
+}
+document.querySelectorAll('#countryChips .chip').forEach(c => c.addEventListener('click', () => {
+  document.querySelectorAll('#countryChips .chip').forEach(x => x.classList.remove('active')); c.classList.add('active');
+  state.country = c.dataset.c;
+  applyCountry();
+  render();
 }));
 document.querySelectorAll('.tgl').forEach(t => t.addEventListener('click', () => {
   const k = t.dataset.addon;
@@ -1482,6 +1517,7 @@ document.getElementById('moSlider').addEventListener('input', e => { state.month
           plan: r.tier.name,
           monthly_total: r.monthly,
           monthly_transactions: state.txns,
+          country: state.country,
           business_structure: state.structure || (state.addons.t2 ? 'corporation' : (state.addons.t1 ? 'sole_prop' : null)),
           add_ons: state.addons,
           employees: state.addons.payroll ? state.employees : null,
