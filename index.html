@@ -526,6 +526,8 @@ nav .nav-book:hover { background: #fff; color: #000; }
 .sum-cta:hover .btn-fill { transform: translateY(0); }
 .sum-cta:hover span { color: var(--ink); }
 .sum-note { margin-top: 14px; font-family: var(--serif); font-style: italic; font-size: 0.92rem; color: rgba(244,239,229,0.5); text-align: center; }
+.sum-alt { display: block; margin-top: 10px; text-align: center; font-size: 0.84rem; color: rgba(244,239,229,0.75); text-decoration: underline; text-underline-offset: 3px; }
+.sum-alt:hover { color: var(--cream); }
 @media (max-width: 960px) {
   .calc-grid { grid-template-columns: 1fr; }
   .sumwrap { position: relative; top: 0; }
@@ -974,6 +976,7 @@ html.is-static .rv { opacity: 1 !important; transform: none !important; }
           <div class="sum-once" id="sumOnce"><span>One-time today</span><span class="amt" id="sumOnceAmt">$0</span></div>
           <button class="sum-cta" id="bookBtn" data-cursor="Book"><span>Book 30 min with Frankly →</span><i class="btn-fill"></i></button>
           <p class="sum-note">This is a starting point. Final scope locks in on the call.</p>
+          <a class="sum-alt" href="/quote" data-cursor="Email">Not ready for a call? Get your quote by email →</a>
         </aside>
       </div>
     </div>

@@ -111,6 +111,28 @@ exports.handler = async (event) => {
       body: JSON.stringify({ ok: false, error: "malformed JSON" }),
     };
   }
+  // Homepage "Book" clicks have no email yet (the lead types it into Notion
+  // Calendar in the new tab). Forward the quote anyway: the pipeline saves it
+  // as a pending quote, which also counts booking clicks while GA is dark.
+  if ((!raw.email || !raw.email.includes("@")) && raw.booked_meeting && raw.plan) {
+    const addOns = {};
+    const src = raw.add_ons || {};
+    for (const k of ["hst", "t2", "t1", "payroll", "ar", "ap"]) {
+      if (src[k]) addOns[k] = true;
+    }
+    if (addOns.payroll && raw.employees) addOns.employees = Number(raw.employees) || 1;
+    if (raw.catchup && raw.catchup.months_behind) addOns.catchup_months = Number(raw.catchup.months_behind) || 3;
+    return forward(secret, {
+      booked_meeting: true,
+      plan: String(raw.plan),
+      monthly_transactions: Number(raw.monthly_transactions) || null,
+      add_ons: addOns,
+      business_structure: raw.business_structure || null,
+      country: raw.country || null,
+      page: raw.page || null,
+      calculator_url: event.headers.referer || event.headers.Referer || "index",
+    });
+  }
   if (!raw.email || !raw.email.includes("@")) {
     return {
       statusCode: 400,
@@ -142,6 +164,10 @@ exports.handler = async (event) => {
   if (raw.booked_meeting) payload.booked_meeting = true;
   if (raw.meeting_starts_at) payload.meeting_starts_at = raw.meeting_starts_at;
 
+  return forward(secret, payload);
+};
+
+async function forward(secret, payload) {
   const body = JSON.stringify(payload);
   const ts = Math.floor(Date.now() / 1000).toString();
 
