@@ -52,6 +52,11 @@
   to = "/termsofservice.html"
   status = 200
 
+[[redirects]]
+  from = "/termsofuse"
+  to = "/termsofuse.html"
+  status = 200
+
 # Blog index — /blog (no trailing slash) serves blog/index.html
 [[redirects]]
   from = "/blog"
