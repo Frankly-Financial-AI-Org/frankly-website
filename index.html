@@ -1541,6 +1541,7 @@ document.getElementById('moSlider').addEventListener('input', e => { state.month
         if (!res.ok) console.warn('Frankly Pipeline pending-quote returned', res.status, await res.text());
       }).catch(err => console.warn('Frankly Pipeline pending-quote call failed (non-blocking)', err));
     } catch (err) { console.warn('Failed to capture pending calculator quote', err); }
+    try { if (window.gtag) gtag('event', 'book_click', { page: 'index' }); } catch (_) {}
     window.open(CAL_URL, '_blank', 'noopener');
   }
   document.getElementById('bookBtn').addEventListener('click', bookNow);

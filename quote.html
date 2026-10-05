@@ -684,6 +684,7 @@ footer p{font-size:.75rem;color:var(--text-3)}
         document.getElementById('intakeForm').style.display = 'none';
         document.getElementById('progressBar').style.width = '100%';
         document.getElementById('successState').style.display = 'block';
+        try { if (window.gtag) gtag('event', 'generate_lead', { form: 'quote' }); } catch (_) {}
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
         throw new Error(result.message || 'Unknown error');
