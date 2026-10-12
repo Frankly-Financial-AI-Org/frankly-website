@@ -89,7 +89,9 @@ exports.handler = async (event) => {
     };
   }
 
-  const secret = process.env.CALCULATOR_WEBHOOK_SECRET;
+  // .trim(): a stray newline/space pasted into the Netlify dashboard must
+  // not silently break every signature.
+  const secret = (process.env.CALCULATOR_WEBHOOK_SECRET || "").trim();
   if (!secret) {
     console.error(
       "calculator-webhook: CALCULATOR_WEBHOOK_SECRET not set on Netlify."
