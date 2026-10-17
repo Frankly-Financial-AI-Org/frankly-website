@@ -408,7 +408,12 @@ footer p{font-size:.75rem;color:var(--text-3)}
     <div class="success-icon">&#10003;</div>
     <h2>You're in <span class="italic">good</span> hands.</h2>
     <p>We got everything and we'll be in touch within 1 business day with a real quote &mdash; no fluff, no surprises.</p>
-    <p style="margin-top:16px;font-size:13px;color:var(--text-3)">Questions in the meantime? Email <a href="mailto:shay@franklyfinancial.co" style="color:var(--gold);text-decoration:none;font-weight:500">shay@franklyfinancial.co</a></p>
+    <p style="margin-top:16px;font-size:13px;color:var(--text-3)">Questions in the meantime? Email <a href="mailto:ata@franklyfinancial.co" style="color:var(--gold);text-decoration:none;font-weight:500">ata@franklyfinancial.co</a></p>
+    <div class="success-book" style="margin-top:40px;text-align:left">
+      <h3 style="font-family:'DM Serif Display',serif;font-size:21px;font-weight:400;text-align:center;margin-bottom:6px">Want to skip the back-and-forth?</h3>
+      <p style="text-align:center;margin-bottom:18px">Grab a free 15-minute assessment with Ata right now — pick any time that works.</p>
+      <iframe id="bookFrame" title="Book a free assessment" src="about:blank" style="width:100%;height:640px;border:1px solid var(--border,rgba(0,0,0,.08));border-radius:12px;background:#fff"></iframe>
+    </div>
   </div>
 
 </div><!-- /page -->
@@ -684,13 +689,17 @@ footer p{font-size:.75rem;color:var(--text-3)}
         document.getElementById('intakeForm').style.display = 'none';
         document.getElementById('progressBar').style.width = '100%';
         document.getElementById('successState').style.display = 'block';
+        // Load Ata's Google appointment page only once the lead is captured —
+        // booking happens right here, no second link to chase.
+        document.getElementById('bookFrame').src =
+          'https://calendar.google.com/calendar/appointments/schedules/AcZssZ1GOtmrw3S2NXR1IM7ZPPzOc8zuep_rpSWMlSjvOFP4d3E8DqVo_TMPb0LSvti3kMgRDr1-vgmz?gv=true';
         try { if (window.gtag) gtag('event', 'generate_lead', { form: 'quote' }); } catch (_) {}
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
         throw new Error(result.message || 'Unknown error');
       }
     } catch (err) {
-      alert('Something went wrong. Please email shay@franklyfinancial.co directly.\n\nError: ' + err.message);
+      alert('Something went wrong. Please email ata@franklyfinancial.co directly.\n\nError: ' + err.message);
       btn.disabled = false;
     } finally {
       document.getElementById('loadingOverlay').classList.remove('show');

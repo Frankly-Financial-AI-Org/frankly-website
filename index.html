@@ -742,6 +742,24 @@ body.menu-open { overflow: hidden; }
 }
 
 /* ================= BOOKING MODAL ================= */
+.bk-modal { position: fixed; inset: 0; z-index: 2000; display: none; }
+.bk-modal.open { display: block; }
+.bk-backdrop { position: absolute; inset: 0; background: rgba(20,18,14,.62); backdrop-filter: blur(6px); }
+.bk-card { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);
+  width: min(880px, 94vw); height: min(740px, 92vh); background: #fff; border-radius: 18px;
+  overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 40px 120px rgba(0,0,0,.45); }
+.bk-head { display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 14px 20px; border-bottom: 1px solid rgba(0,0,0,.08); color: #14120e; }
+.bk-head strong { font-size: 15px; font-weight: 600; }
+.bk-head-actions { display: flex; align-items: center; gap: 16px; }
+.bk-head-actions a { font-size: 12px; color: inherit; opacity: .55; text-decoration: underline; }
+.bk-close { border: 0; background: none; font-size: 26px; line-height: 1; cursor: pointer;
+  padding: 2px 6px; color: inherit; }
+.bk-frame { flex: 1; width: 100%; border: 0; background: #fff; }
+body.bk-open { overflow: hidden; }
+@media (max-width: 640px) {
+  .bk-card { width: 100vw; height: 100dvh; border-radius: 0; }
+}
 
 /* ================= REVEAL PRIMS ================= */
 .rv { opacity: 0; transform: translateY(40px); }
@@ -1105,6 +1123,20 @@ html.is-static .rv { opacity: 1 !important; transform: none !important; }
 </footer>
 
 <!-- ============ BOOKING MODAL ============ -->
+<div class="bk-modal" id="bkModal" role="dialog" aria-modal="true" aria-label="Book your free assessment" aria-hidden="true">
+  <div class="bk-backdrop" id="bkBackdrop"></div>
+  <div class="bk-card">
+    <div class="bk-head">
+      <strong>Book your free assessment with Ata</strong>
+      <span class="bk-head-actions">
+        <a id="bkNewTab" href="#" target="_blank" rel="noopener">Open in new tab</a>
+        <button class="bk-close" id="bkClose" aria-label="Close">&times;</button>
+      </span>
+    </div>
+    <iframe class="bk-frame" id="bkFrame" title="Google appointment booking" src="about:blank"></iframe>
+  </div>
+</div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
@@ -1115,7 +1147,7 @@ html.is-static .rv { opacity: 1 !important; transform: none !important; }
 const STATIC  = new URLSearchParams(location.search).has('static');
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches || STATIC;
 const FINE    = matchMedia('(pointer: fine)').matches;
-const CAL_URL = "https://calendar.notion.so/meet/shayfrankly/ye47g3ulh";
+const CAL_URL = "https://calendar.google.com/calendar/appointments/schedules/AcZssZ1GOtmrw3S2NXR1IM7ZPPzOc8zuep_rpSWMlSjvOFP4d3E8DqVo_TMPb0LSvti3kMgRDr1-vgmz?gv=true";
 if (STATIC) document.documentElement.classList.add('is-static');
 
 const hasGSAP = typeof gsap !== 'undefined';
@@ -1514,12 +1546,30 @@ document.getElementById('moSlider').addEventListener('input', e => { state.month
   addEventListener('resize', syncViewport);
 })();
 
-/* booking: Notion Calendar refuses third-party embedding (its
-   frame-ancestors policy only allows app.notion.com), so an in-page
-   iframe can never load it. Booking opens the calendar in a new tab.
-   The calculator-state capture still fires first so the Frankly
-   Pipeline can pair the booking with the lead's quote. */
+/* booking: Ata's Google appointment page allows embedding (?gv=true),
+   so booking happens in an on-page modal — the lead never leaves the
+   site. The calculator-state capture still fires first so the Frankly
+   Pipeline can pair the booking with the lead's quote. The iframe src
+   is set on first open only, so Google Calendar never loads with the
+   page. */
 (function booking() {
+  const modal = document.getElementById('bkModal');
+  const frame = document.getElementById('bkFrame');
+  document.getElementById('bkNewTab').href = CAL_URL;
+  let loaded = false;
+  function openModal() {
+    if (!loaded) { frame.src = CAL_URL; loaded = true; }
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('bk-open');
+    if (lenis) lenis.stop();
+  }
+  function closeModal() {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('bk-open');
+    if (lenis) lenis.start();
+  }
   function bookNow(e) {
     if (e) e.preventDefault();
     try {
@@ -1545,10 +1595,15 @@ document.getElementById('moSlider').addEventListener('input', e => { state.month
       }).catch(err => console.warn('Frankly Pipeline pending-quote call failed (non-blocking)', err));
     } catch (err) { console.warn('Failed to capture pending calculator quote', err); }
     try { if (window.gtag) gtag('event', 'book_click', { page: 'index' }); } catch (_) {}
-    window.open(CAL_URL, '_blank', 'noopener');
+    openModal();
   }
   document.getElementById('bookBtn').addEventListener('click', bookNow);
   document.getElementById('bookBtn2').addEventListener('click', bookNow);
+  document.getElementById('bkClose').addEventListener('click', closeModal);
+  document.getElementById('bkBackdrop').addEventListener('click', closeModal);
+  addEventListener('keydown', e => {
+    if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+  });
 })();
 
 render();
