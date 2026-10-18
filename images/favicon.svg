@@ -1,5 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <rect width="64" height="64" fill="#F4EFE5"/>
-  <text x="14" y="50" font-family="Georgia, 'Times New Roman', serif" font-size="44" font-weight="400" fill="#131311">F</text>
-  <circle cx="44" cy="46" r="4" fill="#B85C38"/>
+  <!-- "F" in Instrument Serif (brand serif), glyph converted to a path -->
+  <g transform="translate(14,50) scale(0.044000,-0.044000)"><path fill="#131311" d="M34 0Q19 0 19 11Q19 20 32 23L55 27Q76 31 82.5 38.0Q89 45 89 66V654Q89 675 82.5 682.0Q76 689 55 693L32 697Q19 700 19 709Q19 720 34 720H356Q379 720 381 697L389 531Q391 514 376 514Q364 514 362 527L357 560Q349 612 329.0 641.0Q309 670 284.0 682.5Q259 695 236 695Q192 695 176.0 681.0Q160 667 160 638V402Q160 388 174 388H209Q253 388 263 435L274 485Q277 498 289 498Q301 498 301 481V256Q301 239 289 239Q277 239 274 252L263 301Q256 336 243.5 347.0Q231 358 208 358H174Q160 358 160 344V71Q160 50 166.5 41.5Q173 33 194 30L241 23Q252 21 252 12Q252 0 237 0Z"/></g>
+  <circle cx="39.0" cy="46" r="4" fill="#B85C38"/>
 </svg>
