@@ -331,6 +331,11 @@ nav .nav-book:hover { background: #fff; color: #000; }
 .logos-head { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
 .logos-head h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(1.6rem, 2.6vw, 2.2rem); line-height: 1.15; letter-spacing: -0.01em; margin-top: 14px; }
 .logos-head h2 em { color: var(--accent); }
+.logos-note { max-width: 34ch; color: var(--ink-muted); font-size: 0.98rem; line-height: 1.55; }
+.logos-more { margin-top: 30px; display: flex; gap: 18px 26px; align-items: baseline; flex-wrap: wrap; }
+.lm-label { font-family: var(--serif); font-style: italic; font-size: 1.35rem; color: var(--accent); white-space: nowrap; }
+.lm-chips { display: flex; flex-wrap: wrap; gap: 10px; flex: 1; min-width: 260px; }
+.lm-chips li { font-size: 0.9rem; line-height: 1; padding: 10px 15px; border: 1px solid var(--rule); border-radius: 999px; color: var(--ink-soft); background: var(--cream-soft); }
 .logos-grid {
   margin-top: 30px; display: grid; grid-template-columns: repeat(6, 1fr);
   border-top: 1px solid var(--rule); border-left: 1px solid var(--rule);
@@ -348,12 +353,20 @@ nav .nav-book:hover { background: #fff; color: #000; }
 .logo-cell .lw.serif { font-family: var(--serif); font-weight: 400; font-size: 1.45rem; letter-spacing: 0; text-align: center; }
 .logo-cell .lw.round { font-family: var(--mono); font-weight: 800; font-size: 1.25rem; }
 .logo-cell .lw.small { font-size: 0.82rem; font-weight: 500; max-width: 9.5em; }
-@media (max-width: 1000px) { .logos-grid { grid-template-columns: repeat(3, 1fr); } }
+.logos-grid--4 { grid-template-columns: repeat(4, 1fr); }
+.logo-more { flex-direction: column; gap: 4px; opacity: 1; background: var(--ink); color: var(--cream); }
+.logo-more:hover, .logo-more:focus-visible { background: var(--accent); }
+.logo-more .lm-big { font-family: var(--serif); font-size: 2.6rem; line-height: 1; }
+.logo-more .lm-small { font-family: var(--mono); font-weight: 800; font-size: 0.66rem; letter-spacing: 0.18em; text-transform: uppercase; }
+@media (max-width: 1000px) { .logos-grid { grid-template-columns: repeat(3, 1fr); } .logos-grid--4 { grid-template-columns: repeat(4, 1fr); } }
 @media (max-width: 760px) {
   .logos { padding: 50px 20px 60px; }
   .logos-group + .logos-group { margin-top: 44px; }
   .logos-grid { grid-template-columns: repeat(2, 1fr); margin-top: 22px; }
   .logo-cell { height: 100px; padding: 14px; opacity: 0.8; }
+  .logos-head { align-items: flex-start; flex-direction: column; gap: 12px; }
+  .lm-label { font-size: 1.2rem; }
+  .lm-chips li { font-size: 0.84rem; padding: 9px 13px; }
   .logo-cell img, .logo-cell svg { height: calc(var(--h, 30px) * 0.82); }
 }
 
@@ -869,7 +882,7 @@ html.is-static .rv { opacity: 1 !important; transform: none !important; }
       <div class="logos-grid rv">
         <a class="logo-cell" href="https://www.shutterstock.com" target="_blank" rel="noopener" aria-label="Shutterstock (opens in a new tab)"><img src="images/logos/shutterstock.svg" alt="Shutterstock" style="--h:26px" width="169" height="26"></a>
         <a class="logo-cell" href="https://www.ada.cx" target="_blank" rel="noopener" aria-label="Ada (opens in a new tab)"><img src="images/logos/ada.svg" alt="Ada" style="--h:30px" width="107" height="30"></a>
-        <a class="logo-cell" href="https://engin8.io" target="_blank" rel="noopener" aria-label="Engin8 (opens in a new tab)"><img src="images/logos/engin8-mark.png" alt="" style="--h:28px" width="58" height="28"><span class="lw round">Engin8</span></a>
+        <a class="logo-cell" href="https://www.spscommerce.com" target="_blank" rel="noopener" aria-label="SPS Commerce (opens in a new tab)"><img src="images/logos/sps-commerce.svg" alt="SPS Commerce" style="--h:46px" width="167" height="46"></a>
         <a class="logo-cell" href="https://carbon6.io" target="_blank" rel="noopener" aria-label="Carbon6 (opens in a new tab)"><svg viewBox="0 0 35 40" style="--h:32px" aria-hidden="true"><path fill="currentColor" d="M34.641 16.674v-6.67L28.866 6.67 25.348 8.7l-2.252-1.3V3.335L17.321 0l-5.776 3.335V7.4L9.293 8.7 5.776 6.67 0 10.005v6.668l3.521 2.033v2.606L0 23.346v6.669l5.776 3.335 3.533-2.04 2.236 1.29v4.066l5.776 3.335 5.775-3.335V32.6l2.236-1.29 3.534 2.04 5.775-3.335v-6.669l-3.521-2.033v-2.606l3.521-2.033Zm-11.55 6.672v4.052l-2.249 1.297-3.521-2.032-3.522 2.032-2.248-1.297v-4.052L8.03 21.313v-2.606l3.521-2.033v-4.07l2.248-1.298 3.522 2.032 3.521-2.032 2.248 1.297v4.071l3.522 2.033v2.606l-3.522 2.033Z"/></svg><span class="lw" style="font-size:1.2rem">Carbon6</span></a>
         <a class="logo-cell" href="https://www.luxyhair.com" target="_blank" rel="noopener" aria-label="Luxy Hair (opens in a new tab)"><img src="images/logos/luxy.png" alt="Luxy Hair" style="--h:30px" width="107" height="30"></a>
         <a class="logo-cell" href="https://www.beautyindustrygroup.com" target="_blank" rel="noopener" aria-label="Beauty Industry Group (opens in a new tab)"><img src="images/logos/big.png" alt="Beauty Industry Group" style="--h:40px" width="104" height="40"></a>
@@ -880,16 +893,25 @@ html.is-static .rv { opacity: 1 !important; transform: none !important; }
       <div class="logos-head">
         <div>
           <span class="sec-label rv">Who we work with</span>
-          <h2 class="rv">Growing businesses that <em>trust us</em> with their numbers.</h2>
+          <h2 class="rv"><em>50+ growing businesses</em> trust us with their numbers.</h2>
         </div>
+        <p class="logos-note rv">A few of the names we can share. Plenty of our clients prefer to keep their books private, so this is far from the full list.</p>
       </div>
-      <div class="logos-grid rv">
+      <div class="logos-grid logos-grid--4 rv">
         <a class="logo-cell" href="https://www.cftcollective.com" target="_blank" rel="noopener" aria-label="Couples &amp; Family Therapy Collective (opens in a new tab)"><img src="images/logos/cft-mark.png" alt="" style="--h:38px" width="43" height="38"><span class="lw small">Couples &amp; Family Therapy Collective</span></a>
         <a class="logo-cell" href="https://www.uplifttherapyformen.com" target="_blank" rel="noopener" aria-label="UpLift Therapy for Men (opens in a new tab)"><img src="images/logos/uplift.png" alt="UpLift Therapy for Men" style="--h:38px" width="144" height="38"></a>
         <div class="logo-cell" aria-label="Astoria Family Office"><span class="lw serif">Astoria<br>Family Office</span></div>
         <a class="logo-cell" href="https://www.pebre.ca" target="_blank" rel="noopener" aria-label="Pebre &amp; Co. (opens in a new tab)"><img src="images/logos/pebre.png" alt="Pebre &amp; Co." style="--h:62px" width="62" height="62"></a>
         <a class="logo-cell" href="https://nailfix6.ca" target="_blank" rel="noopener" aria-label="Nail Fix in the 6ix (opens in a new tab)"><img src="images/logos/nailfix.png" alt="Nail Fix in the 6ix" style="--h:40px" width="119" height="40"></a>
         <a class="logo-cell" href="https://www.loveclosely.com" target="_blank" rel="noopener" aria-label="Love Closely (opens in a new tab)"><img src="images/logos/loveclosely.png" alt="Love Closely" style="--h:17px" width="161" height="17"></a>
+        <a class="logo-cell" href="https://engin8.io" target="_blank" rel="noopener" aria-label="Engin8 (opens in a new tab)"><img src="images/logos/engin8-mark.png" alt="" style="--h:28px" width="58" height="28"><span class="lw round">Engin8</span></a>
+        <a class="logo-cell logo-more" href="#calculator" aria-label="See pricing and join 50+ clients"><span class="lm-big">50+</span><span class="lm-small">clients &amp; counting</span></a>
+      </div>
+      <div class="logos-more rv">
+        <span class="lm-label">And many more, across</span>
+        <ul class="lm-chips">
+          <li>Therapy &amp; wellness practices</li><li>E-commerce &amp; DTC brands</li><li>Restaurants &amp; hospitality</li><li>Construction &amp; trades</li><li>Real estate &amp; development</li><li>Creative &amp; marketing agencies</li><li>Film, media &amp; entertainment</li><li>Family offices &amp; holding companies</li><li>Consulting &amp; professional services</li><li>Apparel &amp; retail</li><li>Food &amp; beverage brands</li><li>Tech &amp; SaaS startups</li><li>Cross-border Canada&ndash;US businesses</li>
+        </ul>
       </div>
     </div>
   </div>
