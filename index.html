@@ -815,6 +815,17 @@ body.menu-open { overflow: hidden; }
 #sbForm input, #sbForm select, #sbForm textarea { font: inherit; font-size: 0.95rem; color: var(--ink); background: var(--cream-soft); border: 1px solid var(--rule); padding: 11px 12px; border-radius: 0; width: 100%; }
 #sbForm input:focus, #sbForm select:focus, #sbForm textarea:focus { outline: 2px solid var(--accent); outline-offset: -1px; border-color: transparent; }
 #sbForm .bad { border-color: var(--accent); background: #fbeee6; }
+.sb-budget { border: 0; margin: 2px 0 16px; padding: 0; }
+.sb-budget legend { font-size: 0.8rem; font-weight: 500; color: var(--ink-soft); margin-bottom: 8px; }
+.sb-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+#sbForm .sb-chips label { display: block; margin: 0; }
+.sb-chips input { position: absolute; opacity: 0; pointer-events: none; }
+.sb-chips span { display: inline-block; padding: 10px 14px; border: 1px solid var(--rule); background: var(--cream-soft); font-size: 0.88rem; color: var(--ink); cursor: pointer; transition: background .2s, color .2s, border-color .2s; }
+.sb-chips label:hover span { border-color: var(--ink-muted); }
+.sb-chips input:checked + span { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+.sb-chips input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+.sb-budget.bad .sb-chips span { border-color: var(--accent); background: #fbeee6; }
+.sb-budget.bad .sb-chips input:checked + span { background: var(--ink); }
 .sb-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0 14px; }
 .sb-hp { position: absolute !important; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .sb-submit { margin-top: 8px; }
@@ -1285,8 +1296,18 @@ html.is-static .rv { opacity: 1 !important; transform: none !important; }
           </select>
         </label>
       </div>
+      <fieldset class="sb-budget">
+        <legend>What could you comfortably spend a month?</legend>
+        <div class="sb-chips">
+          <label><input type="radio" name="budget" value="Under $75 a month" required><span>Under $75</span></label>
+          <label><input type="radio" name="budget" value="$75 to $125 a month"><span>$75&ndash;125</span></label>
+          <label><input type="radio" name="budget" value="$125 to $200 a month"><span>$125&ndash;200</span></label>
+          <label><input type="radio" name="budget" value="$200 to $300 a month"><span>$200&ndash;300</span></label>
+          <label><input type="radio" name="budget" value="Not sure yet"><span>Not sure yet</span></label>
+        </div>
+      </fieldset>
       <label>What does your business do?<input name="business_type" placeholder="e.g. hair studio, Etsy shop, solo consultant" required></label>
-      <label><span>Anything we should know? <i>(optional)</i></span><textarea name="note" rows="3" placeholder="What you need help with, how far behind you are, what you can budget"></textarea></label>
+      <label><span>Anything we should know? <i>(optional)</i></span><textarea name="note" rows="3" placeholder="What you need help with, how far behind you are"></textarea></label>
       <label class="sb-hp" aria-hidden="true">Leave this empty<input name="company_website" tabindex="-1" autocomplete="off"></label>
       <button type="submit" class="sum-cta sb-submit"><span>Send my request →</span><i class="btn-fill"></i></button>
       <p class="sb-err" id="sbErr" role="alert"></p>
@@ -1810,6 +1831,7 @@ document.getElementById('moSlider').addEventListener('input', e => { state.month
   }
   document.querySelectorAll('.js-sb-open').forEach(b => b.addEventListener('click', e => { e.preventDefault(); open(); }));
   modal.querySelectorAll('[data-sb-close]').forEach(b => b.addEventListener('click', close));
+  form.querySelectorAll('input[name=budget]').forEach(r => r.addEventListener('change', () => form.querySelector('.sb-budget').classList.remove('bad')));
   addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('open')) close(); });
   form.addEventListener('submit', async e => {
     e.preventDefault();
@@ -1817,12 +1839,15 @@ document.getElementById('moSlider').addEventListener('input', e => { state.month
     const fd = new FormData(form);
     const v = k => (fd.get(k) || '').toString().trim();
     let bad = null;
+    const budgetSet = form.querySelector('.sb-budget');
+    budgetSet.classList.toggle('bad', !v('budget'));
     ['first_name', 'email', 'revenue_band', 'business_type'].forEach(k => {
       const el = form.elements[k];
       const ok = k === 'email' ? /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v(k)) : !!v(k);
       el.classList.toggle('bad', !ok);
       if (!ok && !bad) bad = el;
     });
+    if (!v('budget') && !bad) bad = budgetSet.querySelector('input');
     if (bad) { err.textContent = 'Please fill in the highlighted fields.'; bad.focus(); return; }
     if (v('company_website')) { form.hidden = true; done.hidden = false; return; }
     submit.disabled = true; submit.querySelector('span').textContent = 'Sending…';
@@ -1832,14 +1857,14 @@ document.getElementById('moSlider').addEventListener('input', e => { state.month
         body: JSON.stringify({
           small_business_rate: true,
           first_name: v('first_name'), email: v('email'), phone: v('phone'),
-          revenue_band: v('revenue_band'), business_type: v('business_type'), note: v('note'),
+          revenue_band: v('revenue_band'), budget: v('budget'), business_type: v('business_type'), note: v('note'),
           page: 'index',
         }),
       });
       if (!res.ok) throw new Error('status ' + res.status);
       document.getElementById('sbName').textContent = v('first_name');
       form.hidden = true; done.hidden = false; done.querySelector('button').focus();
-      try { if (window.gtag) gtag('event', 'small_biz_rate_submit', { revenue_band: v('revenue_band') }); } catch (_) {}
+      try { if (window.gtag) gtag('event', 'small_biz_rate_submit', { revenue_band: v('revenue_band'), budget: v('budget') }); } catch (_) {}
     } catch (ex) {
       err.innerHTML = 'That didn\'t go through. Please try again, or email <a href="mailto:hello@franklyfinancial.co?subject=Small%20business%20rate">hello@franklyfinancial.co</a>.';
     } finally {

@@ -155,6 +155,7 @@ exports.handler = async (event) => {
       phone: clip(raw.phone, 40),
       business_type: clip(raw.business_type, 120),
       revenue_band: clip(raw.revenue_band, 60),
+      budget: clip(raw.budget, 60),
       note: clip(raw.note, 600),
       calculator_url:
         event.headers.referer || event.headers.Referer || "index",
