@@ -324,6 +324,39 @@ nav .nav-book:hover { background: #fff; color: #000; }
 .marquee-row .accent { color: var(--accent); font-style: italic; }
 .marquee-row .sep { color: var(--accent); font-size: 0.5em; transform: translateY(-0.4em); }
 
+/* ================= LOGOS (proof) ================= */
+.logos { padding: 70px 40px 90px; border-top: 1px solid var(--rule); scroll-margin-top: 40px; }
+.logos-inner { max-width: 1240px; margin: 0 auto; }
+.logos-group + .logos-group { margin-top: 64px; }
+.logos-head { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+.logos-head h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(1.6rem, 2.6vw, 2.2rem); line-height: 1.15; letter-spacing: -0.01em; margin-top: 14px; }
+.logos-head h2 em { color: var(--accent); }
+.logos-grid {
+  margin-top: 30px; display: grid; grid-template-columns: repeat(6, 1fr);
+  border-top: 1px solid var(--rule); border-left: 1px solid var(--rule);
+}
+.logo-cell {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  height: 128px; padding: 18px 22px; text-decoration: none; color: var(--ink);
+  border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+  opacity: 0.68; transition: opacity .35s var(--ease), background-color .35s var(--ease);
+}
+.logo-cell:hover, .logo-cell:focus-visible { opacity: 1; background: var(--cream-soft); }
+.logo-cell:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.logo-cell img, .logo-cell svg { height: var(--h, 30px); width: auto; max-width: 100%; object-fit: contain; flex: none; }
+.logo-cell .lw { font-family: var(--sans); font-weight: 600; font-size: 1rem; line-height: 1.15; letter-spacing: -0.01em; }
+.logo-cell .lw.serif { font-family: var(--serif); font-weight: 400; font-size: 1.45rem; letter-spacing: 0; text-align: center; }
+.logo-cell .lw.round { font-family: var(--mono); font-weight: 800; font-size: 1.25rem; }
+.logo-cell .lw.small { font-size: 0.82rem; font-weight: 500; max-width: 9.5em; }
+@media (max-width: 1000px) { .logos-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 760px) {
+  .logos { padding: 50px 20px 60px; }
+  .logos-group + .logos-group { margin-top: 44px; }
+  .logos-grid { grid-template-columns: repeat(2, 1fr); margin-top: 22px; }
+  .logo-cell { height: 100px; padding: 14px; opacity: 0.8; }
+  .logo-cell img, .logo-cell svg { height: calc(var(--h, 30px) * 0.82); }
+}
+
 /* ================= ABOUT ================= */
 .about { padding: 180px 40px; position: relative; }
 .about-inner { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.5fr; gap: 90px; align-items: start; }
@@ -781,6 +814,7 @@ html.is-static .rv { opacity: 1 !important; transform: none !important; }
   <a href="#top" class="nav-logo">Frankly<span class="dot">.</span></a>
   <div class="nav-links">
     <a href="#about" data-cursor="Go">What we do</a>
+    <a href="#clients" data-cursor="Go">Clients</a>
     <a href="#how" data-cursor="Go">How it works</a>
     <a href="#calculator" data-cursor="Go">Pricing</a>
     <a href="/blog/" data-cursor="Read">Blog</a>
@@ -795,6 +829,7 @@ html.is-static .rv { opacity: 1 !important; transform: none !important; }
 <div class="mobile-menu" id="mobileMenu">
   <span class="mm-label">Menu</span>
   <a href="#about">What we do</a>
+  <a href="#clients">Clients</a>
   <a href="#how">How it works</a>
   <a href="#calculator">Pricing</a>
   <a href="/blog/">Blog</a>
@@ -820,6 +855,45 @@ html.is-static .rv { opacity: 1 !important; transform: none !important; }
   </div>
   <div class="hero-scroll-hint"><span class="line"></span> Scroll: the books get better</div>
 </header>
+
+<!-- ============ LOGOS (who we've worked with) ============ -->
+<section class="logos" id="clients" data-bg="cream" aria-labelledby="logosH1">
+  <div class="logos-inner">
+    <div class="logos-group">
+      <div class="logos-head">
+        <div>
+          <span class="sec-label rv">Where we've worked</span>
+          <h2 class="rv" id="logosH1">Finance experience from <em>companies you know.</em></h2>
+        </div>
+      </div>
+      <div class="logos-grid rv">
+        <a class="logo-cell" href="https://www.shutterstock.com" target="_blank" rel="noopener" aria-label="Shutterstock (opens in a new tab)"><img src="images/logos/shutterstock.svg" alt="Shutterstock" style="--h:26px" width="169" height="26"></a>
+        <a class="logo-cell" href="https://www.ada.cx" target="_blank" rel="noopener" aria-label="Ada (opens in a new tab)"><img src="images/logos/ada.svg" alt="Ada" style="--h:30px" width="107" height="30"></a>
+        <a class="logo-cell" href="https://engin8.io" target="_blank" rel="noopener" aria-label="Engin8 (opens in a new tab)"><img src="images/logos/engin8-mark.png" alt="" style="--h:28px" width="58" height="28"><span class="lw round">Engin8</span></a>
+        <a class="logo-cell" href="https://carbon6.io" target="_blank" rel="noopener" aria-label="Carbon6 (opens in a new tab)"><svg viewBox="0 0 35 40" style="--h:32px" aria-hidden="true"><path fill="currentColor" d="M34.641 16.674v-6.67L28.866 6.67 25.348 8.7l-2.252-1.3V3.335L17.321 0l-5.776 3.335V7.4L9.293 8.7 5.776 6.67 0 10.005v6.668l3.521 2.033v2.606L0 23.346v6.669l5.776 3.335 3.533-2.04 2.236 1.29v4.066l5.776 3.335 5.775-3.335V32.6l2.236-1.29 3.534 2.04 5.775-3.335v-6.669l-3.521-2.033v-2.606l3.521-2.033Zm-11.55 6.672v4.052l-2.249 1.297-3.521-2.032-3.522 2.032-2.248-1.297v-4.052L8.03 21.313v-2.606l3.521-2.033v-4.07l2.248-1.298 3.522 2.032 3.521-2.032 2.248 1.297v4.071l3.522 2.033v2.606l-3.522 2.033Z"/></svg><span class="lw" style="font-size:1.2rem">Carbon6</span></a>
+        <a class="logo-cell" href="https://www.luxyhair.com" target="_blank" rel="noopener" aria-label="Luxy Hair (opens in a new tab)"><img src="images/logos/luxy.png" alt="Luxy Hair" style="--h:30px" width="107" height="30"></a>
+        <a class="logo-cell" href="https://www.beautyindustrygroup.com" target="_blank" rel="noopener" aria-label="Beauty Industry Group (opens in a new tab)"><img src="images/logos/big.png" alt="Beauty Industry Group" style="--h:40px" width="104" height="40"></a>
+      </div>
+    </div>
+
+    <div class="logos-group">
+      <div class="logos-head">
+        <div>
+          <span class="sec-label rv">Who we work with</span>
+          <h2 class="rv">Growing businesses that <em>trust us</em> with their numbers.</h2>
+        </div>
+      </div>
+      <div class="logos-grid rv">
+        <a class="logo-cell" href="https://www.cftcollective.com" target="_blank" rel="noopener" aria-label="Couples &amp; Family Therapy Collective (opens in a new tab)"><img src="images/logos/cft-mark.png" alt="" style="--h:38px" width="43" height="38"><span class="lw small">Couples &amp; Family Therapy Collective</span></a>
+        <a class="logo-cell" href="https://www.uplifttherapyformen.com" target="_blank" rel="noopener" aria-label="UpLift Therapy for Men (opens in a new tab)"><img src="images/logos/uplift.png" alt="UpLift Therapy for Men" style="--h:38px" width="144" height="38"></a>
+        <div class="logo-cell" aria-label="Astoria Family Office"><span class="lw serif">Astoria<br>Family Office</span></div>
+        <a class="logo-cell" href="https://www.pebre.ca" target="_blank" rel="noopener" aria-label="Pebre &amp; Co. (opens in a new tab)"><img src="images/logos/pebre.png" alt="Pebre &amp; Co." style="--h:62px" width="62" height="62"></a>
+        <a class="logo-cell" href="https://nailfix6.ca" target="_blank" rel="noopener" aria-label="Nail Fix in the 6ix (opens in a new tab)"><img src="images/logos/nailfix.png" alt="Nail Fix in the 6ix" style="--h:40px" width="119" height="40"></a>
+        <a class="logo-cell" href="https://www.loveclosely.com" target="_blank" rel="noopener" aria-label="Love Closely (opens in a new tab)"><img src="images/logos/loveclosely.png" alt="Love Closely" style="--h:17px" width="161" height="17"></a>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- ============ MARQUEE ============ -->
 <section class="marquee-band" aria-hidden="true" data-bg="cream">
