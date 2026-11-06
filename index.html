@@ -635,17 +635,6 @@ body.wiz-open { overflow: hidden; }
 .quote-wiz.on-last .qw-foot { justify-content: flex-start; }
 
 /* ================= INDUSTRIES ================= */
-.industries { padding: 130px 40px; border-top: 1px solid var(--rule); }
-.ind-inner { max-width: 1240px; margin: 0 auto; }
-.ind-words { margin-top: 44px; font-family: var(--serif); font-size: clamp(1.9rem, 4.2vw, 3.6rem); line-height: 1.4; letter-spacing: -0.02em; max-width: 24ch_; }
-.ind-words .iw { display: inline-block; position: relative; margin-right: 0.55em; transition: color 0.25s ease; }
-.ind-words .iw::after {
-  content: ''; position: absolute; left: 0; bottom: 0.04em; height: 2px; width: 100%;
-  background: var(--accent); transform: scaleX(0); transform-origin: 0 50%; transition: transform 0.4s var(--ease);
-}
-.ind-words .iw:hover { color: var(--accent); font-style: italic; }
-.ind-words .iw:hover::after { transform: scaleX(1); }
-.ind-words .amp { color: var(--rule); margin-right: 0.55em; }
 
 /* ================= TEAM ================= */
 .team { padding: 170px 40px; position: relative; }
@@ -789,8 +778,6 @@ body.menu-open { overflow: hidden; }
   .numbers { padding: 90px 20px; }
   .numbers-grid { margin-top: 40px; gap: 28px; }
   .calc { padding: 90px 20px; }
-  .industries { padding: 80px 20px; }
-  .ind-words { margin-top: 24px; }
   .team { padding: 90px 20px; }
   .team-grid { margin-top: 44px; gap: 44px; }
   .final { padding: 110px 20px 90px; }
@@ -920,7 +907,7 @@ html.is-static .rv { opacity: 1 !important; transform: none !important; }
       <div class="logos-more rv">
         <span class="lm-label">And many more, across</span>
         <ul class="lm-chips">
-          <li>Therapy &amp; wellness practices</li><li>E-commerce &amp; DTC brands</li><li>Restaurants &amp; hospitality</li><li>Construction &amp; trades</li><li>Real estate &amp; development</li><li>Creative &amp; marketing agencies</li><li>Film, media &amp; entertainment</li><li>Family offices &amp; holding companies</li><li>Consulting &amp; professional services</li><li>Apparel &amp; retail</li><li>Food &amp; beverage brands</li><li>Tech &amp; SaaS startups</li><li>Cross-border Canada&ndash;US businesses</li>
+          <li>Healthcare &amp; therapy practices</li><li>Law firms</li><li>E-commerce &amp; DTC brands</li><li>Restaurants &amp; hospitality</li><li>Construction &amp; trades</li><li>Real estate &amp; development</li><li>Creative &amp; marketing agencies</li><li>Film, media &amp; entertainment</li><li>Family offices &amp; holding companies</li><li>Consulting &amp; professional services</li><li>Apparel &amp; retail</li><li>Food &amp; beverage brands</li><li>Tech &amp; SaaS startups</li><li>Cross-border Canada&ndash;US businesses</li>
         </ul>
       </div>
     </div>
@@ -1128,25 +1115,6 @@ html.is-static .rv { opacity: 1 !important; transform: none !important; }
     <button class="qw-next" id="qwNext">Next →</button>
   </div>
 </div>
-
-<!-- ============ INDUSTRIES ============ -->
-<section class="industries" data-bg="cream">
-  <div class="ind-inner">
-    <span class="sec-label rv">Built for</span>
-    <p class="ind-words rv" id="indWords">
-      <span class="iw">Healthcare practices</span><span class="amp">·</span>
-      <span class="iw">Law firms</span><span class="amp">·</span>
-      <span class="iw">Construction &amp; trades</span><span class="amp">·</span>
-      <span class="iw">Design studios</span><span class="amp">·</span>
-      <span class="iw">E-commerce brands</span><span class="amp">·</span>
-      <span class="iw">Agencies</span><span class="amp">·</span>
-      <span class="iw">Therapy practices</span><span class="amp">·</span>
-      <span class="iw">Restaurants</span><span class="amp">·</span>
-      <span class="iw">SaaS &amp; tech</span><span class="amp">·</span>
-      <span class="iw">Consultancies</span>
-    </p>
-  </div>
-</section>
 
 <!-- ============ TEAM ============ -->
 <section class="team" id="team" data-bg="deep">
