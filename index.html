@@ -679,6 +679,16 @@ body.wiz-open { overflow: hidden; }
 .fn .fn-label { font-family: var(--mono); font-weight: 800; font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); }
 .fn h3 { font-family: var(--serif); font-weight: 400; font-size: 1.7rem; letter-spacing: -0.02em; margin: 12px 0 10px; }
 .fn p { color: var(--ink-soft); font-size: 0.98rem; line-height: 1.7; }
+.partner { display: flex; gap: 16px; align-items: flex-start; margin-top: 22px; padding-top: 20px; border-top: 1px dashed var(--rule); text-decoration: none; color: inherit; }
+.partner img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; flex: none; filter: grayscale(1) contrast(1.05); transition: filter .5s ease; }
+.partner:hover img { filter: grayscale(0.15) sepia(0.12); }
+.partner .pt-body { display: flex; flex-direction: column; }
+.partner .pt-kicker { font-family: var(--mono); font-weight: 800; font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-muted); }
+.partner .pt-name { font-family: var(--serif); font-size: 1.3rem; line-height: 1.2; margin-top: 4px; }
+.partner .pt-cred { font-family: var(--sans); font-size: 0.72rem; font-weight: 500; color: var(--ink-muted); letter-spacing: 0.04em; margin-left: 4px; }
+.partner .pt-bio { color: var(--ink-soft); font-size: 0.88rem; line-height: 1.6; margin-top: 6px; }
+.partner .pt-link { font-family: var(--mono); font-weight: 800; font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-top: 8px; align-self: flex-start; border-bottom: 1px solid transparent; transition: border-color .2s; }
+.partner:hover .pt-link { border-color: var(--accent); }
 .member .cred {
   display: inline-block; margin-top: 14px;
   font-family: var(--mono); font-weight: 800; font-size: 0.64rem; letter-spacing: 0.14em; text-transform: uppercase;
@@ -1161,6 +1171,15 @@ html.is-static .rv { opacity: 1 !important; transform: none !important; }
           <span class="fn-label">Function 02 · Tax</span>
           <h3>Filing season, all year round.</h3>
           <p>Over a decade of corporate and personal tax experience on both sides of the border, sharpened at Big Four accounting firms. Canadian T2s and US 1120s, T1s and 1040s, HST/GST and state sales tax, CRA and IRS correspondence, trusts and estates, and cross-border Canada–US filings, planned through the year, not scrambled in April.</p>
+          <a class="partner" href="https://www.linkedin.com/in/caguptaudit/" target="_blank" rel="noopener" data-cursor="LinkedIn" aria-label="Udit Gupta on LinkedIn (opens in a new tab)">
+            <img src="images/udit.jpg" alt="Udit Gupta" width="64" height="64" loading="lazy">
+            <span class="pt-body">
+              <span class="pt-kicker">Our in-house tax partner</span>
+              <span class="pt-name">Udit Gupta <span class="pt-cred">CA, CPA</span></span>
+              <span class="pt-bio">A Chartered Accountant and CPA who has completed CPA Canada's In-Depth Tax Course. Udit leads our corporate and personal returns, HST/GST and CRA reviews, working alongside the team that keeps your books.</span>
+              <span class="pt-link">LinkedIn ↗</span>
+            </span>
+          </a>
         </div>
       </div>
     </div>
