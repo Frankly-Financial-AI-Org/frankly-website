@@ -785,6 +785,49 @@ body.menu-open { overflow: hidden; }
 }
 
 /* ================= BOOKING MODAL ================= */
+/* ---------- small business rate ---------- */
+.sum-sb { display: block; width: 100%; margin-top: 16px; padding-top: 14px; border-top: 1px dashed rgba(244,239,229,0.2); text-align: center; font-size: 0.84rem; color: #E9A27F; text-decoration: underline; text-underline-offset: 3px; }
+.sum-sb:hover { color: var(--cream); }
+.sb-strip { margin-top: 56px; display: grid; grid-template-columns: auto 1fr auto; gap: 30px; align-items: center; padding: 30px 36px; border: 1.5px dashed var(--accent); background: var(--cream-soft); position: relative; }
+.sb-stamp { width: 96px; height: 96px; border-radius: 50%; border: 2px solid var(--accent); display: grid; place-items: center; transform: rotate(-12deg); outline: 1px solid var(--accent); outline-offset: 4px; }
+.sb-stamp span { font-family: var(--mono); font-weight: 800; font-size: 0.66rem; line-height: 1.25; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); text-align: center; }
+.sb-copy h3 { font-family: var(--serif); font-weight: 400; font-size: clamp(1.5rem, 2.4vw, 2rem); line-height: 1.15; letter-spacing: -0.01em; }
+.sb-copy h3 em { color: var(--accent); }
+.sb-copy p { margin-top: 8px; color: var(--ink-soft); font-size: 0.98rem; line-height: 1.6; max-width: 58ch; }
+.sb-btn { white-space: nowrap; }
+@media (max-width: 960px) {
+  .sb-strip { grid-template-columns: 1fr; gap: 18px; padding: 26px 22px; margin-top: 30px; }
+  .sb-stamp { width: 78px; height: 78px; position: absolute; top: -26px; right: 14px; background: var(--cream); }
+  .sb-stamp span { font-size: 0.56rem; }
+  .sb-copy { padding-right: 70px; }
+  .sb-btn { width: 100%; text-align: center; white-space: normal; }
+}
+.sb-modal { position: fixed; inset: 0; z-index: 2000; display: none; }
+.sb-modal.open { display: block; }
+.sb-backdrop { position: absolute; inset: 0; background: rgba(20,18,14,.62); backdrop-filter: blur(6px); }
+.sb-card { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: min(620px, 94vw); max-height: 92vh; overflow-y: auto; background: var(--cream); color: var(--ink); padding: 40px 42px 30px; box-shadow: 0 40px 120px rgba(0,0,0,.45); }
+.sb-x { position: absolute; top: 12px; right: 16px; font-size: 28px; line-height: 1; padding: 4px 8px; color: var(--ink-muted); }
+.sb-card h3 { font-family: var(--serif); font-weight: 400; font-size: 2rem; line-height: 1.1; letter-spacing: -0.02em; margin-top: 14px; }
+.sb-card h3 em { color: var(--accent); }
+.sb-lede { color: var(--ink-soft); font-size: 0.96rem; line-height: 1.6; margin: 10px 0 22px; }
+#sbForm label { display: flex; flex-direction: column; gap: 6px; font-size: 0.8rem; font-weight: 500; color: var(--ink-soft); margin-bottom: 14px; }
+#sbForm label i { font-style: normal; color: var(--ink-muted); font-weight: 400; }
+#sbForm input, #sbForm select, #sbForm textarea { font: inherit; font-size: 0.95rem; color: var(--ink); background: var(--cream-soft); border: 1px solid var(--rule); padding: 11px 12px; border-radius: 0; width: 100%; }
+#sbForm input:focus, #sbForm select:focus, #sbForm textarea:focus { outline: 2px solid var(--accent); outline-offset: -1px; border-color: transparent; }
+#sbForm .bad { border-color: var(--accent); background: #fbeee6; }
+.sb-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0 14px; }
+.sb-hp { position: absolute !important; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.sb-submit { margin-top: 8px; }
+.sb-submit[disabled] { opacity: .6; pointer-events: none; }
+.sb-err { color: var(--accent-deep); font-size: 0.86rem; margin-top: 10px; min-height: 1em; }
+.sb-fine { font-size: 0.76rem; color: var(--ink-muted); text-align: center; margin-top: 6px; }
+.sb-fine a { color: inherit; }
+.sb-done .btn { margin-top: 6px; }
+body.sb-open { overflow: hidden; }
+@media (max-width: 640px) {
+  .sb-card { width: 100vw; height: 100dvh; max-height: none; padding: 34px 20px 26px; }
+  .sb-row { grid-template-columns: 1fr; }
+}
 .bk-modal { position: fixed; inset: 0; z-index: 2000; display: none; }
 .bk-modal.open { display: block; }
 .bk-backdrop { position: absolute; inset: 0; background: rgba(20,18,14,.62); backdrop-filter: blur(6px); }
@@ -1089,6 +1132,7 @@ html.is-static .rv { opacity: 1 !important; transform: none !important; }
           <button class="sum-cta" id="bookBtn" data-cursor="Book"><span>Book 30 min with Frankly →</span><i class="btn-fill"></i></button>
           <p class="sum-note">This is a starting point. Final scope locks in on the call.</p>
           <a class="sum-alt" href="/quote" data-cursor="Email">Not ready for a call? Get your quote by email →</a>
+          <button type="button" class="sum-sb js-sb-open">Too much right now? Ask for our small business rate →</button>
         </aside>
       </div>
     </div>
@@ -1096,6 +1140,15 @@ html.is-static .rv { opacity: 1 !important; transform: none !important; }
     <div class="calc-launch rv">
       <p class="cl-meta">4 quick questions · about a minute</p>
       <button class="btn btn-solid cl-btn" id="wizOpen"><span>Build your quote →</span><i class="btn-fill"></i></button>
+    </div>
+
+    <div class="sb-strip rv">
+      <div class="sb-stamp" aria-hidden="true"><span>Small<br>biz<br>rate</span></div>
+      <div class="sb-copy">
+        <h3>Small business, <em>tight budget?</em> We've been there.</h3>
+        <p>Just starting out, or the numbers above don't fit yet? Tell us where you're at and Ata will put together a rate that works for you. No judgement, no catch.</p>
+      </div>
+      <button type="button" class="btn btn-solid sb-btn js-sb-open" data-cursor="Ask"><span>Ask for the small business rate →</span><i class="btn-fill"></i></button>
     </div>
   </div>
 </section>
@@ -1207,6 +1260,47 @@ html.is-static .rv { opacity: 1 !important; transform: none !important; }
 </footer>
 
 <!-- ============ BOOKING MODAL ============ -->
+<div class="sb-modal" id="sbModal" role="dialog" aria-modal="true" aria-labelledby="sbTitle" aria-hidden="true">
+  <div class="sb-backdrop" data-sb-close></div>
+  <div class="sb-card" data-lenis-prevent>
+    <button type="button" class="sb-x" data-sb-close aria-label="Close">&times;</button>
+    <form id="sbForm" novalidate>
+      <span class="sec-label">Small business rate</span>
+      <h3 id="sbTitle">Let's find a number that <em>works.</em></h3>
+      <p class="sb-lede">A few details and Ata will reply within one business day with a rate that fits where your business is today.</p>
+      <div class="sb-row">
+        <label>First name<input name="first_name" autocomplete="given-name" required></label>
+        <label>Email<input name="email" type="email" autocomplete="email" required></label>
+      </div>
+      <div class="sb-row">
+        <label><span>Phone <i>(optional)</i></span><input name="phone" type="tel" autocomplete="tel"></label>
+        <label>Monthly revenue
+          <select name="revenue_band" required>
+            <option value="">Choose one</option>
+            <option>Not making revenue yet</option>
+            <option>Under $5k a month</option>
+            <option>$5k to $15k a month</option>
+            <option>$15k to $40k a month</option>
+            <option>Over $40k a month</option>
+          </select>
+        </label>
+      </div>
+      <label>What does your business do?<input name="business_type" placeholder="e.g. hair studio, Etsy shop, solo consultant" required></label>
+      <label><span>Anything we should know? <i>(optional)</i></span><textarea name="note" rows="3" placeholder="What you need help with, how far behind you are, what you can budget"></textarea></label>
+      <label class="sb-hp" aria-hidden="true">Leave this empty<input name="company_website" tabindex="-1" autocomplete="off"></label>
+      <button type="submit" class="sum-cta sb-submit"><span>Send my request →</span><i class="btn-fill"></i></button>
+      <p class="sb-err" id="sbErr" role="alert"></p>
+      <p class="sb-fine">We only use this to reply to you. <a href="/termsofservice" target="_blank" rel="noopener">How we handle data</a></p>
+    </form>
+    <div class="sb-done" id="sbDone" hidden>
+      <span class="sec-label">Request sent</span>
+      <h3>Got it, <em id="sbName">thanks</em>.</h3>
+      <p class="sb-lede">Ata will be in touch within one business day with a rate that fits. Keep an eye on your inbox.</p>
+      <button type="button" class="btn btn-solid" data-sb-close><span>Back to the site</span><i class="btn-fill"></i></button>
+    </div>
+  </div>
+</div>
+
 <div class="bk-modal" id="bkModal" role="dialog" aria-modal="true" aria-label="Book your free assessment" aria-hidden="true">
   <div class="bk-backdrop" id="bkBackdrop"></div>
   <div class="bk-card">
@@ -1687,6 +1781,70 @@ document.getElementById('moSlider').addEventListener('input', e => { state.month
   document.getElementById('bkBackdrop').addEventListener('click', closeModal);
   addEventListener('keydown', e => {
     if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+  });
+})();
+
+/* small business rate: an ask, not a quote. Sends to the same pipeline
+   webhook with small_business_rate=true, so the lead lands with the team
+   and the first reply acknowledges the ask instead of quoting tier prices. */
+(function smallBizRate() {
+  const modal = document.getElementById('sbModal');
+  const form = document.getElementById('sbForm');
+  const done = document.getElementById('sbDone');
+  const err = document.getElementById('sbErr');
+  const submit = form.querySelector('.sb-submit');
+  let lastFocus = null;
+  function open() {
+    lastFocus = document.activeElement;
+    modal.classList.add('open'); modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('sb-open');
+    if (typeof lenis !== 'undefined' && lenis) lenis.stop();
+    setTimeout(() => { const f = form.hidden ? done.querySelector('button') : form.querySelector('input'); if (f) f.focus(); }, 30);
+    try { if (window.gtag) gtag('event', 'small_biz_rate_open'); } catch (_) {}
+  }
+  function close() {
+    modal.classList.remove('open'); modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('sb-open');
+    if (typeof lenis !== 'undefined' && lenis) lenis.start();
+    if (lastFocus) lastFocus.focus();
+  }
+  document.querySelectorAll('.js-sb-open').forEach(b => b.addEventListener('click', e => { e.preventDefault(); open(); }));
+  modal.querySelectorAll('[data-sb-close]').forEach(b => b.addEventListener('click', close));
+  addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('open')) close(); });
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    err.textContent = '';
+    const fd = new FormData(form);
+    const v = k => (fd.get(k) || '').toString().trim();
+    let bad = null;
+    ['first_name', 'email', 'revenue_band', 'business_type'].forEach(k => {
+      const el = form.elements[k];
+      const ok = k === 'email' ? /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v(k)) : !!v(k);
+      el.classList.toggle('bad', !ok);
+      if (!ok && !bad) bad = el;
+    });
+    if (bad) { err.textContent = 'Please fill in the highlighted fields.'; bad.focus(); return; }
+    if (v('company_website')) { form.hidden = true; done.hidden = false; return; }
+    submit.disabled = true; submit.querySelector('span').textContent = 'Sending…';
+    try {
+      const res = await fetch('/.netlify/functions/calculator-webhook', {
+        method: 'POST', headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({
+          small_business_rate: true,
+          first_name: v('first_name'), email: v('email'), phone: v('phone'),
+          revenue_band: v('revenue_band'), business_type: v('business_type'), note: v('note'),
+          page: 'index',
+        }),
+      });
+      if (!res.ok) throw new Error('status ' + res.status);
+      document.getElementById('sbName').textContent = v('first_name');
+      form.hidden = true; done.hidden = false; done.querySelector('button').focus();
+      try { if (window.gtag) gtag('event', 'small_biz_rate_submit', { revenue_band: v('revenue_band') }); } catch (_) {}
+    } catch (ex) {
+      err.innerHTML = 'That didn\'t go through. Please try again, or email <a href="mailto:hello@franklyfinancial.co?subject=Small%20business%20rate">hello@franklyfinancial.co</a>.';
+    } finally {
+      submit.disabled = false; submit.querySelector('span').textContent = 'Send my request →';
+    }
   });
 })();
 

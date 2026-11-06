@@ -143,6 +143,24 @@ exports.handler = async (event) => {
     };
   }
 
+  // Homepage "Small business rate" form (Nov 6 2026): an ask for a lower
+  // rate, not a quote. Forward only what the lead typed, flagged, so the
+  // pipeline skips the standard price and the first reply acknowledges it.
+  if (raw.small_business_rate) {
+    const clip = (v, n) => String(v || "").trim().slice(0, n);
+    return forward(secret, {
+      small_business_rate: true,
+      email: clip(raw.email, 200),
+      first_name: clip(raw.first_name, 80),
+      phone: clip(raw.phone, 40),
+      business_type: clip(raw.business_type, 120),
+      revenue_band: clip(raw.revenue_band, 60),
+      note: clip(raw.note, 600),
+      calculator_url:
+        event.headers.referer || event.headers.Referer || "index",
+    });
+  }
+
   // Translate quote.html's flat form fields into the pipeline's payload schema.
   const txn = parseTxnBand(raw.monthly_transactions);
   const payload = {
