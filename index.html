@@ -403,48 +403,6 @@ nav .nav-book:hover { background: #fff; color: #000; }
 .about-body .no-list { font-family: var(--serif); font-size: 1.35rem; color: var(--cream); margin-top: 34px; line-height: 1.5; }
 .about-body .no-list s { text-decoration-color: var(--accent); text-decoration-thickness: 2px; }
 
-/* ================= HOW (pinned horizontal) ================= */
-.how { position: relative; background: transparent; }
-.how-head { max-width: 1240px; margin: 0 auto; padding: 140px 40px 60px; }
-.how-title {
-  font-family: var(--serif); font-size: clamp(2.6rem, 5.5vw, 4.6rem);
-  line-height: 0.98; letter-spacing: -0.03em; max-width: 18ch; margin-top: 26px;
-}
-.how-title em { color: var(--accent); }
-.how-track-wrap { overflow: hidden; }
-.how-track { display: flex; width: max-content; }
-.how-panel {
-  width: 66vw; min-width: 620px; max-width: 900px;
-  padding: 40px 40px 120px;
-  flex-shrink: 0;
-  display: grid; grid-template-columns: auto 1fr; gap: 40px; align-items: start;
-}
-.how-num {
-  font-family: var(--serif); font-style: italic;
-  font-size: clamp(6rem, 12vw, 11rem); line-height: 0.8;
-  color: transparent; -webkit-text-stroke: 2px var(--accent);
-}
-.how-panel h3 { font-family: var(--serif); font-weight: 400; font-size: 2rem; letter-spacing: -0.02em; margin-bottom: 16px; }
-.how-panel p { color: var(--ink-soft); font-size: 1.05rem; line-height: 1.7; max-width: 38ch; }
-.how-panel .tagline { margin-top: 22px; font-family: var(--mono); font-size: 0.66rem; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); }
-.how-progress { max-width: 1240px; margin: 0 auto; padding: 0 40px 120px; }
-.how-progress .bar { height: 1.5px; background: var(--rule); position: relative; }
-.how-progress .bar .fill { position: absolute; inset: 0; background: var(--accent); transform-origin: 0 50%; transform: scaleX(0); }
-@media (min-width: 961px) {
-  /* fill the pinned viewport: center the whole block vertically instead of
-     leaving a dead band under the progress bar */
-  .how { min-height: 96vh; display: flex; flex-direction: column; justify-content: center; }
-  .how-head { width: 100%; padding: 60px 40px 46px; }
-  .how-panel { padding: 40px 40px 80px; }
-  .how-progress { width: 100%; padding: 0 40px 60px; }
-}
-@media (max-width: 960px) {
-  .how-head { padding: 90px 20px 36px; }
-  .how-track { flex-direction: column; width: auto; }
-  .how-panel { width: auto; min-width: 0; padding: 36px 20px; grid-template-columns: 1fr; gap: 16px; }
-  .how-progress { padding: 0 20px 70px; }
-}
-
 /* ================= NUMBERS (dark) ================= */
 .numbers { padding: 170px 40px; color: var(--cream); position: relative; }
 .numbers-inner { max-width: 1240px; margin: 0 auto; }
@@ -1014,7 +972,6 @@ html.is-static .rv { opacity: 1 !important; transform: none !important; }
   <div class="nav-links">
     <a href="#about" data-cursor="Go">What we do</a>
     <a href="#clients" data-cursor="Go">Clients</a>
-    <a href="#how" data-cursor="Go">How it works</a>
     <a href="#calculator" data-cursor="Go">Pricing</a>
     <a href="/blog/" data-cursor="Read">Blog</a>
     <a href="#team" data-cursor="Go">Team</a>
@@ -1029,7 +986,6 @@ html.is-static .rv { opacity: 1 !important; transform: none !important; }
   <span class="mm-label">Menu</span>
   <a href="#about">What we do</a>
   <a href="#clients">Clients</a>
-  <a href="#how">How it works</a>
   <a href="#calculator">Pricing</a>
   <a href="/blog/">Blog</a>
   <a href="#team">Team</a>
@@ -1044,7 +1000,7 @@ html.is-static .rv { opacity: 1 !important; transform: none !important; }
     <p class="hero-sub rv">Real humans. Real numbers. <em>Real answers.</em> Delivered monthly. CFO-grade rigour, no CFO-grade invoice.</p>
     <div class="hero-actions rv">
       <a href="#calculator" class="btn btn-solid" data-qz-open data-cursor="Build"><span>Book your quote →</span><i class="btn-fill"></i></a>
-      <a href="#how" class="btn btn-ghost" data-cursor="Peek"><span>How it works</span><i class="btn-fill"></i></a>
+      <a href="#about" class="btn btn-ghost" data-cursor="Peek"><span>What we do</span><i class="btn-fill"></i></a>
     </div>
   </div>
   <div class="hero-dog-3d" id="dogStage" aria-hidden="true">
@@ -1147,43 +1103,6 @@ html.is-static .rv { opacity: 1 !important; transform: none !important; }
       </div>
     </div>
   </div>
-</section>
-
-<!-- ============ HOW (pinned horizontal) ============ -->
-<section class="how" id="how" data-bg="deep">
-  <div class="how-head">
-    <span class="sec-label rv">How it works</span>
-    <h2 class="how-title rv">Three steps. <em>Five minutes.</em> No accounting degree required.</h2>
-  </div>
-  <div class="how-track-wrap" id="howWrap">
-    <div class="how-track" id="howTrack">
-      <article class="how-panel">
-        <div class="how-num">01</div>
-        <div>
-          <h3>Hop on a call</h3>
-          <p>Thirty minutes with the Frankly team, by phone or video from anywhere in Canada. Already have a bookkeeper? It's a free second opinion.</p>
-          <div class="tagline">No deck · no script · no pressure</div>
-        </div>
-      </article>
-      <article class="how-panel">
-        <div class="how-num">02</div>
-        <div>
-          <h3>We take it from here</h3>
-          <p>Link your bank, QuickBooks or Xero. We pull everything in, clean it up, and set you up properly, usually within a week.</p>
-          <div class="tagline">You do approximately nothing</div>
-        </div>
-      </article>
-      <article class="how-panel">
-        <div class="how-num">03</div>
-        <div>
-          <h3>You get clarity</h3>
-          <p>Monthly P&amp;L, balance sheet and cash flow in plain English, in your inbox. Plus a real person you can ping when something feels off.</p>
-          <div class="tagline">Every month · like clockwork</div>
-        </div>
-      </article>
-    </div>
-  </div>
-  <div class="how-progress"><div class="bar"><div class="fill" id="howFill"></div></div></div>
 </section>
 
 <!-- ============ NUMBERS (dark) ============ -->
@@ -1693,23 +1612,6 @@ if (!REDUCED && hasGSAP) {
       scrollTrigger: { trigger: '.about', start: 'top bottom', end: 'bottom top', scrub: true } });
   }
 
-  /* HOW: pinned horizontal */
-  (function() {
-    if (innerWidth <= 960) return;
-    const track = document.getElementById('howTrack');
-    const dist = () => track.scrollWidth - innerWidth + 80;
-    gsap.to(track, { x: () => -dist(), ease: 'none',
-      scrollTrigger: {
-        trigger: '#howWrap', start: 'top 18%', end: () => '+=' + (dist() * 1.05),
-        pin: '#how', scrub: 0.6, invalidateOnRefresh: true,
-        onUpdate(self) { document.getElementById('howFill').style.transform = 'scaleX(' + self.progress + ')'; }
-      }});
-    document.querySelectorAll('.how-num').forEach(n => {
-      gsap.from(n, { opacity: 0.15, scale: 0.9, duration: 0.6,
-        scrollTrigger: { trigger: n, containerAnimation: ScrollTrigger.getById?.('how'), start: 'left 70%' } });
-    });
-  })();
-
   /* NUMBERS count-up */
   document.querySelectorAll('[data-count]').forEach(el => {
     const target = +el.dataset.count;
@@ -1753,7 +1655,6 @@ if (!REDUCED && hasGSAP) {
   document.querySelectorAll('.rv').forEach(el => { el.style.opacity = 1; el.style.transform = 'none'; });
   // static bg for dark sections so text stays readable when scrolled screenshots are taken
   document.querySelectorAll('[data-bg="dark"]').forEach(s => s.style.background = '#17130C');
-  const hf = document.getElementById('howFill'); if (hf) hf.style.transform = 'scaleX(1)';
   document.querySelectorAll('[data-count]').forEach(el => el.textContent = el.dataset.count);
 }
 
