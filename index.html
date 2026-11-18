@@ -460,6 +460,11 @@ nav .nav-book:hover { background: #fff; color: #000; }
 .ql-cta .btn-solid .btn-fill { background: var(--cream); }
 .ql-cta .btn-solid:hover span { color: var(--ink); }
 .ql-btn { justify-content: center; }
+/* 961-1200px: five plan columns plus the 290px CTA overflow the page, so the CTA drops under the plans */
+@media (min-width: 961px) and (max-width: 1200px) {
+  .ql { grid-template-columns: 1fr; }
+  .ql-cta { min-width: 0; flex-direction: row; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+}
 @media (max-width: 960px) {
   .ql { grid-template-columns: 1fr; margin-top: 40px; }
   .ql-plans { grid-template-columns: 1fr 1fr; }
