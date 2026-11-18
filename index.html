@@ -48,7 +48,7 @@
     {"@type": "Country", "name": "Canada"},
     {"@type": "Country", "name": "United States"}
   ],
-  "priceRange": "$149+/month",
+  "priceRange": "$179+/month",
   "address": {"@type": "PostalAddress", "addressLocality": "Toronto", "addressRegion": "ON", "addressCountry": "CA"},
   "knowsAbout": ["Small business bookkeeping", "Canadian corporate tax (T2) filing", "US corporate tax (Form 1120) filing", "Personal tax (T1 and Form 1040)", "HST/GST and US sales tax", "Cross-border Canada–US tax", "Payroll", "Financial reporting"],
   "hasOfferCatalog": {
@@ -442,7 +442,7 @@ nav .nav-book:hover { background: #fff; color: #000; }
 /* section teaser: the four plans as a price board + one launch button.
    The questions themselves live in the .qz popup. */
 .ql { margin-top: 64px; display: grid; grid-template-columns: 1fr auto; border: 1px solid var(--rule); background: var(--cream-soft); }
-.ql-plans { display: grid; grid-template-columns: repeat(4, 1fr); }
+.ql-plans { display: grid; grid-template-columns: repeat(5, 1fr); }
 .ql-plan { text-align: left; padding: 30px 26px 28px; border-right: 1px solid var(--rule); position: relative; transition: background 0.3s var(--ease); }
 .ql-plan:hover { background: var(--cream); }
 .ql-plan .n { display: block; font-family: var(--mono); font-weight: 800; font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-muted); }
@@ -463,6 +463,7 @@ nav .nav-book:hover { background: #fff; color: #000; }
 @media (max-width: 960px) {
   .ql { grid-template-columns: 1fr; margin-top: 40px; }
   .ql-plans { grid-template-columns: 1fr 1fr; }
+  .ql-plan:last-child { grid-column: 1 / -1; border-right: 0; }
   .ql-plan { padding: 22px 18px; border-bottom: 1px solid var(--rule); }
   .ql-plan:nth-child(2n) { border-right: none; }
   .ql-plan .p { font-size: 2.1rem; margin: 12px 0 6px; }
@@ -1175,14 +1176,15 @@ html.is-static .rv { opacity: 1 !important; transform: none !important; }
   <div class="calc-inner">
     <span class="sec-label rv">Build your quote</span>
     <h2 class="calc-title rv">Pricing that <em>matches</em> what you actually need.</h2>
-    <p class="calc-sub rv">Pick what fits, skip what doesn't. The number you see is the number we quote: no setup fees, no surprise invoices.</p>
+    <p class="calc-sub rv">Pick what fits, skip what doesn't. HST/GST filing is included in every Canadian plan. The number you see is the number we quote: no setup fees, no surprise invoices.</p>
 
     <div class="ql rv">
       <div class="ql-plans">
-        <button type="button" class="ql-plan" data-qz-open data-tier="essentials" data-cursor="Start"><span class="go">→</span><span class="n">Essentials</span><span class="p">$149<i>/mo</i></span><span class="m">Just starting out, under 50 transactions a month</span></button>
+        <button type="button" class="ql-plan" data-qz-open data-tier="essentials" data-cursor="Start"><span class="go">→</span><span class="n">Essentials</span><span class="p">$179<i>/mo</i></span><span class="m">Just starting out, under 50 transactions a month</span></button>
         <button type="button" class="ql-plan pop" data-qz-open data-tier="growth" data-cursor="Start"><span class="go">→</span><span class="n">Growth · most picked</span><span class="p">$349<i>/mo</i></span><span class="m">Steady business, up to 150 a month</span></button>
-        <button type="button" class="ql-plan" data-qz-open data-tier="complete" data-cursor="Start"><span class="go">→</span><span class="n">Complete</span><span class="p">$649<i>/mo</i></span><span class="m">Busy, up to 400 a month, with a KPI dashboard</span></button>
-        <button type="button" class="ql-plan" data-qz-open data-tier="cfo" data-cursor="Start"><span class="go">→</span><span class="n">CFO Partner</span><span class="p">$1,200<i>/mo</i></span><span class="m">400+ a month, forecasting and board reporting</span></button>
+        <button type="button" class="ql-plan" data-qz-open data-tier="complete" data-cursor="Start"><span class="go">→</span><span class="n">Complete</span><span class="p">$599<i>/mo</i></span><span class="m">Busy, up to 600 a month, with a KPI dashboard</span></button>
+        <button type="button" class="ql-plan" data-qz-open data-tier="scale" data-cursor="Start"><span class="go">→</span><span class="n">Scale</span><span class="p">$899<i>/mo</i></span><span class="m">High volume, up to 1,500 a month</span></button>
+        <button type="button" class="ql-plan" data-qz-open data-tier="cfo" data-cursor="Start"><span class="go">→</span><span class="n">CFO Partner</span><span class="p">$1,850<i>/mo</i></span><span class="m">Your books, plus forecasting and board reporting</span></button>
       </div>
       <div class="ql-cta">
         <p class="ql-meta"><span>4 quick taps</span><span>About a minute</span><span>No email needed</span></p>
@@ -1221,10 +1223,11 @@ html.is-static .rv { opacity: 1 !important; transform: none !important; }
           <h3 class="qz-q">How busy is your business <em>each month?</em></h3>
           <p class="qz-help">Count every sale, bill and card swipe. A rough guess is fine.</p>
           <div class="qz-opts" role="radiogroup" aria-label="Monthly transactions">
-            <button type="button" class="qz-opt" role="radio" aria-checked="false" data-tier="essentials" data-txns="40"><kbd>1</kbd><span><b>Just getting started</b><small>Under 50 transactions</small></span><span class="o-side">Essentials<strong>$149</strong></span></button>
+            <button type="button" class="qz-opt" role="radio" aria-checked="false" data-tier="essentials" data-txns="40"><kbd>1</kbd><span><b>Just getting started</b><small>Under 50 transactions</small></span><span class="o-side">Essentials<strong>$179</strong></span></button>
             <button type="button" class="qz-opt" role="radio" aria-checked="false" data-tier="growth" data-txns="100"><kbd>2</kbd><span><b>Steady</b><small>50 to 150 transactions</small></span><span class="o-side">Growth<strong>$349</strong></span></button>
-            <button type="button" class="qz-opt" role="radio" aria-checked="false" data-tier="complete" data-txns="300"><kbd>3</kbd><span><b>Busy</b><small>150 to 400 transactions</small></span><span class="o-side">Complete<strong>$649</strong></span></button>
-            <button type="button" class="qz-opt" role="radio" aria-checked="false" data-tier="cfo" data-txns="500"><kbd>4</kbd><span><b>Very busy</b><small>400+ transactions</small></span><span class="o-side">CFO Partner<strong>$1,200</strong></span></button>
+            <button type="button" class="qz-opt" role="radio" aria-checked="false" data-tier="complete" data-txns="300"><kbd>3</kbd><span><b>Busy</b><small>150 to 600 transactions</small></span><span class="o-side">Complete<strong>$599</strong></span></button>
+            <button type="button" class="qz-opt" role="radio" aria-checked="false" data-tier="scale" data-txns="900"><kbd>4</kbd><span><b>Very busy</b><small>600 to 1,500 transactions</small></span><span class="o-side">Scale<strong>$899</strong></span></button>
+            <button type="button" class="qz-opt" role="radio" aria-checked="false" data-tier="cfo" data-txns="400"><kbd>5</kbd><span><b>I want a CFO too</b><small>Books plus forecasting and board reporting</small></span><span class="o-side">CFO Partner<strong>$1,850</strong></span></button>
           </div>
         </div>
 
@@ -1257,7 +1260,7 @@ html.is-static .rv { opacity: 1 !important; transform: none !important; }
           <p class="qz-help">Tap all that apply, or skip ahead.</p>
           <div class="qz-tiles" id="qzTiles"></div>
           <div class="qz-more" id="qzPeople" hidden>
-            <span class="lbl">People on payroll<br><span class="sub" id="qzPeopleSub">$180 / month</span></span>
+            <span class="lbl">People on payroll<br><span class="sub" id="qzPeopleSub">$131 / month</span></span>
             <div class="qz-stepper"><button type="button" data-step-for="employees" data-d="-1" aria-label="Fewer people">−</button><output id="qzEmp">1</output><button type="button" data-step-for="employees" data-d="1" aria-label="More people">+</button></div>
           </div>
         </div>
@@ -1362,7 +1365,7 @@ html.is-static .rv { opacity: 1 !important; transform: none !important; }
       <h3 class="cmp-h">Monthly bookkeeping for a small business</h3>
       <p class="cmp-note">Lowest published monthly price at roughly 50 transactions a month. What's included differs, so the note under each name says what that price covers.</p>
       <ol class="cmp-bars">
-<li class="cmp-bar is-us"><div class="cmp-bar-name">Frankly<span class="cmp-bar-note">Up to 50 transactions a month. CPA-reviewed monthly close.</span></div><div class="cmp-bar-track"><span class="cmp-bar-fill" style="--w:11.9%"></span><span class="cmp-bar-val">$149<small>/mo</small></span></div></li>
+<li class="cmp-bar is-us"><div class="cmp-bar-name">Frankly<span class="cmp-bar-note">Up to 50 transactions a month. CPA-reviewed monthly close, HST/GST filing included.</span></div><div class="cmp-bar-track"><span class="cmp-bar-fill" style="--w:14.3%"></span><span class="cmp-bar-val">$179<small>/mo</small></span></div></li>
 <li class="cmp-bar"><div class="cmp-bar-name"><a href="https://iaccounting.ca/pricing/" rel="nofollow noopener" target="_blank">iAccounting</a><span class="cmp-bar-note">Up to 40 transactions a month. Includes the year-end T2.</span></div><div class="cmp-bar-track"><span class="cmp-bar-fill" style="--w:16.8%"></span><span class="cmp-bar-val">$210<small>/mo</small></span></div></li>
 <li class="cmp-bar"><div class="cmp-bar-name"><a href="https://www.outsourcebookkeeping.ca/pricing" rel="nofollow noopener" target="_blank">Outsource Bookkeeping</a><span class="cmp-bar-note">Starting rate, up to 50 transactions a month.</span></div><div class="cmp-bar-track"><span class="cmp-bar-fill" style="--w:40.0%"></span><span class="cmp-bar-val">From $500<small>/mo</small></span></div></li>
 <li class="cmp-bar"><div class="cmp-bar-name"><a href="https://ontariotaxteam.ca/pricing" rel="nofollow noopener" target="_blank">Ontario Tax Team</a><span class="cmp-bar-note">Under 50 transactions a month.</span></div><div class="cmp-bar-track"><span class="cmp-bar-fill" style="--w:40.0%"></span><span class="cmp-bar-val">$500<small>/mo</small></span></div></li>
@@ -1374,9 +1377,23 @@ html.is-static .rv { opacity: 1 !important; transform: none !important; }
     </div>
 
     <div class="cmp-block">
+      <h3 class="cmp-h">A growing business, about 150 transactions a month</h3>
+      <p class="cmp-note">Lowest published monthly price that covers about 150 transactions. Our Complete plan covers up to 600 a month for $599, with HST/GST filing included.</p>
+      <ol class="cmp-bars">
+<li class="cmp-bar is-us"><div class="cmp-bar-name">Frankly<span class="cmp-bar-note">Growth plan, up to 150 transactions. HST/GST filing included.</span></div><div class="cmp-bar-track"><span class="cmp-bar-fill" style="--w:27.9%"></span><span class="cmp-bar-val">$349<small>/mo</small></span></div></li>
+<li class="cmp-bar"><div class="cmp-bar-name"><a href="https://iaccounting.ca/pricing/" rel="nofollow noopener" target="_blank">iAccounting</a><span class="cmp-bar-note">Pro plan, up to 150 transactions. Includes the year-end T2.</span></div><div class="cmp-bar-track"><span class="cmp-bar-fill" style="--w:52.0%"></span><span class="cmp-bar-val">$650<small>/mo</small></span></div></li>
+<li class="cmp-bar"><div class="cmp-bar-name"><a href="https://www.outsourcebookkeeping.ca/pricing" rel="nofollow noopener" target="_blank">Outsource Bookkeeping</a><span class="cmp-bar-note">Standard plan, unlimited transactions, HST filing included.</span></div><div class="cmp-bar-track"><span class="cmp-bar-fill" style="--w:52.0%"></span><span class="cmp-bar-val">From $650<small>/mo</small></span></div></li>
+<li class="cmp-bar"><div class="cmp-bar-name"><a href="https://ontariotaxteam.ca/pricing" rel="nofollow noopener" target="_blank">Ontario Tax Team</a><span class="cmp-bar-note">Standard plan, unlimited transactions, HST filing included.</span></div><div class="cmp-bar-track"><span class="cmp-bar-fill" style="--w:64.0%"></span><span class="cmp-bar-val">$800<small>/mo</small></span></div></li>
+<li class="cmp-bar"><div class="cmp-bar-name"><a href="https://thinkaccounting.ca/pricing/" rel="nofollow noopener" target="_blank">Think Accounting</a><span class="cmp-bar-note">Their own estimate, for books plus payroll.</span></div><div class="cmp-bar-track"><span class="cmp-bar-fill" style="--w:80.0%"></span><span class="cmp-bar-val">~$1,000<small>/mo</small></span></div></li>
+<li class="cmp-bar"><div class="cmp-bar-name"><a href="https://zenbooks.ca/pricing/" rel="nofollow noopener" target="_blank">Zenbooks</a><span class="cmp-bar-note">Entry tier, aimed at about $1M in revenue.</span></div><div class="cmp-bar-track"><span class="cmp-bar-fill" style="--w:80.0%"></span><span class="cmp-bar-val">$1,000+<small>/mo</small></span></div></li>
+<li class="cmp-bar"><div class="cmp-bar-name"><a href="https://www.liveca.ca/pricing" rel="nofollow noopener" target="_blank">LiveCA</a><span class="cmp-bar-note">Basic tier, bookkeeping plus tax.</span></div><div class="cmp-bar-track"><span class="cmp-bar-fill" style="--w:100.0%"></span><span class="cmp-bar-val">$1,250+<small>/mo</small></span></div></li>
+      </ol>
+    </div>
+
+    <div class="cmp-block">
       <h3 class="cmp-h">Tax and payroll</h3>
-      <p class="cmp-note">Published starting prices. We're not the cheapest on every line: you're paying for a CPA-reviewed return from the same team that keeps your books all year.</p>
-      <div class="cmp-scroll" tabindex="0" role="region" aria-label="Tax and payroll prices by firm"><table class="cmp-table"><thead><tr><th scope="col"><span class="sr">Service</span></th><th scope="col" class="is-us">Frankly</th><th scope="col">iAccounting</th><th scope="col">Think Accounting</th><th scope="col">TurboTax</th><th scope="col">H&amp;R Block</th></tr></thead><tbody><tr><th scope="row">Corporate return (T2)</th><td class="is-us">$1,800 / yr</td><td>Included in its $210 / mo bookkeeping</td><td>From $3,000 (with year-end statements)</td><td>$400 (you prepare it, with expert help)</td><td data-muted>Not published</td></tr><tr><th scope="row">Personal return with business income (T1)</th><td class="is-us">$500 / yr</td><td>$350 (with HST)</td><td data-muted>Not listed</td><td>$315 (Expert Full Service)</td><td>From $229.99 (its online estimate)</td></tr><tr><th scope="row">HST / GST filing</th><td class="is-us">$100 / mo</td><td>In the $350 T1</td><td>Included with books</td><td data-muted>Not listed</td><td data-muted>Not published</td></tr><tr><th scope="row">Payroll, one employee</th><td class="is-us">$180 / mo</td><td>$57 / mo</td><td>$150 / mo</td><td data-muted>Not listed</td><td data-muted>Not published</td></tr></tbody></table></div>
+      <p class="cmp-note">Published starting prices. We're not the cheapest on every line: you're paying for a CPA-reviewed return and payroll from the same team that keeps your books all year.</p>
+      <div class="cmp-scroll" tabindex="0" role="region" aria-label="Tax and payroll prices by firm"><table class="cmp-table"><thead><tr><th scope="col"><span class="sr">Service</span></th><th scope="col" class="is-us">Frankly</th><th scope="col">iAccounting</th><th scope="col">Think Accounting</th><th scope="col">TurboTax</th><th scope="col">H&amp;R Block</th></tr></thead><tbody><tr><th scope="row">Corporate return (T2)</th><td class="is-us">$750 / yr ($1,250 over $200K revenue)</td><td>Included in its $210 / mo bookkeeping</td><td>From $3,000 (with year-end statements)</td><td>$400 (you prepare it, with expert help)</td><td data-muted>Not published</td></tr><tr><th scope="row">Personal return with business income (T1)</th><td class="is-us">$375 / yr</td><td>$350 (with HST)</td><td data-muted>Not listed</td><td>$315 (Expert Full Service)</td><td data-muted>Not published</td></tr><tr><th scope="row">HST / GST filing</th><td class="is-us">Included with books</td><td>In the $350 T1</td><td>Included with books</td><td data-muted>Not listed</td><td data-muted>Not published</td></tr><tr><th scope="row">Payroll, one employee</th><td class="is-us">$131 / mo</td><td>$57 / mo</td><td>$150 / mo</td><td data-muted>Not listed</td><td data-muted>Not published</td></tr><tr><th scope="row">Payroll, five employees</th><td class="is-us">$179 / mo</td><td>$145 / mo</td><td>$230 to $250 / mo</td><td data-muted>Not listed</td><td data-muted>Not published</td></tr></tbody></table></div>
     </div>
 
     <div class="cmp-block">
@@ -1750,27 +1767,29 @@ if (!REDUCED && hasGSAP) {
 
 /* ================= CALCULATOR LOGIC ================= */
 const TIERS = {
-  essentials: { name: 'Essentials', price: 149, tag: 'Bookkeeping only, reconciled monthly. For brand-new and micro businesses keeping things tidy.' },
+  essentials: { name: 'Essentials', price: 179, tag: 'Bookkeeping only, reconciled monthly. For brand-new and micro businesses keeping things tidy.' },
   growth:     { name: 'Growth', price: 349, tag: 'Full monthly close plus a quarterly review call. The sweet spot for most growing businesses.' },
-  complete:   { name: 'Complete', price: 649, tag: 'Adds a KPI dashboard and monthly exec summary. For businesses that actually use their numbers.' },
-  cfo:        { name: 'CFO Partner', price: 1200, tag: 'Monthly strategy, forecasting, board-ready reporting, without the six-figure salary.' }
+  complete:   { name: 'Complete', price: 599, tag: 'Adds a KPI dashboard and monthly exec summary. For businesses that actually use their numbers.' },
+  scale:      { name: 'Scale', price: 899, tag: 'High-volume monthly close for up to 1,500 transactions, with the KPI dashboard and exec summary.' },
+  cfo:        { name: 'CFO Partner', price: 1850, tag: 'Your books plus monthly strategy, forecasting and board-ready reporting, without the six-figure salary.' }
 };
-const ADD = { hst: 100, t2: 150, t1: 41.67, payrollBase: 150, payrollPer: 30, ar: 300, ap: 300, catchupPer: 250 };
+/* HST/GST filing is included in every Canadian plan; US sales tax stays an add-on. Tax returns are priced per country. */
+const ADD = { hst: { ca: 0, us: 100 }, t2: { ca: 62.5, us: 150 }, t1: { ca: 31.25, us: 41.67 }, payrollBase: 119, payrollPer: 12, ar: 300, ap: 300, catchupPer: 250 };
 const state = { txns: 100, override: null, structure: null, country: 'ca', addons: { hst: 0, payroll: 0, ar: 0, ap: 0, t2: 0, t1: 0 }, employees: 1, catchup: 0, months: 3 };
 
 /* country-specific labels: same service shape, local filings */
 const TAXCOPY = {
-  ca: { hst: ['HST / GST filing', '+ $100 / month'],
-        t2:  ['Corporate tax return (T2)', '$1,800/yr · billed $150 / month'],
-        t1:  ['Personal tax return (T1)', '$500/yr · billed ~$42 / month'],
-        lineHst: 'HST / GST filing', lineT2: 'Corporate tax (T2)', lineT1: 'Personal tax (T1)' },
+  ca: { hst: ['HST / GST filing', 'Included'],
+        t2:  ['Corporate tax return (T2)', 'From $750/yr · billed $62.50 / month'],
+        t1:  ['Personal tax return (T1)', '$375/yr · billed ~$31 / month'],
+        lineHst: 'HST / GST filing', lineT2: 'Corporate tax (T2), from', lineT1: 'Personal tax (T1)' },
   us: { hst: ['Sales tax filings', '+ $100 / month'],
         t2:  ['Corporate tax return (Form 1120)', '$1,800/yr · billed $150 / month'],
         t1:  ['Personal tax return (Form 1040)', '$500/yr · billed ~$42 / month'],
         lineHst: 'Sales tax filings', lineT2: 'Corporate tax (1120)', lineT1: 'Personal tax (1040)' }
 };
 
-function tierFor(t) { return t <= 50 ? 'essentials' : t <= 150 ? 'growth' : t <= 400 ? 'complete' : 'cfo'; }
+function tierFor(t) { return t <= 50 ? 'essentials' : t <= 150 ? 'growth' : t <= 600 ? 'complete' : 'scale'; }
 function currentTier() { return state.override || tierFor(state.txns); }
 function fmt(n) { n = Math.round(n); return '$' + n.toLocaleString('en-US'); }
 
@@ -1778,12 +1797,13 @@ function calc() {
   const key = currentTier(), tier = TIERS[key];
   let monthly = tier.price;
   const lines = [[tier.name + ' plan', tier.price, 'plan']];
-  if (state.addons.hst) { monthly += ADD.hst; lines.push([TAXCOPY[state.country].lineHst, ADD.hst, 'hst']); }
+  const hst = ADD.hst[state.country], t2 = ADD.t2[state.country], t1 = ADD.t1[state.country];
+  if (state.addons.hst) { monthly += hst; lines.push([TAXCOPY[state.country].lineHst, hst, 'hst']); }
   if (state.addons.payroll) { const p = ADD.payrollBase + state.employees * ADD.payrollPer; monthly += p; lines.push(['Payroll · ' + state.employees + (state.employees === 1 ? ' person' : ' people'), p, 'payroll']); }
   if (state.addons.ar) { monthly += ADD.ar; lines.push(['Invoicing & collections', ADD.ar, 'ar']); }
   if (state.addons.ap) { monthly += ADD.ap; lines.push(['Bill pay', ADD.ap, 'ap']); }
-  if (state.addons.t2) { monthly += ADD.t2; lines.push([TAXCOPY[state.country].lineT2, ADD.t2, 't2']); }
-  if (state.addons.t1) { monthly += ADD.t1; lines.push([TAXCOPY[state.country].lineT1, ADD.t1, 't1']); }
+  if (state.addons.t2) { monthly += t2; lines.push([TAXCOPY[state.country].lineT2, t2, 't2']); }
+  if (state.addons.t1) { monthly += t1; lines.push([TAXCOPY[state.country].lineT1, t1, 't1']); }
   const once = state.catchup ? state.months * ADD.catchupPer : 0;
   return { key, tier, monthly, lines, once };
 }
@@ -1819,10 +1839,10 @@ function renderOdo(amount) {
 
 /* extras offered on question three; labels follow the country */
 const EXTRAS = [
-  { k: 'hst', ca: ['HST / GST filing', 'We file your sales tax returns'], us: ['Sales tax filings', 'We file your state sales tax'], p: '+ $100 / mo' },
-  { k: 'payroll', ca: ['Payroll', 'Pay runs, remittances and T4s'], us: ['Payroll', 'Pay runs, filings and W-2s'], p: '$150 + $30 / person' },
-  { k: 't2', ca: ['Corporate tax (T2)', '$1,800 a year, spread monthly'], us: ['Corporate tax (1120)', '$1,800 a year, spread monthly'], p: '+ $150 / mo', rec: ['corp'], tag: 'for corporations' },
-  { k: 't1', ca: ['Personal tax (T1)', '$500 a year, spread monthly'], us: ['Personal tax (1040)', '$500 a year, spread monthly'], p: '+ $42 / mo', rec: ['sole', 'partnership'], tag: 'covers business income' },
+  { k: 'hst', ca: ['HST / GST filing', 'We file your sales tax returns'], us: ['Sales tax filings', 'We file your state sales tax'], p: { ca: 'Included in every plan', us: '+ $100 / mo' } },
+  { k: 'payroll', ca: ['Payroll', 'Pay runs, remittances and T4s'], us: ['Payroll', 'Pay runs, filings and W-2s'], p: '$119 + $12 / person' },
+  { k: 't2', ca: ['Corporate tax (T2)', '$750 a year, spread monthly ($1,250 over $200K revenue)'], us: ['Corporate tax (1120)', '$1,800 a year, spread monthly'], p: { ca: 'from $62.50 / mo', us: '+ $150 / mo' }, rec: ['corp'], tag: 'for corporations' },
+  { k: 't1', ca: ['Personal tax (T1)', '$375 a year, spread monthly'], us: ['Personal tax (1040)', '$500 a year, spread monthly'], p: { ca: '+ $31 / mo', us: '+ $42 / mo' }, rec: ['sole', 'partnership'], tag: 'covers business income' },
   { k: 'ar', ca: ['Invoicing & collections', 'We send invoices and chase payment'], p: '+ $300 / mo' },
   { k: 'ap', ca: ['Bill pay', 'We schedule and pay your bills'], p: '+ $300 / mo' }
 ];
@@ -1835,7 +1855,7 @@ function render() {
   document.getElementById('sumTag').textContent = picked ? r.tier.tag : '';
   renderOdo(picked ? r.monthly : 0);
   const box = document.getElementById('sumLines');
-  const want = picked ? r.lines.map(l => ({ k: l[2], label: l[0], amt: fmt(l[1]) })) : [];
+  const want = picked ? r.lines.map(l => ({ k: l[2], label: l[0], amt: l[1] === 0 && l[2] === 'hst' ? 'Included' : fmt(l[1]) })) : [];
   if (picked && r.once) want.push({ k: 'once', label: 'Catch-up · ' + state.months + ' mo, one-time', amt: fmt(r.once), cls: 'once' });
   if (!want.length) {
     box.innerHTML = '<p class="qz-empty">Your plan builds here as you answer.</p>';
@@ -1883,7 +1903,7 @@ function render() {
       const c = x[state.country] || x.ca;
       const rec = x.rec && x.rec.includes(state.structure);
       return '<button type="button" class="qz-tile' + (state.addons[x.k] ? ' sel' : '') + (rec ? ' rec' : '') + '" role="checkbox" aria-checked="' + !!state.addons[x.k] + '" data-k="' + x.k + '">' +
-        '<b>' + c[0] + '</b><span class="ck" aria-hidden="true"></span><span class="t-p">' + x.p + (x.tag ? '<span class="tag"> · ' + x.tag + '</span>' : '') + '</span></button>';
+        '<b>' + c[0] + '</b><span class="ck" aria-hidden="true"></span><span class="t-p">' + (typeof x.p === 'object' ? x.p[state.country] : x.p) + (x.tag ? '<span class="tag"> · ' + x.tag + '</span>' : '') + '</span></button>';
     }).join('');
   }
   tiles.addEventListener('click', e => {
