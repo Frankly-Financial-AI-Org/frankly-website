@@ -42,6 +42,12 @@
 
 # Client intake / get-a-quote form (legacy — keep working while we migrate)
 [[redirects]]
+  from = "/book"
+  to = "https://calendar.app.google/swUMgkHzr5FYJdZR7"
+  status = 302
+  force = true
+
+[[redirects]]
   from = "/quote"
   to = "/quote.html"
   status = 200
